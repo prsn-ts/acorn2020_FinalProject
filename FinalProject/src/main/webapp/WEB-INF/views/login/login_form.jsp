@@ -17,7 +17,8 @@
 	</jsp:include>
   
 	<div class="container" style="width:460px; margin: 0 auto;">
-		<h2>로그인</h2>
+
+		<h1><img style="width:3em;height:3em;margin-right:15px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="logo" />BARSIN 로그인</h1>
 		<div class="panel-body">
 		    <form class="user" action="login.do" method="post">
 				<input type="hidden" name="url" value="${url }">
@@ -37,7 +38,7 @@
 		    </form>
 		    <div class="etc_line"></div>
 		    <div class="join_btn">
-		        <a href="/user/join.html">회원가입</a>
+		        <a href="${pageContext.request.contextPath }/login/signup_form.do">회원가입</a>
 		        <a href="/user/find_passwd.html">비밀번호 찾기</a>
 		        <a href="javascript:doGuest()">비회원주문</a>
 		        <a href="javascript:doGuesOrder()">비회원주문조회 </a>
@@ -54,15 +55,10 @@
 		            <div class="info">주문번호와 비밀번호를 잊으신 경우,<br><a href="mailto:help@10000recipe.com">[☞고객센터]</a>로 문의해주세요.</div>
 		        </form>
 		    </div>
-			    <button type="button" onClick="location.href='https://www.10000recipe.com/user/login_fb.html?q_path=' +encodeURIComponent('') " class="btn btn-primary btn-lg btn-block join_f"><span>페이스북으로 로그인</span></button>
-			    <button type="button" onClick="loginWithKakao()" class="btn btn-primary btn-lg btn-block join_k"><span>카카오톡으로 로그인</span></button>
-			    <button type="button" onClick="loginWithNaver()" class="btn btn-primary btn-lg btn-block join_n"><span>네이버로 로그인</span></button>
-			    <button type="button" onClick="loginWithGoogle()" class="btn btn-primary btn-lg btn-block join_g" id="gooleSigninButton"><span>구글로 로그인</span></button>
+
 	    </div>
 	</div>
   
-	<jsp:include page="../include/footer.jsp">
-		<jsp:param value="index" name="thisPage"/>
-	</jsp:include>
+
 </body>
 </html>
