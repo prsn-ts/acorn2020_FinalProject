@@ -26,7 +26,7 @@
 
 
  <!-- Page Content -->
-<div style="margin-top:50px;"id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="${pageContext.request.contextPath }/resources/images/shoes1.png" class="d-block w-100" alt="...">
