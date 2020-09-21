@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
   <!-- Navigation -->
-<div id="header-div"class="fixed-top">
+<div id="header-div"class="sticky-top">
 	 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="${pageContext.request.contextPath }/home.do">BARSIN</a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath }/home.do"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="" />BARSIN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
