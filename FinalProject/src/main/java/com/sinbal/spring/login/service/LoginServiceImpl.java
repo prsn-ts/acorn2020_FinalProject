@@ -23,6 +23,7 @@ public class LoginServiceImpl implements LoginService{
 		//쿠키에 저장된 아이디와 비밀번호를 담을 변수
 		String savedId="";
 		String savedPwd="";
+		String savedChecked="";
 		//쿠키에 저장된 값을 위의 변수에 저장하는 코드를 작성해 보세요.
 		Cookie[] cooks=request.getCookies();
 		if(cooks!=null){
@@ -38,11 +39,16 @@ public class LoginServiceImpl implements LoginService{
 				if(key.equals("savedPwd")){
 					savedPwd=tmp.getValue();
 				}
+				if(key.equals("savedChecked")){
+					savedChecked=tmp.getValue();
+				}				
+				
 			}
 		}
 		//쿠키 정보를 ModelAndView 객체에 저장.
 		mView.addObject("savedId", savedId);
 		mView.addObject("savedPwd", savedPwd);
+		mView.addObject("savedChecked", savedChecked);
 		
 		return mView;
 	}
@@ -64,6 +70,10 @@ public class LoginServiceImpl implements LoginService{
 			Cookie pwdCook=new Cookie("savedPwd", dto.getPwd());
 			pwdCook.setMaxAge(0);
 			response.addCookie(pwdCook);
+			
+			Cookie checkboxCook=new Cookie("savedChecked", "checked");
+			checkboxCook.setMaxAge(0);
+			response.addCookie(checkboxCook);			
 		}else{//체크 박스를 체크 했다면 
 			//아이디와 비밀번호를 쿠키에 저장
 			Cookie idCook=new Cookie("savedId", dto.getId());
@@ -73,6 +83,10 @@ public class LoginServiceImpl implements LoginService{
 			Cookie pwdCook=new Cookie("savedPwd", dto.getPwd());
 			pwdCook.setMaxAge(60*60*24);
 			response.addCookie(pwdCook);
+			
+			Cookie checkboxCook=new Cookie("savedChecked", "checked");
+			checkboxCook.setMaxAge(60*60*24);
+			response.addCookie(checkboxCook);	
 		}
 		
 		//입력한 정보가 유효한 정보인지 여부를 저장할 지역변수

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
   <!-- Navigation -->
 <div id="header-div"class="sticky-top">
 	 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -52,7 +52,7 @@
 		<c:otherwise>
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          	상품목록
+	          	SHOP
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	          <a class="dropdown-item" href="#">캐주얼</a>
@@ -67,13 +67,29 @@
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="신발명" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">검색</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="상품명..." aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg></button>
     </form>
-<div id="login">
-	<a class="icon-svg"href="">로그인</a>
-	<a class="icon-svg"href="">회원가입</a>
-</div>    
+<c:choose>
+	<c:when test="${empty id }">
+		<div id="login">
+		<a class="icon-svg"href="${pageContext.request.contextPath }/login/login_form.do">로그인</a>
+		<a class="icon-svg"href="${pageContext.request.contextPath }/login/signup_form.do">회원가입</a>
+		</div> 	
+	</c:when>
+	<c:otherwise>
+		<div id="login">
+		<a class="icon-svg"href="${pageContext.request.contextPath }/home.do">${id }님 </a>
+		<a class="icon-svg"href="${pageContext.request.contextPath }/login/logout.do">로그아웃</a>
+		</div>		
+	</c:otherwise>
+</c:choose>
+
+
+   
    <a title="나의 쇼핑정보"class="icon-svg" href=""><svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 </svg></a>    

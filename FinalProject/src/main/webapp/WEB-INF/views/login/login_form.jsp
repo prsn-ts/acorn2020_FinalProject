@@ -31,8 +31,8 @@
 				</div>
 				<button type="submit" class="btn-primary btn-lg btn-block">로그인</button>
 				<div class="form-group">
-				    <input type="checkbox" name="isSave" value="yes">
-				    <span>로그인 상태 유지</span>
+				    <input type="checkbox" name="isSave" value="yes" ${savedChecked }>
+				    <span>아이디 비밀번호 저장</span>
 				</div>
 		    </form>
 		    <div class="etc_line"></div>

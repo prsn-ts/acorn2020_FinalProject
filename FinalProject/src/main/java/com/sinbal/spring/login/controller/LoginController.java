@@ -64,4 +64,13 @@ public class LoginController {
 		mView.setViewName("login/signup_form");
 		return mView;
 	}
+	
+	//로그아웃 폼 요청처리
+	@RequestMapping("/login/logout.do")
+	public ModelAndView logout(ModelAndView mView,HttpServletRequest request) {
+		
+		request.getSession().invalidate();
+		mView.setViewName("redirect:/home.do");
+		return mView;
+	}
 }
