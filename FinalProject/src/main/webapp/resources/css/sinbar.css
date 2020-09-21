@@ -1,0 +1,16 @@
+#carouselExampleFade{
+	margin-bottom:40px;
+}
+
+.icon-svg{
+	margin-left:10px;
+	color:white;
+}
+.icon-svg:hover {
+	color:rgba(190, 232, 238, 0.89);
+}
+#login{
+
+	text-align: right;
+	background-color: #343a40 !important;
+}
