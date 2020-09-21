@@ -183,7 +183,7 @@
 
   </div>
   
-  <li><a href="notice/list.do">카페글 목록 보기</a></li>
+  <li><a href="notice/list.do">공지사항</a></li>
 
 
 

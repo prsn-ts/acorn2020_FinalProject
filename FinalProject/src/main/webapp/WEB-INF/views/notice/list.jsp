@@ -10,9 +10,9 @@
 </head>
 <body>
 <div class="container">
-	<h1>공지사항 페이지 입니다.</h1>
+	<h1>공지사항</h1>
 	<table class="table table-striped table-sm">
-		<thead class="thead-dark">
+		<thead>
 			<tr>				
 				<th>제목</th>
 				<th>조회수</th>
@@ -20,9 +20,18 @@
 			</tr>
 		</thead>
 		<tbody>
-		
+		<c:forEach var="tmp" items="${list }">
+			<tr>
+				<td><a href="detail.do?num=${tmp.num }&condition=${condition }&keyword=${encodedK }">${tmp.title }</a></td>
+				<td>${tmp.viewCount }</td>
+				<td>${tmp.regdate }</td>
+			</tr>
+		</c:forEach>
 		</tbody>
+	</table>
+	<a href="private/insertform.do">새글 작성</a>
 </div>
+
 </body>
 </html>
 
