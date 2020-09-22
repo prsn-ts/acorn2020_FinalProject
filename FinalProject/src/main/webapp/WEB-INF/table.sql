@@ -9,3 +9,18 @@ CREATE TABLE sblogin(
 	regdate DATE -- 가입일 관련
 );
 
+CREATE TABLE sbproduct(
+	num NUMBER PRIMARY KEY,
+	kind VARCHAR2(100),
+	productName VARCHAR2(100),
+	content CLOB,
+	quantity NUMBER,
+	price NUMBER,
+	regdate DATE
+);
+
+CREATE SEQUENCE sbproduct_seq;
+
+INSERT INTO sbproduct
+(num, kind, productname, content, quantity, price, regdate)
+VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname }, #{content }, #{quantity }, #{price }, SYSDATE);
