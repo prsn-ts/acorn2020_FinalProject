@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>BARSIN 공식온라인 STORE</title>
 	  <!-- Bootstrap core CSS -->
 	  
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
