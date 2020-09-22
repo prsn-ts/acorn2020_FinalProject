@@ -19,7 +19,7 @@ public class ProductController {
 		return "product/insertform";
 	}
 	
-	@RequestMapping("/insert")
+	@RequestMapping("/product/insert") 
 	public ModelAndView getList(ProductDto dto, ModelAndView mView) {
 		productService.insert(dto);
 		mView.setViewName("redirect:/home.do");

@@ -27,7 +27,7 @@
 
 <div class="container" style="margin-top:150px;">
 	
-	<form action="insert.do" method="post">
+	<form action="${pageContext.request.contextPath}/product/insert.do" method="post">
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="kind">카테고리</label>
