@@ -14,12 +14,12 @@
     <c:choose>
     <c:when test="${param.thisPage eq 'info' }">
        <li class="nav-item active">
-        <a class="nav-link" href="#">회사소개 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath }/info.do">회사소개 <span class="sr-only">(current)</span></a>
       </li>    	
     </c:when>
     <c:otherwise>
        <li class="nav-item">
-        <a class="nav-link" href="#">회사소개 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath }/info.do">회사소개 <span class="sr-only">(current)</span></a>
       </li>
     </c:otherwise>
     </c:choose>
@@ -43,7 +43,7 @@
 	          	상품목록
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">캐주얼</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">캐주얼</a>
 	          <a class="dropdown-item" href="#">스포츠화</a>
 	          <a class="dropdown-item" href="#">워커</a>
 	        </div>
@@ -55,7 +55,7 @@
 	          	SHOP
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">캐주얼</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">캐주얼</a>
 	          <a class="dropdown-item" href="#">스포츠화</a>
 	          <a class="dropdown-item" href="#">워커</a>
 	        </div>

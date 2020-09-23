@@ -1,6 +1,7 @@
 package com.sinbal.spring.login.controller;
 
 import java.net.URLEncoder;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinbal.spring.login.dto.LoginDto;
@@ -65,6 +68,16 @@ public class LoginController {
 		return mView;
 	}
 	
+	//회원 가입 요청 처리
+	@RequestMapping("/login/signup")
+	public ModelAndView signup(LoginDto dto, ModelAndView mView) {
+		//loginService 객체를 이용해서 사용자 정보를 추가한다.
+		loginService.addUser(dto, mView);
+		//view 페이지로 이동해서 응답하기.
+		mView.setViewName("login/signup");
+		return mView;
+	}
+	
 	//로그아웃 폼 요청처리
 	@RequestMapping("/login/logout.do")
 	public ModelAndView logout(ModelAndView mView,HttpServletRequest request) {
@@ -72,5 +85,13 @@ public class LoginController {
 		request.getSession().invalidate();
 		mView.setViewName("redirect:/home.do");
 		return mView;
+	}
+	
+	//아이디가 존재하는 지 여부에 대한 요청 처리
+	@RequestMapping("/login/checkid")
+	@ResponseBody
+	public Map<String, Object> checkid(@RequestParam String inputId){
+		//service 가 리턴해주는 Map 객체를 리턴한다.
+		return loginService.isExistId(inputId);
 	}
 }

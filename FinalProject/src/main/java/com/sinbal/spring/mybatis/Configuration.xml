@@ -4,6 +4,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 쿼리에 null값이 있을 경우를 대비해 세팅. -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="VARCHAR"/>
+	</settings>
+	
 	<!-- type  별칭 등록 -->
 	<typeAliases>
 		<!-- LoginDto 별칭 설정. -->
@@ -12,11 +17,14 @@
 		<!-- NoticeDto 별칭 설정. -->
 		<typeAlias type="com.sinbal.spring.notice.dto.NoticeDto" 
 			alias="noticeDto"/>	
+		<typeAlias type="com.sinbal.spring.product.dto.ProductDto"
+			alias="productDto"/>
 	</typeAliases>
 
 	<!-- Mapper 문서가 동작하기위한 설정. -->
 	<mappers>
 		<mapper resource="com/sinbal/spring/mybatis/LoginMapper.xml"/>
 		<mapper resource="com/sinbal/spring/mybatis/NoticeMapper.xml"/>
+		<mapper resource="com/sinbal/spring/mybatis/ProductMapper.xml"/>
 	</mappers>
 </configuration>
