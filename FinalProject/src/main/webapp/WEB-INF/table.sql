@@ -4,7 +4,11 @@
 CREATE TABLE sblogin(
 	id VARCHAR2(100) PRIMARY KEY,
 	pwd VARCHAR2(100) NOT NULL,
-	email VARCHAR2(100),
+	email VARCHAR2(100) NOT NULL,
+	phone_num VARCHAR2(100) NOT NULL,
+	buy_consent VARCHAR2(50) NOT NULL, -- 구매 이용약관 동의
+	private_consent VARCHAR2(50) NOT NULL, -- 개인정보 수집 동의
+	trust_consent VARCHAR2(50) NOT NULL, -- 개인정보 처리위탁동의
 	profile VARCHAR2(100), -- 프로필 이미지 경로를 저장할 칼럼
 	regdate DATE -- 가입일 관련
 );

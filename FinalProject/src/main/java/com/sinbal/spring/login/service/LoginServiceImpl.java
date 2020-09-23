@@ -1,11 +1,15 @@
 package com.sinbal.spring.login.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +20,16 @@ import com.sinbal.spring.login.dto.LoginDto;
 public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private LoginDao loginDao;
+	
+	//아이디가 중복되는지 검사하는 메소드
+	@Override
+	public Map<String, Object> isExistId(String inputId) {
+		boolean isExist = loginDao.isExist(inputId);
+		//아이디가 존재하는 지 여부를 Map 에 담아서 리턴해준다.
+		Map<String, Object> map = new HashMap<>();
+		map.put("isExist", isExist);
+		return map;
+	}
 
 	//저장된 쿠키 정보를 가져오는 메소드
 	@Override
@@ -112,5 +126,18 @@ public class LoginServiceImpl implements LoginService{
 		}else {
 			mView.addObject("isSuccess", false);
 		}
+	}
+	
+	//회원가입 요청을 처리하는 메소드
+	@Override
+	public void addUser(LoginDto dto, ModelAndView mView) {
+		//나눠받은 이메일을 하나로 합친다.
+		dto.setEmail_all(dto.getEmail()+"@"+dto.getEmail_second());
+		//비밀번호를 암호화할 BcryptPasswordEncoder 객체 생성.
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		//dto에 있는 입력된 비밀번호 암호화해서 다시 dto의 pwd 필드에 넣는다.
+		dto.setPwd(pe.encode(dto.getPwd()));
+		// dao 객체를 이용해서 새로운 사용자 정보를 DB에 저장하기
+		loginDao.insert(dto, mView);
 	}
 }

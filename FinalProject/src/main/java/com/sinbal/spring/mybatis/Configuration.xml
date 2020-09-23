@@ -4,6 +4,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 쿼리에 null값이 있을 경우를 대비해 세팅. -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="VARCHAR"/>
+	</settings>
+	
 	<!-- type  별칭 등록 -->
 	<typeAliases>
 		<!-- LoginDto 별칭 설정. -->
