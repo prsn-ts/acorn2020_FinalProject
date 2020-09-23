@@ -9,17 +9,34 @@ CREATE TABLE sblogin(
 	regdate DATE -- 가입일 관련
 );
 
-CREATE TABLE sbproduct(
-	num NUMBER PRIMARY KEY,
-	kind VARCHAR2(100),
-	productName VARCHAR2(100),
-	content CLOB,
-	quantity NUMBER,
-	price NUMBER,
-	regdate DATE
+CREATE TABLE sbproduct
+(
+    num            NUMBER            NOT NULL, 
+    productName    VARCHAR2(100)     NOT NULL, 
+    kind           VARCHAR2(100)     NOT NULL, 
+    content        CLOB              NULL, 
+    price          NUMBER            NOT NULL, 
+    regdate        DATE              NOT NULL, 
+    profile        NVARCHAR2(100)    NULL, 
+    profile2       NVARCHAR2(100)    NULL, 
+    CONSTRAINT SBPRODUCT_PK PRIMARY KEY (num)
 );
-
+--시퀀스 생성
 CREATE SEQUENCE sbproduct_seq;
+--productname 에 유니크키 설정
+alter table sbproduct add constraint primarykey22 unique (productname);
+--상품 추가정보 테이블
+CREATE TABLE sbproduct_sub
+(
+    sbsize     NUMBER    NOT NULL, 
+    sbcount    NUMBER    NOT NULL, 
+    num        NUMBER    NOT NULL
+);
+--상품 추가정보 FOREIGN KEY 설정
+ALTER TABLE sbproduct_sub
+    ADD CONSTRAINT FK_sbproduct_sub_num_sbproduct FOREIGN KEY (num)
+        REFERENCES sbproduct (num);
+        
 
 INSERT INTO sbproduct
 (num, kind, productname, content, quantity, price, regdate)

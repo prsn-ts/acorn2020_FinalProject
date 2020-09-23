@@ -2,24 +2,26 @@ package com.sinbal.spring.product.dto;
 
 public class ProductDto {
 	private int num;
-	private String kind;
 	private String productname;
+	private String kind;
 	private String content;
-	private float quantity;
 	private float price;
 	private String regdate;
+	private String profile;
+	private String profile2;
 	//디폴트 생성자 
 	public ProductDto() {}
-	public ProductDto(int num, String kind, String productname, String content, float quantity, float price,
-			String regdate) {
+	public ProductDto(int num, String productname, String kind, String content, float price, String regdate,
+			String profile, String profile2) {
 		super();
 		this.num = num;
-		this.kind = kind;
 		this.productname = productname;
+		this.kind = kind;
 		this.content = content;
-		this.quantity = quantity;
 		this.price = price;
 		this.regdate = regdate;
+		this.profile = profile;
+		this.profile2 = profile2;
 	}
 	public int getNum() {
 		return num;
@@ -27,29 +29,23 @@ public class ProductDto {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getKind() {
-		return kind;
-	}
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
 	public String getProductname() {
 		return productname;
 	}
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public float getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(float quantity) {
-		this.quantity = quantity;
 	}
 	public float getPrice() {
 		return price;
@@ -63,7 +59,18 @@ public class ProductDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getProfile2() {
+		return profile2;
+	}
+	public void setProfile2(String profile2) {
+		this.profile2 = profile2;
+	}
 	
 	
 }
