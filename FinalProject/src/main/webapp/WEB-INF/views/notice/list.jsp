@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 <style>
+ .color:link { color: black; text-decoration: none;}
  .color:visited { color: black; text-decoration: none;}
  .color:hover { color: black; text-decoration: none;}
   .jb-th-1 {
