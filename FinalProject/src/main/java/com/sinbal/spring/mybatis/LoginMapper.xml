@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login">
+	<!-- 아이디가 중복되는 지 검사하는 sql문 -->
+	<select id="isExist" parameterType="java.lang.String" 
+		resultType="string"> <!-- java.long.String or string 아무거나 써도 인식한다. -->
+		SELECT id
+		FROM sblogin
+		WHERE id=#{inputId}
+	</select>
 	<select id="getData" parameterType="string" resultType="loginDto">
 		SELECT id, pwd, email, profile,
 			TO_CHAR(regdate, 'YY.MM.DD HH24"시"MM"분"') AS regdate
 		FROM sblogin
 		WHERE id=#{id}
 	</select>
+	<!-- 회원가입 요청을 수행하는 sql문 -->
+	<insert id="insert" parameterType="loginDto">
+		INSERT INTO sblogin
+		VALUES(#{id}, #{pwd}, #{email_all}, #{phone_num}, #{buy_consent},
+			#{private_consent}, #{trust_consent}, #{profile}, SYSDATE)
+	</insert>
 </mapper>
