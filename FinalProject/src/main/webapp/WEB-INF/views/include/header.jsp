@@ -52,7 +52,7 @@
 		<c:otherwise>
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          	SHOP
+	          	상품목록
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">캐주얼</a>
@@ -62,9 +62,12 @@
 	      </li>		
 		</c:otherwise>
 	</c:choose>	
-
-
-
+	<c:if test="${id eq 'admin' }">
+		   <li class="nav-item">
+	        <a class="nav-link" href="${pageContext.request.contextPath }/product/insertform.do">상품등록</a>
+	      </li>			
+	</c:if>
+	
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="상품명..." aria-label="Search">
@@ -82,7 +85,7 @@
 	</c:when>
 	<c:otherwise>
 		<div id="login">
-		<a class="icon-svg"href="${pageContext.request.contextPath }/home.do">${id }님 </a>
+		<a class="icon-svg"href="${pageContext.request.contextPath }/login/private/info.do">${id }님 </a>
 		<a class="icon-svg"href="${pageContext.request.contextPath }/login/logout.do">로그아웃</a>
 		</div>		
 	</c:otherwise>

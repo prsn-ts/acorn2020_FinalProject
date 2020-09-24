@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -93,5 +94,82 @@ public class LoginController {
 	public Map<String, Object> checkid(@RequestParam String inputId){
 		//service 가 리턴해주는 Map 객체를 리턴한다.
 		return loginService.isExistId(inputId);
+	}
+	
+	//회원 정보 보기 요청 처리
+	@RequestMapping("/login/private/info.do")
+	public ModelAndView info(HttpServletRequest request, ModelAndView mView) {
+		//로그인된 정보를 가져온다.
+		loginService.getLoginInfo(request, mView);
+		//ModelAndView 객체에 view 페이지 정보를 담는다.
+		mView.setViewName("login/private/info");
+		//view 페이지로 forward 이동한다.
+		return mView;
+	}
+	
+	//입력한 비밀번호가 기존 비밀번호와 맞는 지 체크하는 요청 처리
+	@RequestMapping("/login/private/pwd_check.do")
+	@ResponseBody
+	public Map<String, Object> pwdCheck(@RequestParam String pwd, HttpSession session){
+		//service 가 리턴해주는 Map 객체를 리턴한다.
+		return loginService.isExistPwd(pwd, session);
+	}
+	
+	//비밀번호 수정 폼 요청 처리
+	@RequestMapping("/login/private/pwd_updateform")
+	public String pwdUpdate() {
+		
+		//view 페이지로 이동하기.
+		return "login/private/pwd_updateform";
+	}
+	
+	//비밀번호 수정 요청 처리
+	@RequestMapping("/login/private/pwd_update")
+	public ModelAndView pwdUpdate(ModelAndView mView,
+			LoginDto dto, HttpServletRequest request) {
+		//loginService 객체를 이용해서 비밀번호를 수정한다.
+		loginService.updateUserPwd(dto, request, mView);
+		
+		//view 페이지 정보를 담고
+		mView.setViewName("login/private/pwd_update");
+		//이동한다.
+		return mView;
+	}
+	
+	//회원정보 수정 폼 요청 처리
+	@RequestMapping("/login/private/update_form.do")
+	public ModelAndView updateForm(HttpServletRequest request,
+			ModelAndView mView) {
+		//로그인된 정보를 가져온다.
+		loginService.getLoginInfo(request, mView);
+		//ModelAndView 객체에 view 페이지 정보를 담는다.
+		mView.setViewName("login/private/update_form");
+		//view 페이지로 이동한다.
+		return mView;
+	}
+	
+	//회원정보 수정 요청 처리
+	@RequestMapping("/login/private/update.do")
+	public ModelAndView updateForm(LoginDto dto, HttpServletRequest request,
+			ModelAndView mView) {
+		//로그인된 정보를 가져온다.
+		loginService.updateUser(dto, request, mView);
+		//ModelAndView 객체에 view 페이지 정보를 담는다.
+		mView.setViewName("login/private/update");
+		//view 페이지로 이동한다.
+		return mView;
+	}
+	
+	//회원 탈퇴 요청 처리
+	@RequestMapping("/login/private/delete.do")
+	public ModelAndView delete(HttpServletRequest request,
+			ModelAndView mView) {
+		//아이디 정보를 읽어내서 mView에 대입.
+		mView.addObject("id", request.getSession().getAttribute("id"));
+		//서비스를 이용해서 사용자 정보를 삭제하고
+		loginService.deleteUser(request.getSession());
+		//view 페이지로 forward 이동해서 응답
+		mView.setViewName("login/private/delete");
+		return mView;
 	}
 }

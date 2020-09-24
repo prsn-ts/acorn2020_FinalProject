@@ -8,9 +8,16 @@
 		FROM sblogin
 		WHERE id=#{inputId}
 	</select>
+	<!-- 비밀번호가 중복되는 지 검사하는 sql문 -->
+	<select id="isExistPwd" parameterType="java.lang.String" 
+		resultType="string"> <!-- java.long.String or string 아무거나 써도 인식한다. -->
+		SELECT pwd
+		FROM sblogin
+		WHERE id=#{id}
+	</select>
 	<select id="getData" parameterType="string" resultType="loginDto">
-		SELECT id, pwd, email, profile,
-			TO_CHAR(regdate, 'YY.MM.DD HH24"시"MM"분"') AS regdate
+		SELECT id, pwd, email, phone_num, buy_consent, private_consent, trust_consent, profile, 
+			TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
 		FROM sblogin
 		WHERE id=#{id}
 	</select>
@@ -20,4 +27,21 @@
 		VALUES(#{id}, #{pwd}, #{email_all}, #{phone_num}, #{buy_consent},
 			#{private_consent}, #{trust_consent}, #{profile}, SYSDATE)
 	</insert>
+	<!-- 비밀번호를 수정하는 sql문 -->
+	<update id="updatePwd" parameterType="loginDto">
+		UPDATE sblogin
+		SET pwd=#{newPwd}
+		WHERE id=#{id}
+	</update>
+	<!-- 회원 정보를 수정하는 sql문 -->
+	<update id="update" parameterType="loginDto">
+		UPDATE sblogin
+		SET phone_num=#{phone_num}, email=#{email_all}
+		WHERE id=#{id}
+	</update>
+	<!-- 회원 탈퇴하는 sql문 -->
+	<delete id="delete" parameterType="String">
+		DELETE FROM sblogin
+		WHERE id = #{id}
+	</delete>
 </mapper>
