@@ -5,18 +5,20 @@ public class LoginDto {
 	private String pwd;
 	private String email; // @(골뱅이)전까지의 글자
 	private String email_second; // @(골뱅이) 후의 클자
-	private String email_all; //이메일 앞쪽과 뒤쪽을 합친 것을 저장할 필드
+	private String email_all; //이메일 앞쪽과 뒤쪽 합친 것을 저장할 필드
 	private String phone_num;
 	private String buy_consent; //구매 이용약관 동의
 	private String private_consent; //개인정보 수집 동의
 	private String trust_consent; //개인정보 처리위탁동의
+	private String newPwd; //입력받을 새로운 비밀번호
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String regdate;
 	
 	public LoginDto() {}
 
 	public LoginDto(String id, String pwd, String email, String email_second, String email_all, String phone_num,
-			String buy_consent, String private_consent, String trust_consent, String profile, String regdate) {
+			String buy_consent, String private_consent, String trust_consent, String newPwd, String profile,
+			String regdate) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -27,6 +29,7 @@ public class LoginDto {
 		this.buy_consent = buy_consent;
 		this.private_consent = private_consent;
 		this.trust_consent = trust_consent;
+		this.newPwd = newPwd;
 		this.profile = profile;
 		this.regdate = regdate;
 	}
@@ -101,6 +104,14 @@ public class LoginDto {
 
 	public void setTrust_consent(String trust_consent) {
 		this.trust_consent = trust_consent;
+	}
+
+	public String getNewPwd() {
+		return newPwd;
+	}
+
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
 	}
 
 	public String getProfile() {

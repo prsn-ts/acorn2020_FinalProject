@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -21,10 +22,33 @@ public class LoginServiceImpl implements LoginService{
 	@Autowired
 	private LoginDao loginDao;
 	
+	//로그인 정보를 가져오는 메소드
+	@Override
+	public void getLoginInfo(HttpServletRequest request, ModelAndView mView) {
+		//로그인된 아이디가 있는지 가져와본다.
+		String id=(String)request.getSession().getAttribute("id");
+		//로그인된 정보를 dto에 담는다.
+		LoginDto dto = loginDao.getData(id);
+		//view 페이지에서 사용하기 위해서 ModelAndView 객체에 dto를 담는다.
+		mView.addObject("dto", dto);
+	}
+	
 	//아이디가 중복되는지 검사하는 메소드
 	@Override
 	public Map<String, Object> isExistId(String inputId) {
 		boolean isExist = loginDao.isExist(inputId);
+		//아이디가 존재하는 지 여부를 Map 에 담아서 리턴해준다.
+		Map<String, Object> map = new HashMap<>();
+		map.put("isExist", isExist);
+		return map;
+	}
+	
+	//비밀번호가 중복되는지 검사하는 메소드
+	@Override
+	public Map<String, Object> isExistPwd(String inputPwd, HttpSession session) {
+		//아이디를 읽어온다.
+		String id = (String) session.getAttribute("id");
+		boolean isExist = loginDao.isExistPwd(inputPwd, id);
 		//아이디가 존재하는 지 여부를 Map 에 담아서 리턴해준다.
 		Map<String, Object> map = new HashMap<>();
 		map.put("isExist", isExist);
@@ -139,5 +163,57 @@ public class LoginServiceImpl implements LoginService{
 		dto.setPwd(pe.encode(dto.getPwd()));
 		// dao 객체를 이용해서 새로운 사용자 정보를 DB에 저장하기
 		loginDao.insert(dto, mView);
+	}
+	
+	//비밀번호 수정 요청을 처리하는 메소드
+	@Override
+	public void updateUserPwd(LoginDto dto, HttpServletRequest request, ModelAndView mView) {
+		//세션 영역에서 아이디 읽어오기
+		String id=(String)request.getSession().getAttribute("id");
+		//LoginDto 객체에 세션에 있는 id를 담는다.
+		dto.setId(id);
+		
+		//DB에 저장된 암호화된 비밀번호와 기존 비밀번호가 일치하는 지 확인하고 일치하면 새로운 비밀번호를 암호화해서 DB에 저장.
+		//작업 성공여부
+		boolean isSuccess = false;
+		//1. DB에 저장된 비밀번호를 읽어온다.
+		LoginDto resultDto = loginDao.getData(id);
+		//2. DB에 암호화해서 저장된 비밀번호와 기존 비밀번호가 일치하는 지 확인.
+		isSuccess = BCrypt.checkpw(dto.getPwd(), resultDto.getPwd());
+		if(isSuccess) {//isSuccess가 true 일 경우(기존 비밀번호와 암호화된 비밀번호가 같을 경우)
+			//새로운 비밀번호를 암호화한다.
+			BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+			String encodedNewPwd = pe.encode(dto.getNewPwd());
+			//암호화된 새 비밀번호를 dto 에 다시 넣어준다.
+			dto.setNewPwd(encodedNewPwd);
+			//dao 를 이용해서 DB 에 반영한다.
+			loginDao.updatePwd(dto);
+		}
+		//mView 객체에 성공 여부를 담는다.
+		mView.addObject("isSuccess", isSuccess);
+	}
+	
+	//회원정보 수정 요청 처리를 위한 메소드
+	@Override
+	public void updateUser(LoginDto dto, HttpServletRequest request, ModelAndView mView) {
+		//세션에 있는 아이디값을 얻어낸다.
+		String id = (String) request.getSession().getAttribute("id");
+		//dto에 id값을 저장한다.
+		dto.setId(id);
+		//나눠받은 이메일을 하나로 합친다.
+		dto.setEmail_all(dto.getEmail()+"@"+dto.getEmail_second());
+		//UsersDao 객체를 이용해서 수정 반영한다.
+		loginDao.update(dto);
+	}
+	
+	//회원 탈퇴 요청 관련 메소드
+	@Override
+	public void deleteUser(HttpSession session) {
+		//세션에 저장된 아이디를 읽어와서
+		String id = (String)session.getAttribute("id");
+		//삭제
+		loginDao.delete(id);
+		//로그 아웃 처리
+		session.invalidate();
 	}
 }

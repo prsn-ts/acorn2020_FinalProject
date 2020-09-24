@@ -3,7 +3,13 @@
 <mapper namespace="product">
 	<insert id="addProduct" parameterType="productDto">
 		INSERT INTO sbproduct
-		(num, kind, productname, content, quantity, price, regdate)
-		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{quantity }, #{price }, SYSDATE)
+		(num, kind, productname, content, price, regdate,profile)
+		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{price }, SYSDATE,#{profile})
 	</insert>
+	
+	<select id="getList" resultType="ProductDto">
+		select num,productname,kind,content,price,regdate,profile,profile2
+		from sbproduct
+		order by num desc
+	</select>
 </mapper>
