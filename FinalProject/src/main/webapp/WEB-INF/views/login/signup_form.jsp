@@ -145,7 +145,7 @@
 		<jsp:param value="index" name="thisPage"/>
 	</jsp:include>
   
-	<div class="container" style="width:460px; margin: 0 auto; margin-top: 100px;">
+	<div class="container" style="width:460px; margin: 0 auto; margin-top: 10px;">
 		<h2>회원가입</h2>
 		<div class="panel-body">
 		    <form name="user" class="user" action="signup.do" method="post">

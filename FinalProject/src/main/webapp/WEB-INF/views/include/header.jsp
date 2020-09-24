@@ -82,7 +82,7 @@
 	</c:when>
 	<c:otherwise>
 		<div id="login">
-		<a class="icon-svg"href="${pageContext.request.contextPath }/home.do">${id }님 </a>
+		<a class="icon-svg"href="${pageContext.request.contextPath }/login/private/info.do">${id }님 </a>
 		<a class="icon-svg"href="${pageContext.request.contextPath }/login/logout.do">로그아웃</a>
 		</div>		
 	</c:otherwise>
