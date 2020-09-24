@@ -127,7 +127,7 @@
 
   </div>
   
-  <li><a href="notice/list.do">공지사항</a></li>
+ 
 
 
 

@@ -46,7 +46,17 @@
 		VALUES(sbnotice_seq.NEXTVAL, #{writer}, #{title},
 			#{content}, #{viewCount}, SYSDATE)
 	</insert>
-	<select id="getData" parameterType="noticeDto" resultType="noticeDto">
+	<select id="getData" parameterType="int" resultType="noticeDto">
+		SELECT result1.*
+		FROM
+			(SELECT num,writer,title,content,viewCount,
+				TO_CHAR(regdate,'YY.MM.DD HH24:MI') AS regdate,
+				LAG(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
+				LEAD(num,1,0) OVER (ORDER BY num DESC) AS nextNum
+			FROM sbnotice) result1
+		WHERE num=#{num}
+	</select>
+	<select id="getData2" parameterType="noticeDto" resultType="noticeDto">
 		SELECT result1.*
 		FROM
 			(SELECT num,writer,title,content,viewCount,
@@ -61,9 +71,6 @@
 				</when>
 				<when test="title != null">
 					WHERE title LIKE '%'||#{title}||'%'
-				</when>
-				<when test="writer != null">
-					WHERE writer LIKE '%'||#{writer}||'%'
 				</when>
 			</choose>			
 			) result1

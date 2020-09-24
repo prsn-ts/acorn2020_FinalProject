@@ -14,6 +14,9 @@
  .color:link { color: black; text-decoration: none;}
  .color:visited { color: black; text-decoration: none;}
  .color:hover { color: black; text-decoration: none;}
+ .color{
+  	text-align: right;
+  }
   .jb-th-1 {
     width: 600px;
   }
@@ -48,7 +51,40 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<a class="color" href="private/insertform.do">새글 작성</a>
+	<div class="page-display">
+		<ul class="pagination pagination-sm">
+		<c:if test="${startPageNum ne 1 }">
+			<li class="page-item"><a class="page-link" href="list.do?pageNum=${startPageNum-1 }&condition=${condition }&keyword=${encodedK }">Prev</a></li>
+		</c:if>
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="page-item active"><a class="page-link" href="list.do?pageNum=${i }&condition=${condition }&keyword=${encodedK }">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link" href="list.do?pageNum=${i }&condition=${condition }&keyword=${encodedK }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endPageNum lt totalPageCount }">
+			<li class="page-item"><a class="page-link" href="list.do?pageNum=${endPageNum+1 }&condition=${condition }&keyword=${encodedK }">Next</a></li>
+		</c:if>
+		</ul>
+		<div class="color">
+			<c:if test="${id eq 'admin'}">
+				<a class="color" href="private/insertform.do"><button type="button" class="btn btn-outline-dark btn-sm">공지 작성</button></a>
+			</c:if>
+		</div>		
+	</div>
+	<hr style="clear:left;"/>
+	<form action="list.do" method="get">
+		<label for="condition"></label>
+		<select name="condition" id="condition">
+			<option value="title_content" <c:if test="${condition eq 'title_content' }">selected</c:if>>제목+내용</option>
+		</select>
+		<input value="${keyword }" type="text" name="keyword" placeholder="검색어..."/>
+		<button type="submit">검색</button>
+	</form>	
 </div>
 
 </body>
