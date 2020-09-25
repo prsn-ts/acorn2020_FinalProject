@@ -9,7 +9,14 @@
 	
 	<select id="getList" resultType="ProductDto">
 		select num,productname,kind,content,price,regdate,profile,profile2
-		from sbproduct
+		from sbproduct 
 		order by num desc
+	</select>
+	
+	<insert id="insert_sub" parameterType="productdto">
+		insert into sbproduct_sub(num, sbsize, sbcount) values(#{num},#{sbsize},#{sbcount})
+	</insert>
+	<select id="getnum" resultType="int">
+		 SELECT sbproduct_seq.currval as num FROM DUAL 
 	</select>
 </mapper>
