@@ -46,7 +46,8 @@
 			자세히 보기 입니다.
 		</p>
 	</c:if>
-
+	<h4><strong>BARSIN 공지사항</strong></h4>
+	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">목록 보기</button></a>
 	<c:if test="${dto.prevNum ne 0 }">
 		<a class="btn btn-outline-dark btn-sm" href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedK}">
 			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +64,7 @@
 			다음글
 		</a>	
 	</c:if>
-	<h1>공지사항</h1>
+	<br />
 	<table>
 		<tr>
 			<th>제목</th>
@@ -76,7 +77,7 @@
 	</table>
 	<br />
 	<div class="contents">${dto.content }</div>
-	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">목록 보기</button></a>
+	<br />
 	<c:if test="${dto.writer eq id }">
 		<div align="right">
 			<a class="btn btn-outline-warning btn-sm" href="private/updateform.do?num=${dto.num }">

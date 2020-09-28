@@ -31,9 +31,9 @@
 <!-- Page Content -->
 <div class="container">
 	<br />
-	<h4><strong>공지사항</strong></h4>
+	<h4><strong>BARSIN 공지사항</strong></h4>
 	<br />
-	<table class="table table-striped table-sm">
+	<table class="table table-hover table-sm">
 		<thead>
 			<tr>				
 				<th class="jb-th-1">제목</th>
@@ -83,7 +83,7 @@
 			<option value="title_content" <c:if test="${condition eq 'title_content' }">selected</c:if>>제목+내용</option>
 		</select>
 		<input value="${keyword }" type="text" name="keyword" placeholder="검색어..."/>
-		<button type="submit">검색</button>
+		<button type="submit" class="btn btn-outline-dark btn-sm">검색</button>
 	</form>	
 </div>
 

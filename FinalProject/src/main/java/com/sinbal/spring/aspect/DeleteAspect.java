@@ -39,7 +39,7 @@ public class DeleteAspect {
 		//세션에 저장된 아이디를 읽어온다(로그인된 아이디)
 		String id=(String)request.getSession().getAttribute("id");
 		if(!id.equals(noticeDto.getWriter())) {
-			throw new NotDeleteException("남의 글 지우기 없기!");
+			throw new NotDeleteException("삭제 권한이 없습니다.");
 		}
 		//메소드 정상 수행하기 
 		joinPoint.proceed();		
