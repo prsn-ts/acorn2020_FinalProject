@@ -44,7 +44,7 @@
 <div class="container" style="">
 	<br />
 	<h2>상품 등록</h2>
-	<form action="${pageContext.request.contextPath}/product/insert.do" method="post">
+	<form name="myForm"action="${pageContext.request.contextPath}/product/insert.do" method="post">
 				<input type="hidden" name="profile" id="profile" 
 				value="${dto.profile }"/>
 		<div class="form-row">
@@ -58,80 +58,81 @@
 			</div>
 			<div class="form-group col-md-9">
 				<label for="productname">상품명</label>
-				<input class="form-control" type="text" placeholder="상품명"name="productname"/>
+				<input data-ng-model="productname"class="form-control" data-ng-class="{'is-invalid': (myForm.productname.$invalid || myForm.productname.$canuseproductname) && myForm.productname.$dirty }" type="text" 
+				required placeholder="상품명"name="productname" ng-change="productnameChanged()"/>
+				<small class="form-text text-muted">상품명 입력해주세요 (필수)</small>
+				<div class="invalid-feedback">이미존재하는 상품명입니다.</div>
 			</div>			
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="price">가격</label>
-				<input class="form-control" type="text" placeholder="숫자만 입력"name="price"/>
+				<input data-ng-model="price" class="form-control" type="number"required placeholder="가격 입력"name="price"/>
+				<small class="form-text text-muted">숫자만 입력하세요 (필수)</small>
 			</div>
 		</div>
 		<div class="row">
 		
 		<div class="col">
-		<div>
-		<h4>상품 사이즈 수량 등록</h4>
-		<label for="all">전체선택</label>
-		<input type="checkbox"id="all" data-ng-model="isShow" 
-		data-ng-checked="isShow230&&isShow240&&isShow250&&isShow260&&isShow270&&isShow280"/>
 		
-		</div>
-	
+		<h4>상품 사이즈 수량 등록</h4>
+		
+		
+		<br />
 		<div class="row">
 
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr"   value="230" class="checkSelect" id="check230"
-				 data-ng-checked="isShow"data-ng-model="isShow230"
+				 data-ng-model="isShow230"
 				>230	
 			</div>	
-			<div class="col-md-8">
-				<input  type="number" data-ng-disabled="!(isShow||isShow230)"  placeholder="신발 재고"name="sbcount" />
+			<div  class="col-md-8">
+				<input ng-model="size230" ng-required="isShow230" data-ng-show="isShow230" type="number" data-ng-disabled="!isShow230"  placeholder="230 size 재고 입력"name="sbcount" />
 			</div>
 		</div>	
 		<div class="row">
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr" value="240" class="checkSelect"
-				data-ng-checked="isShow" data-ng-model="isShow240">240	
+				 data-ng-model="isShow240">240	
 			</div>	
 			<div class="col-md-8">
-				<input  type="number" placeholder="신발 재고"name="sbcount"data-ng-disabled="!(isShow||isShow240)"/>
+				<input ng-model="size240"ng-required="isShow240"data-ng-show="isShow240" type="number" placeholder="240 size 재고 입력"name="sbcount"data-ng-disabled="!isShow240"/>
 			</div>
 		</div>		
 		<div class="row">	
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr" value="250" class="checkSelect"
-				data-ng-checked="isShow" data-ng-model="isShow250">250	
+				 data-ng-model="isShow250">250	
 			</div>	
 			<div class="col-md-8">
-				<input  type="number" placeholder="신발 재고"name="sbcount"data-ng-disabled="!(isShow||isShow250)"/>
+				<input ng-model="size250"ng-required="isShow250"data-ng-show="isShow250" type="number" placeholder="250 size 재고 입력"name="sbcount"data-ng-disabled="!isShow250"/>
 			</div>			
 		</div>		
 		<div class="row">	
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr" value="260" class="checkSelect"
-				data-ng-checked="isShow" data-ng-model="isShow260">260	
+				 data-ng-model="isShow260">260	
 			</div>	
 			<div class="col-md-8">
-				<input  type="number" placeholder="신발 재고"name="sbcount"data-ng-disabled="!(isShow||isShow260)"/>
+				<input ng-model="size260" data-ng-show="isShow260"ng-required="isShow260" type="number" placeholder="260 size 재고 입력"name="sbcount"data-ng-disabled="!isShow260"/>
 			</div>			
 		</div>
 		<div class="row">	
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr" value="270" class="checkSelect"
-				data-ng-checked="isShow" data-ng-model="isShow270">270	
+				 data-ng-model="isShow270">270	
 			</div>	
 			<div class="col-md-8">
-				<input  type="number" placeholder="신발 재고"name="sbcount"data-ng-disabled="!(isShow||isShow270)"/>
+				<input ng-model="size270"data-ng-show="isShow270"ng-required="isShow270" type="number" placeholder="270 size 재고 입력"name="sbcount"data-ng-disabled="!isShow270"/>
 			</div>			
 		</div>
 		<div class="row">	
 			<div class="col-md-4">
 				<input type="checkbox" name="sizearr" value="280" class="checkSelect"
-				data-ng-checked="isShow" data-ng-model="isShow280">280	
+				 data-ng-model="isShow280">280	
 			</div>	
 			<div class="col-md-8">
-				<input  type="number" placeholder="신발 재고"name="sbcount"data-ng-disabled="!(isShow||isShow280)"/>
+				<input  ng-model="size280"data-ng-show="isShow280" ng-required="isShow280" type="number" placeholder="280 size 재고 입력"name="sbcount"data-ng-disabled="!isShow280"/>
 			</div>			
 		</div>			
 		</div>
@@ -160,7 +161,7 @@
 			
 
 
-		<button class="btn btn-outline-primary"  type="submit" onclick="submitContents(this);">등록</button>
+		<button data-ng-disabled="myForm.$invalid" class="btn btn-outline-primary"  type="submit" onclick="submitContents(this);">등록</button>
 			<button class="btn btn-outline-warning" type="reset" >취소</button>
 	</form>
 	
@@ -261,7 +262,21 @@
 		var myApp=angular.module("myApp", []);
 	
 	myApp.controller("insert_Ctrl", function($scope, $http){
-		
+		//angularjs  가 초기화 될때 최초 한번만 호출된다.
+		$scope.productnameChanged=function(){
+			$http({
+				url:"checkproductname.do",
+				method:"get",
+				params:{inputproductname:$scope.productname}
+			})
+			.success(function(data){
+				//data => {isExist:true} or {isExist:false} 인 object 이다.
+				//입력한 아이디가 DB 에 존재 하지 않아야지 사용할수 있다.
+				console.log(data.isExist);
+				$scope.myForm.productname.$canuseproductname = !data.isExist;
+				$scope.myForm.productname.$canuseproductname = data.isExist;
+			});
+		};
 		
 	})
 </script>

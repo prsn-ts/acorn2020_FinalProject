@@ -19,4 +19,11 @@
 	<select id="getnum" resultType="int">
 		 SELECT sbproduct_seq.currval as num FROM DUAL 
 	</select>
+	
+		<select id="isExist" parameterType="java.lang.String" 
+		resultType="string"> <!-- java.long.String or string 아무거나 써도 인식한다. -->
+		SELECT productname
+		FROM sbproduct
+		WHERE productname=#{inputproductname}
+	</select>
 </mapper>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,9 +20,23 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDao productDao;
 	
+	@Transactional
 	@Override
-	public void insert(ProductDto dto) {
+	public void insert(ProductDto dto ,HttpServletRequest request) {
 		productDao.insert(dto);
+		int num=productDao.getnum();
+		String[] sbsize= request.getParameterValues("sizearr");
+		String[] sbcount= request.getParameterValues("sbcount");
+		for(int i=0; i<sbsize.length;i++) {
+			dto.setSbsize(sbsize[i]);
+			dto.setSbcount(sbcount[i]);
+			dto.setNum(num);
+			productDao.insert_sub(dto);
+		}
+		
+		
+		
+		
 	}
 	@Override
 	public Map<String, Object> saveProfileImage(HttpServletRequest request, MultipartFile mFile) {
@@ -64,8 +79,15 @@ public class ProductServiceImpl implements ProductService{
 	//신발 사이즈와 수량을 추가
 	@Override
 	public void insert_sub(ProductDto dto) {
-		int num=productDao.getnum();
-		dto.setNum(num);
-		productDao.insert_sub(dto);
+
+	}
+	@Override
+	public Map<String, Object> isExistproductname(String inputproductname) {
+		boolean isExist = productDao.isExist(inputproductname);
+		//아이디가 존재하는 지 여부를 Map 에 담아서 리턴해준다.
+		Map<String, Object> map = new HashMap<>();
+		map.put("isExist", isExist);
+		return map;
+		
 	}
 }

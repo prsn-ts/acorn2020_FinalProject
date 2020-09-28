@@ -11,6 +11,8 @@ public interface ProductDao {
 	
 	//num값 얻어오기
 	public int getnum();
-	
+
+	//상품명 존재하는지 여부를 판단
+	public boolean isExist(String inputproductname);
 	public List<ProductDto> getList();
 }
