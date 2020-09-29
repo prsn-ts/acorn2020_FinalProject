@@ -14,4 +14,6 @@ public interface ProductService {
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
 	public void getList(ModelAndView mView);
+	
+	public void insert_sub(ProductDto dto);
 }

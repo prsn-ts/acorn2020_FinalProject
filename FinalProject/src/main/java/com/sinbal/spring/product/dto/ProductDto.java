@@ -5,14 +5,17 @@ public class ProductDto {
 	private String productname;
 	private String kind;
 	private String content;
-	private float price;
+	private int price;
 	private String regdate;
 	private String profile;
 	private String profile2;
+	private String[] sizearr;
+	private String sbsize;
+	private String sbcount;
 	//디폴트 생성자 
 	public ProductDto() {}
-	public ProductDto(int num, String productname, String kind, String content, float price, String regdate,
-			String profile, String profile2) {
+	public ProductDto(int num, String productname, String kind, String content, int price, String regdate,
+			String profile, String profile2, String[] sizearr, String sbsize, String sbcount) {
 		super();
 		this.num = num;
 		this.productname = productname;
@@ -22,6 +25,9 @@ public class ProductDto {
 		this.regdate = regdate;
 		this.profile = profile;
 		this.profile2 = profile2;
+		this.sizearr = sizearr;
+		this.sbsize = sbsize;
+		this.sbcount = sbcount;
 	}
 	public int getNum() {
 		return num;
@@ -47,10 +53,10 @@ public class ProductDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public float getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getRegdate() {
@@ -71,6 +77,23 @@ public class ProductDto {
 	public void setProfile2(String profile2) {
 		this.profile2 = profile2;
 	}
-	
-	
+	public String[] getSizearr() {
+		return sizearr;
+	}
+	public void setSizearr(String[] sizearr) {
+		this.sizearr = sizearr;
+	}
+	public String getSbsize() {
+		return sbsize;
+	}
+	public void setSbsize(String sbsize) {
+		this.sbsize = sbsize;
+	}
+	public String getSbcount() {
+		return sbcount;
+	}
+	public void setSbcount(String sbcount) {
+		this.sbcount = sbcount;
+	}
+
 }

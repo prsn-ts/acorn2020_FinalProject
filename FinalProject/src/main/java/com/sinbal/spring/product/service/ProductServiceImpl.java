@@ -60,4 +60,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		
 	}
+	
+	//신발 사이즈와 수량을 추가
+	@Override
+	public void insert_sub(ProductDto dto) {
+		int num=productDao.getnum();
+		dto.setNum(num);
+		productDao.insert_sub(dto);
+	}
 }

@@ -27,8 +27,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/product/insert") 
-	public ModelAndView getList(ProductDto dto, ModelAndView mView) {
+	public ModelAndView insert(ProductDto dto, ModelAndView mView ,HttpServletRequest request) {
 		productService.insert(dto);
+		String[] sbsize= request.getParameterValues("sizearr");
+		String[] sbcount= request.getParameterValues("sbcount");
+		for(int i=0; i<sbsize.length;i++) {
+			dto.setSbsize(sbsize[i]);
+			dto.setSbcount(sbcount[i]);
+			productService.insert_sub(dto);
+		}
+		
 		mView.setViewName("redirect:/shop/shop.do");
 		return mView;
 	}
