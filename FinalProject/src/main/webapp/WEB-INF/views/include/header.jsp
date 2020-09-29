@@ -27,12 +27,12 @@
 	<c:choose>
 		<c:when test="${param.thisPage eq 'list' }">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="#">아몰라게시판</a>
+	        <a class="nav-link" href="${pageContext.request.contextPath }/notice/list.do">BARSIN공지</a>
 	      </li>		
 		</c:when>
 		<c:otherwise>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">아몰라게시판</a>
+	        <a class="nav-link" href="${pageContext.request.contextPath }/notice/list.do">BARSIN공지</a>
 	      </li>		
 		</c:otherwise>
 	</c:choose>

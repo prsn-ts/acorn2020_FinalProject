@@ -13,7 +13,6 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 
 <style>
-
 </style>
 </head>
 <body>
@@ -118,6 +117,8 @@
     <!-- /END THE FEATURETTES -->
 
   </div>
+  
+ 
 
 
 
