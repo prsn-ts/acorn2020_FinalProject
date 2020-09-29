@@ -17,5 +17,11 @@ public interface ProductService {
 	
 	public void insert_sub(ProductDto dto);
 	//상품명이 중복되는지 검사하는 추상 메소드
-		public Map<String, Object> isExistproductname(String inputproductname);
+	public Map<String, Object> isExistproductname(String inputproductname);
+	
+	public void productdelete(int num);
+	public void getData(ModelAndView mView ,int num);
+	
+	//신발 수정 서비스
+	public void productupdate(ModelAndView mView, ProductDto dto ,HttpServletRequest request);
 }

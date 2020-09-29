@@ -2,6 +2,7 @@ package com.sinbal.spring.product.service;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +29,8 @@ public class ProductServiceImpl implements ProductService{
 		String[] sbsize= request.getParameterValues("sizearr");
 		String[] sbcount= request.getParameterValues("sbcount");
 		for(int i=0; i<sbsize.length;i++) {
-			dto.setSbsize(sbsize[i]);
-			dto.setSbcount(sbcount[i]);
+			dto.setSbsize(Integer.parseInt(sbsize[i]));
+			dto.setSbcount(Integer.parseInt(sbcount[i]));
 			dto.setNum(num);
 			productDao.insert_sub(dto);
 		}
@@ -88,6 +89,31 @@ public class ProductServiceImpl implements ProductService{
 		Map<String, Object> map = new HashMap<>();
 		map.put("isExist", isExist);
 		return map;
+		
+	}
+	@Override
+	public void productdelete(int num) {
+		productDao.productdelete(num);
+		
+	}
+	@Override
+	public void getData(ModelAndView mView ,int num) {
+		List<ProductDto> list=productDao.getData(num);
+		mView.addObject("list",list);
+	}
+	
+	@Transactional
+	@Override
+	public void productupdate(ModelAndView mView, ProductDto dto ,HttpServletRequest request) {
+		productDao.productupdate(dto);
+		String[] sbsize= request.getParameterValues("sizearr");
+		String[] sbcount= request.getParameterValues("sbcount");
+		
+		for(int i=0; i<sbsize.length;i++) {
+			dto.setSbsize(Integer.parseInt(sbsize[i]));
+			dto.setSbcount(Integer.parseInt(sbcount[i]));
+			productDao.productupdate_sub(dto);
+		}
 		
 	}
 }

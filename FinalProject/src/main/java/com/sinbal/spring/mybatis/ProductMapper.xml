@@ -7,23 +7,45 @@
 		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{price }, SYSDATE,#{profile})
 	</insert>
 	
-	<select id="getList" resultType="ProductDto">
+	<select id="getList" resultType="productDto">
 		select num,productname,kind,content,price,regdate,profile,profile2
 		from sbproduct 
 		order by num desc
 	</select>
 	
-	<insert id="insert_sub" parameterType="productdto">
+	<insert id="insert_sub" parameterType="productDto">
 		insert into sbproduct_sub(num, sbsize, sbcount) values(#{num},#{sbsize},#{sbcount})
 	</insert>
 	<select id="getnum" resultType="int">
 		 SELECT sbproduct_seq.currval as num FROM DUAL 
 	</select>
 	
-		<select id="isExist" parameterType="java.lang.String" 
+	<select id="isExist" parameterType="java.lang.String" 
 		resultType="string"> <!-- java.long.String or string 아무거나 써도 인식한다. -->
 		SELECT productname
 		FROM sbproduct
 		WHERE productname=#{inputproductname}
 	</select>
+	<delete id="productdelete" parameterType="int">
+		delete from sbproduct
+		where num=#{num}
+	</delete>
+	
+	<select id="getData" parameterType="int" resultType="productDto">
+		SELECT sbproduct.num,kind,price, productname, content, regdate, profile,
+		 sbcount, sbsize
+		FROM sbproduct, sbproduct_sub
+		WHERE sbproduct.num = sbproduct_sub.num and sbproduct.num=#{num}
+		ORDER BY sbsize asc
+	</select>
+	
+	<update id="update" parameterType="productDto">
+		UPDATE sbproduct SET kind=#{kind},price=#{price}, profile=#{profile}, content=#{content}
+		WHERE num=#{num}
+	</update>
+	<update id="updatesub" parameterType="productDto">
+		UPDATE sbproduct_sub SET
+		sbcount=#{sbcount}
+		WHERE num=#{num} and sbsize=#{sbsize}
+	</update>
 </mapper>
