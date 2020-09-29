@@ -33,12 +33,16 @@
 	.contents img{
 		max-width: 100%;
 	}
+	.fontst{
+		font-size: 30px;
+	}
 </style>
 </head>
 <body>
 <jsp:include page="../include/header.jsp">
 	<jsp:param value="index" name="thisPage"/>
 </jsp:include>
+<br />
 <div class="container">
 	<c:if test="${not empty keyword }">
 		<p class="alert alert-info">
@@ -46,25 +50,22 @@
 			자세히 보기 입니다.
 		</p>
 	</c:if>
-	<h4><strong>BARSIN 공지사항</strong></h4>
-	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">목록 보기</button></a>
+	<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="" />공지사항</p>
+	<br />
 	<c:if test="${dto.prevNum ne 0 }">
 		<a class="btn btn-outline-dark btn-sm" href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedK}">
-			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  					<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  				<path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
 			</svg>
-			이전글
 		</a>	
 	</c:if>
 	<c:if test="${dto.nextNum ne 0 }">
 		<a class="btn btn-outline-dark btn-sm" href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${encodedK}">
-			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  				<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  				<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 			</svg>
-			다음글
 		</a>	
 	</c:if>
-	<br />
 	<table>
 		<tr>
 			<th>제목</th>
@@ -78,6 +79,11 @@
 	<br />
 	<div class="contents">${dto.content }</div>
 	<br />
+	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">
+		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  			<path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+		</svg>List
+	</button></a>
 	<c:if test="${dto.writer eq id }">
 		<div align="right">
 			<a class="btn btn-outline-warning btn-sm" href="private/updateform.do?num=${dto.num }">
