@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinbal.spring.product.dao.ProductDao;
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dto.ShopDto;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -76,7 +78,6 @@ public class ProductServiceImpl implements ProductService{
 		
 		
 	}
-	
 	//신발 사이즈와 수량을 추가
 	@Override
 	public void insert_sub(ProductDto dto) {
@@ -116,4 +117,30 @@ public class ProductServiceImpl implements ProductService{
 		}
 		
 	}
+	//상품 번호에 맞는 상품 정보를 가져오는 추상 메소드
+	@Override
+	public void getProductData(ModelAndView mView, int num) {
+		//상품 정보를 가져온다.
+		ProductDto dto = productDao.getData2(num);
+		//신발 사이즈, 신발 수량 정보를 가져온다.
+		List<ProductDto> dto_sub = productDao.getSubData(num);
+		//mView에 담는다.
+		mView.addObject("productDto", dto);
+		mView.addObject("productDto_sub", dto_sub);
+	}
+	//특정 사이즈의 재고 개수를 리턴하는 메소드
+	@Override
+	public ProductDto getStockData(int size, int num) {
+		//재고 개수를 가져온다.
+		ProductDto dto = productDao.getStockData(size, num);
+		return dto;
+	}
+	//선택할 수 있는 신발 사이즈 항목의 개수를 리턴하는 메소드
+	@Override
+	public int getSizeData(int num) {
+		//재고 개수를 가져온다.
+		int number = productDao.getSizeData(num);
+		return number;
+	}
+	
 }
