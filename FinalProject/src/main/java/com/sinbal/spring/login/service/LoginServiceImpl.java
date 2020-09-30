@@ -163,6 +163,7 @@ public class LoginServiceImpl implements LoginService{
 		dto.setPwd(pe.encode(dto.getPwd()));
 		// dao 객체를 이용해서 새로운 사용자 정보를 DB에 저장하기
 		loginDao.insert(dto, mView);
+		loginDao.insert_account(dto, mView);
 	}
 	
 	//비밀번호 수정 요청을 처리하는 메소드
@@ -215,5 +216,22 @@ public class LoginServiceImpl implements LoginService{
 		loginDao.delete(id);
 		//로그 아웃 처리
 		session.invalidate();
+	}
+
+	@Override
+	public void addMoney( HttpServletRequest request) {
+		String id =	(String)request.getSession().getAttribute("id");
+		loginDao.addMoney(id);
+	
+	}
+
+	@Override
+	public Map<String, Object> getaccount(HttpServletRequest request) {
+		String id =	(String)request.getSession().getAttribute("id");
+		LoginDto dto =loginDao.getData(id);
+		Map<String, Object> map = new HashMap<>();
+		map.put("money",dto.getMoney() );
+		return map;
+		
 	}
 }

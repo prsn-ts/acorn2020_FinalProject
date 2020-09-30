@@ -13,12 +13,14 @@ public class LoginDto {
 	private String newPwd; //입력받을 새로운 비밀번호
 	private String profile; //프로필 이미지 경로를 저장할 필드
 	private String regdate;
+	private int money;  //돈
+	private int point; // 포인트
 	
 	public LoginDto() {}
 
 	public LoginDto(String id, String pwd, String email, String email_second, String email_all, String phone_num,
 			String buy_consent, String private_consent, String trust_consent, String newPwd, String profile,
-			String regdate) {
+			String regdate, int money, int point) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -32,6 +34,8 @@ public class LoginDto {
 		this.newPwd = newPwd;
 		this.profile = profile;
 		this.regdate = regdate;
+		this.money = money;
+		this.point = point;
 	}
 
 	public String getId() {
@@ -129,5 +133,23 @@ public class LoginDto {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+
 
 }	

@@ -16,10 +16,10 @@
 		WHERE id=#{id}
 	</select>
 	<select id="getData" parameterType="string" resultType="loginDto">
-		SELECT id, pwd, email, phone_num, buy_consent, private_consent, trust_consent, profile, 
-			TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate
-		FROM sblogin
-		WHERE id=#{id}
+		SELECT sblogin.id, pwd, email, phone_num, buy_consent, private_consent, trust_consent, profile, 
+			TO_CHAR(regdate, 'YYYY-MM-DD') AS regdate , money, point
+		FROM sblogin ,sblogin_account
+		WHERE sblogin.id=sblogin_account.id and sblogin.id=#{id}
 	</select>
 	<!-- 회원가입 요청을 수행하는 sql문 -->
 	<insert id="insert" parameterType="loginDto">
@@ -44,4 +44,16 @@
 		DELETE FROM sblogin
 		WHERE id = #{id}
 	</delete>
+	
+	<!-- 회원가입시 계정 등록 sql문 -->
+	<insert id="insert_account" parameterType="loginDto">
+		INSERT INTO sblogin_account
+		VALUES(#{id},0,0)
+	</insert>
+	
+	<update id="addMoney" parameterType="string">
+		update sblogin_account
+		set money = money+100000
+		where id=#{id}
+	</update>
 </mapper>
