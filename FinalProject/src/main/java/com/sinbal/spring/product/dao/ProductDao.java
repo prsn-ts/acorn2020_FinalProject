@@ -1,6 +1,7 @@
 package com.sinbal.spring.product.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sinbal.spring.product.dto.ProductDto;
 
@@ -22,4 +23,13 @@ public interface ProductDao {
 	
 	public void productupdate(ProductDto dto);
 	public void productupdate_sub(ProductDto dto);
+	
+	//상품 정보를 가져오는 추상 메소드
+	public ProductDto getData2(int num);
+	//신발 사이즈, 신발 수량 정보를 가져오는 추상 메소드
+	public List<ProductDto> getSubData(int num);
+	//특정 사이즈의 재고 개수를 리턴하는 추상 메소드
+	public ProductDto getStockData(int size, int num);
+	//선택할 수 있는 신발 사이즈 항목의 개수를 리턴하는 추상 메소드
+	public int getSizeData(int num);
 }

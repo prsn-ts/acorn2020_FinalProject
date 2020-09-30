@@ -103,7 +103,4 @@ public class ProductDto {
 	public void setCountarr(String[] countarr) {
 		this.countarr = countarr;
 	}
-
-
-
 }

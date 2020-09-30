@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +15,6 @@ public interface ProductService {
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
 	public void getList(ModelAndView mView);
-	
 	public void insert_sub(ProductDto dto);
 	//상품명이 중복되는지 검사하는 추상 메소드
 	public Map<String, Object> isExistproductname(String inputproductname);
@@ -24,4 +24,11 @@ public interface ProductService {
 	
 	//신발 수정 서비스
 	public void productupdate(ModelAndView mView, ProductDto dto ,HttpServletRequest request);
+
+	//상품 번호에 맞는 상품 정보를 가져오는 추상 메소드
+	public void getProductData(ModelAndView mView, int num);
+	//특정 사이즈의 재고 개수를 리턴하는 추상 메소드
+	public ProductDto getStockData(int size, int num);
+	//선택할 수 있는 신발 사이즈 항목의 개수를 리턴하는 추상 메소드
+	public int getSizeData(int num);
 }
