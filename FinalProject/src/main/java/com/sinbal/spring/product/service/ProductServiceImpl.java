@@ -142,5 +142,26 @@ public class ProductServiceImpl implements ProductService{
 		int number = productDao.getSizeData(num);
 		return number;
 	}
+	//선택한 신발 사이즈에 해당하는 가격을 가져오는 추상 메소드
+	@Override
+	public Map<String, Object> getSbsizePrice(int size, int num) {
+		//특정 상품번호에 대한 정보를 가져온다.
+		List<ProductDto> list_dto = productDao.getSubData(num);
+		//특정 상품번호의 특정 신발 사이즈에 대한 정보를 가져온다.
+		ProductDto dto = productDao.getStockData(size, num);
+		//선택한 신발 사이즈에 대한 총 가격을 구한다.
+		//총 가격을 저장할 변수 선언
+		int totalPrice = 0;
+		for(int i=0; i<list_dto.size(); i++) {
+			totalPrice = totalPrice + list_dto.get(i).getPrice();
+		}
+		//특정 신발 사이즈에 맞는 가격을 가져온다.
+		int price = dto.getPrice();
+		//Map 객체에 정보를 담는다.
+		Map<String, Object> priceInfo = new HashMap<>();
+		priceInfo.put("totalPrice", totalPrice);
+		priceInfo.put("price", price);
+		return priceInfo;
+	}
 	
 }

@@ -34,7 +34,7 @@
 </style>
 </head>
 <body data-ng-controller="insert_Ctrl">
-<jsp:include page="../include/header.jsp">
+<jsp:include page="../../include/header.jsp">
 	<jsp:param value="index" name="thisPage"/>
 </jsp:include>
 
@@ -43,7 +43,7 @@
 <div class="container" style="">
 	<br />
 	<h2>상품 수정</h2>
-	<form name="myForm"action="${pageContext.request.contextPath}/shop/productupdate2.do" method="post">
+	<form name="myForm"action="${pageContext.request.contextPath}/shop/private/productupdate2.do" method="post">
 			<input type="hidden" name="num" value="${list[0].num }"/>
 			<input type="hidden" name="profile" id="profile" 
 				value="${list[0].profile }"/>
@@ -228,7 +228,7 @@
 	})
 </script>
 	<br />
-<jsp:include page="../include/footer.jsp">
+<jsp:include page="../../include/footer.jsp">
 	<jsp:param value="index" name="thisPage"/>
 </jsp:include>
 </body>

@@ -56,16 +56,6 @@ public class ProductController {
 		return map;
 	}	
 	
-	
-	//나중에 지울부분 입니다example
-	@RequestMapping("/shop/example.do")
-	public ModelAndView example(ModelAndView mView , Integer num) {
-		
-		mView.addObject("num",num);
-		mView.setViewName("shop/example");
-		return mView;
-	}
-	
 	//상품 삭제 부분
 	@RequestMapping("/shop/productdelete.do")
 	public ModelAndView productdelete(ModelAndView mView, int num) {
@@ -75,20 +65,20 @@ public class ProductController {
 		return mView;
 	}
 	//회원정보 폼 페이지
-	@RequestMapping("/shop/productupdate.do")
+	@RequestMapping("/shop/private/productupdate.do")
 	public ModelAndView productupdate(ModelAndView mView, int num) {
 		
 		productService.getData(mView, num);
-		mView.setViewName("shop/productupdate");
+		mView.setViewName("shop/private/productupdate");
 		return mView;
 		
 	}
 	//회원정보 수정 응답페이지
-	@RequestMapping("/shop/productupdate2.do")
+	@RequestMapping("/shop/private/productupdate2.do")
 	public ModelAndView productupdate2(ModelAndView mView, ProductDto dto, HttpServletRequest request) {
 		
 		productService.productupdate(mView, dto, request);
-		mView.setViewName("shop/productupdate2");
+		mView.setViewName("shop/private/productupdate2");
 		return mView;
 		
 	}

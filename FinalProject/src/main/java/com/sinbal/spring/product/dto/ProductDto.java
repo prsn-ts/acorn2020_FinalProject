@@ -11,12 +11,15 @@ public class ProductDto {
 	private String profile2;
 	private int sbsize;
 	private int sbcount;
-	private String[] sizearr;
-	private String[] countarr;
+	private int[] sizearr; //사이즈를 받아낼 배열
+	private int[] countarr; //수량을 받아낼 배열
+	private int[] pricearr; //가격을 받아낼 배열
+	private int totalPrice; //총 가격
 	//디폴트 생성자 
 	public ProductDto() {}
 	public ProductDto(int num, String productname, String kind, String content, int price, String regdate,
-			String profile, String profile2, int sbsize, int sbcount, String[] sizearr, String[] countarr) {
+			String profile, String profile2, int sbsize, int sbcount, int[] sizearr, int[] countarr, int[] pricearr,
+			int totalPrice) {
 		super();
 		this.num = num;
 		this.productname = productname;
@@ -30,6 +33,8 @@ public class ProductDto {
 		this.sbcount = sbcount;
 		this.sizearr = sizearr;
 		this.countarr = countarr;
+		this.pricearr = pricearr;
+		this.totalPrice = totalPrice;
 	}
 	public int getNum() {
 		return num;
@@ -91,16 +96,28 @@ public class ProductDto {
 	public void setSbcount(int sbcount) {
 		this.sbcount = sbcount;
 	}
-	public String[] getSizearr() {
+	public int[] getSizearr() {
 		return sizearr;
 	}
-	public void setSizearr(String[] sizearr) {
+	public void setSizearr(int[] sizearr) {
 		this.sizearr = sizearr;
 	}
-	public String[] getCountarr() {
+	public int[] getCountarr() {
 		return countarr;
 	}
-	public void setCountarr(String[] countarr) {
+	public void setCountarr(int[] countarr) {
 		this.countarr = countarr;
+	}
+	public int[] getPricearr() {
+		return pricearr;
+	}
+	public void setPricearr(int[] pricearr) {
+		this.pricearr = pricearr;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

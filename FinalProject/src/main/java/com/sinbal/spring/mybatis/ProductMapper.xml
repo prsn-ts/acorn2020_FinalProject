@@ -26,7 +26,7 @@
 		from sbproduct
 		where num=#{num}
 	</select>
-	<!-- 상품 정보(신발 사이즈, 수량)를 가져오는 sql문 -->
+	<!-- 특정 상품번호의 모든 정보(신발 사이즈, 수량 포함)를 가져오는 sql문 -->
 	<select id="getSubData" parameterType="int" resultType="ProductDto">
 		SELECT detailSelect.*, ROWNUM rnum
 			FROM
@@ -36,7 +36,7 @@
 			where num=#{num}
 			order by sbsize ASC) detailSelect
 	</select>
-	<!-- 선택할 수 있는 신발 사이즈 항목의 개수를 가져오는 sql문 -->
+	<!-- 특정 상품번호에 선택할 수 있는 신발 사이즈 항목의 총 개수를 가져오는 sql문 -->
 	<select id="getSizeData" parameterType="int" resultType="int">
 		select MAX(rnum)
 			from
@@ -47,7 +47,7 @@
 				inner join sbproduct_sub using(num)
 				where num=#{num}) detailSelect)
 	</select>
-	<!-- 특정 사이즈의 재고 개수를 리턴하는 sql문 -->
+	<!-- 특정 상품번호의 특정 사이즈의 정보(재고 개수 포함)를 리턴하는 sql문 -->
 	<select id="getStockData" parameterType="Map" resultType="productDto">
 		select detailSelect.*, ROWNUM rnum
 			from
