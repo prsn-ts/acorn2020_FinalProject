@@ -28,24 +28,24 @@
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${pageContext.request.contextPath }/resources/images/shoes1.png" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/images/shoes2.png" class="d-block w-100 " height="500px" alt="...">
       <div style="text-align: right"  class="carousel-caption d-none d-md-block">
-        <h5>첫번째 신발사진</h5>
-        <p>스니커즈로 부탁해</p>
+        <h5>새로운 차원의 디자인과 최상의 편안함</h5>
+        <p>지금 가장 먼저 경험해 보세요</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath }/resources/images/shoes2.png" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath }/resources/images/a1.png" class="d-block w-100" height="500px" alt="...">
       <div style="text-align: right" class="carousel-caption d-none d-md-block">
-        <h5>두번쨰 신발사진</h5>
-        <p>런닝화로 부탁해</p>
+        <h5>새로운 컬러, 새로운 디자인</h5>
+        <p>새로운 모습으로 지금 공개 합니다</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="${pageContext.request.contextPath }/resources/images/shoes3.png" class="d-block w-100" alt="...">
-      <div style="text-align: right"class="carousel-caption d-none d-md-block">
-        <h5>세번째 신발사진</h5>
-        <p>워커로 부탁해</p>
+      <img src="${pageContext.request.contextPath }/resources/images/p2.png" class="d-block w-100" height="500px" alt="...">
+      <div style="text-align: right" class="carousel-caption d-none d-md-block">
+        <h5>학생들에게 인기 많은디자인</h5>
+        <p>입학하는 자녀에게 신발 선물을 해보세요</p>
       </div>
     </div>
   </div>
@@ -84,40 +84,31 @@
 
 
     <!-- START THE FEATURETTES -->
+    
+    
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      <div class="col-md-5 text-center" style="margin-top: 200px">
+        <h1 class="featurette-heading">STYLE PICK</h1>
+        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-dark btn-lg" >구매하기 -></button></a>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img src="${pageContext.request.contextPath }/resources/images/a4.png" width="700" height="500" >
       </div>
     </div>
 
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-      <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-      </div>
-      <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-      </div>
-    </div>
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
-      <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      <div class="col-md-3 order-md-9 text-center" style="margin-top: 200px">
+        <h1 class="featurette-heading">Sneakers</h1>
+        <a href="info.do" class="lead"><button type="button" class="btn btn-dark btn-lg"><-자세히 보기</button></a>
       </div>
-      <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"></rect><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+      <div class="col-md-9 order-md-1">
+        <img src="${pageContext.request.contextPath }/resources/images/a3.png" width="700" height="500" >
       </div>
     </div>
 

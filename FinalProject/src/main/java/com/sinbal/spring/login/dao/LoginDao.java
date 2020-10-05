@@ -19,4 +19,8 @@ public interface LoginDao {
 	public void update(LoginDto dto);
 	//탈퇴 처리하는 추상 메소드
 	public void delete(String id);
+	//회원가입시 계좌 테이블 수행하기위한 메소드
+	public void insert_account(LoginDto dto, ModelAndView mView);
+	
+	public void addMoney(String id);
 }

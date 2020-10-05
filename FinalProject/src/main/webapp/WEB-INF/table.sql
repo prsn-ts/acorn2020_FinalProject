@@ -1,5 +1,17 @@
 -- 자신이 생성한 테이블과 시퀀스  추가하기
 
+--계좌테이블
+CREATE TABLE sblogin_account
+(
+    id       VARCHAR2(100)    NOT NULL, 
+    money    NUMBER           NOT NULL, 
+    point    NUMBER           NOT NULL
+);
+
+ALTER TABLE sblogin_account
+    ADD CONSTRAINT FK_sblogin_account_id_sblogin_ FOREIGN KEY (id)
+        REFERENCES sblogin (id) on delete cascade;
+
 -- 공지 사항 테이블
 CREATE TABLE sbnotice(
 	num NUMBER PRIMARY KEY,
@@ -50,9 +62,6 @@ CREATE TABLE sbproduct_sub
 --상품 추가정보 FOREIGN KEY 설정
 ALTER TABLE sbproduct_sub
     ADD CONSTRAINT FK_sbproduct_sub_num_sbproduct FOREIGN KEY (num)
-        REFERENCES sbproduct (num);
+        REFERENCES sbproduct (num) on delete cascade;
         
 
-INSERT INTO sbproduct
-(num, kind, productname, content, quantity, price, regdate)
-VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname }, #{content }, #{quantity }, #{price }, SYSDATE);

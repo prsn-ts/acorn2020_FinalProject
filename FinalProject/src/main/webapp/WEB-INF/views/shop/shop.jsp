@@ -89,7 +89,7 @@
               <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath }${tmp.profile}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">${tmp.productname }</a>
+                  <a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname }</a>
                 </h4>
                 <h6>${tmp.price }</h6>
                 <p class="card-text">심플 이즈 베스트 단화!</p>
