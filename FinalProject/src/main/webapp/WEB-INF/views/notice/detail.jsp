@@ -36,6 +36,7 @@
 	.fontst{
 		font-size: 30px;
 	}
+
 </style>
 </head>
 <body>
@@ -52,38 +53,36 @@
 	</c:if>
 	<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="" />공지사항</p>
 	<br />
+	<table class="table">
+		<tr>
+			<th style="text-align: center; font-size: 40px;">${dto.title }</th>
+		</tr>
+		<tr>
+			<td style="text-align: right;">${dto.regdate }</td>
+		</tr>
+	</table>
+	<hr style="clear:left;"/>
+	<div class="contents">${dto.content }</div>
+	<hr style="clear:left;"/>
+	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">
+		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  			<path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+		</svg>List
+	</button></a>
 	<c:if test="${dto.prevNum ne 0 }">
 		<a class="btn btn-outline-dark btn-sm" href="detail.do?num=${dto.prevNum }&condition=${condition}&keyword=${encodedK}">
 			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   				<path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-			</svg>
+			</svg>Next
 		</a>	
 	</c:if>
 	<c:if test="${dto.nextNum ne 0 }">
 		<a class="btn btn-outline-dark btn-sm" href="detail.do?num=${dto.nextNum }&condition=${condition}&keyword=${encodedK}">
 			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   				<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-			</svg>
+			</svg>Pre
 		</a>	
 	</c:if>
-	<table>
-		<tr>
-			<th>제목</th>
-			<td>${dto.title }</td>
-		</tr>
-		<tr>
-			<th>등록일</th>
-			<td>${dto.regdate }</td>
-		</tr>
-	</table>
-	<br />
-	<div class="contents">${dto.content }</div>
-	<br />
-	<a href="list.do"><button type="button" class="btn btn-outline-dark btn-sm">
-		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  			<path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-		</svg>List
-	</button></a>
 	<c:if test="${dto.writer eq id }">
 		<div align="right">
 			<a class="btn btn-outline-warning btn-sm" href="private/updateform.do?num=${dto.num }">
