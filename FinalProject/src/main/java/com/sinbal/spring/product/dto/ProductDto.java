@@ -9,13 +9,17 @@ public class ProductDto {
 	private String regdate;
 	private String profile;
 	private String profile2;
-	private String[] sizearr;
-	private String sbsize;
-	private String sbcount;
+	private int sbsize;
+	private int sbcount;
+	private int[] sizearr; //사이즈를 받아낼 배열
+	private int[] countarr; //수량을 받아낼 배열
+	private int[] pricearr; //가격을 받아낼 배열
+	private int totalPrice; //총 가격
 	//디폴트 생성자 
 	public ProductDto() {}
 	public ProductDto(int num, String productname, String kind, String content, int price, String regdate,
-			String profile, String profile2, String[] sizearr, String sbsize, String sbcount) {
+			String profile, String profile2, int sbsize, int sbcount, int[] sizearr, int[] countarr, int[] pricearr,
+			int totalPrice) {
 		super();
 		this.num = num;
 		this.productname = productname;
@@ -25,9 +29,12 @@ public class ProductDto {
 		this.regdate = regdate;
 		this.profile = profile;
 		this.profile2 = profile2;
-		this.sizearr = sizearr;
 		this.sbsize = sbsize;
 		this.sbcount = sbcount;
+		this.sizearr = sizearr;
+		this.countarr = countarr;
+		this.pricearr = pricearr;
+		this.totalPrice = totalPrice;
 	}
 	public int getNum() {
 		return num;
@@ -77,23 +84,40 @@ public class ProductDto {
 	public void setProfile2(String profile2) {
 		this.profile2 = profile2;
 	}
-	public String[] getSizearr() {
-		return sizearr;
-	}
-	public void setSizearr(String[] sizearr) {
-		this.sizearr = sizearr;
-	}
-	public String getSbsize() {
+	public int getSbsize() {
 		return sbsize;
 	}
-	public void setSbsize(String sbsize) {
+	public void setSbsize(int sbsize) {
 		this.sbsize = sbsize;
 	}
-	public String getSbcount() {
+	public int getSbcount() {
 		return sbcount;
 	}
-	public void setSbcount(String sbcount) {
+	public void setSbcount(int sbcount) {
 		this.sbcount = sbcount;
 	}
-
+	public int[] getSizearr() {
+		return sizearr;
+	}
+	public void setSizearr(int[] sizearr) {
+		this.sizearr = sizearr;
+	}
+	public int[] getCountarr() {
+		return countarr;
+	}
+	public void setCountarr(int[] countarr) {
+		this.countarr = countarr;
+	}
+	public int[] getPricearr() {
+		return pricearr;
+	}
+	public void setPricearr(int[] pricearr) {
+		this.pricearr = pricearr;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 }

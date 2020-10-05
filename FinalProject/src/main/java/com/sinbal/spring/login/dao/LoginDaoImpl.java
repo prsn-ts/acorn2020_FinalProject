@@ -79,4 +79,16 @@ public class LoginDaoImpl implements LoginDao{
 	public void delete(String id) {
 		session.delete("login.delete", id);
 	}
+
+	@Override
+	public void insert_account(LoginDto dto, ModelAndView mView) {
+		session.insert("login.insert_account",dto);
+		
+	}
+
+	@Override
+	public void addMoney(String id) {
+		session.update("login.addMoney", id);
+		
+	}
 }
