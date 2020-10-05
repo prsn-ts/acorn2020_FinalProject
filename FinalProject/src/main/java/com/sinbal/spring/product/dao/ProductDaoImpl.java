@@ -105,3 +105,4 @@ public class ProductDaoImpl implements ProductDao{
 		return session.selectOne("product.getSizeData", num);
 	}
 }
+
