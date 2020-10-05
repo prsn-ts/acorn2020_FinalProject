@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dto.OrderDto;
 
 public interface ProductDao {
 	public void insert(ProductDto dto);
@@ -32,4 +33,6 @@ public interface ProductDao {
 	public ProductDto getStockData(int size, int num);
 	//선택할 수 있는 신발 사이즈 항목의 개수를 리턴하는 추상 메소드
 	public int getSizeData(int num);
+	
+	
 }

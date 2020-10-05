@@ -1,5 +1,25 @@
 -- 자신이 생성한 테이블과 시퀀스  추가하기
 
+--주문테이블
+CREATE TABLE sborder
+(
+    num            NUMBER           NOT NULL, 
+    productnum     NUMBER           NOT NULL, 
+    id             VARCHAR2(100)    NOT NULL, 
+    name           VARCHAR2(100)    NOT NULL, 
+    addr           VARCHAR2(100)    NOT NULL, 
+    phone_num      VARCHAR2(100)    NOT NULL, 
+    sendrequest    VARCHAR2(100)    NULL, 
+    totalprice     NUMBER           NOT NULL, 
+    orderdate      DATE             NOT NULL, 
+    sboption       CLOB             NOT NULL, 
+    CONSTRAINT SBORDER_PK PRIMARY KEY (num)
+);
+
+주문테이블 시퀀스
+
+CREATE SEQUENCE sborder_seq;
+
 --계좌테이블
 CREATE TABLE sblogin_account
 (

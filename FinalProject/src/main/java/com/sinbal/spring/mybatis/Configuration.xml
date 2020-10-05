@@ -19,6 +19,8 @@
 			alias="noticeDto"/>	
 		<typeAlias type="com.sinbal.spring.product.dto.ProductDto"
 			alias="productDto"/>
+		<typeAlias type="com.sinbal.spring.shop.dto.OrderDto"
+			alias="orderDto"/>
 	</typeAliases>
 
 	<!-- Mapper 문서가 동작하기위한 설정. -->

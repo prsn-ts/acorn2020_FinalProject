@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dto.OrderDto;
 
 public interface ProductService {
 	public void insert(ProductDto dto, HttpServletRequest request);
@@ -33,4 +34,9 @@ public interface ProductService {
 	public int getSizeData(int num);
 	//특정 신발 사이즈에 해당하는 가격을 가져오는 추상 메소드
 	public Map<String, Object> getSbsizePrice(int size, int num);
+	
+	//상품을 결제하는 메소드
+	public void order(ModelAndView mView,OrderDto dto, HttpServletRequest request);
+	
+	public void buy(ModelAndView mView ,ProductDto dto);
 }

@@ -14,14 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sinbal.spring.login.dao.LoginDao;
 import com.sinbal.spring.product.dao.ProductDao;
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dao.OrderDao;
+import com.sinbal.spring.shop.dto.OrderDto;
 import com.sinbal.spring.shop.dto.ShopDto;
 
 @Service
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	@Autowired
+	private LoginDao loginDao;
 	
 	@Transactional
 	@Override
@@ -164,4 +172,64 @@ public class ProductServiceImpl implements ProductService{
 		return priceInfo;
 	}
 	
+	@Transactional
+	@Override
+	public void order(ModelAndView mView, OrderDto dto ,HttpServletRequest request) {
+		
+		int[]sizearr =dto.getSizearr();
+		int[]countarr=dto.getCountarr();
+		
+		//총금액을 가져오ㄴ다
+		int totalPrice =dto.getTotalPrice();
+		//사용자의 id를 검색한다
+		String id=(String)request.getSession().getAttribute("id");
+		//사용자의 계좌 정보를 검색한다.
+		int money =loginDao.getData(id).getMoney();
+		
+		//사용자의 머니가 총금액보다 높을떄만  주문을 하도록 처리
+		if(money>=totalPrice) {
+			String sboption="";
+			for(int i=0;i<sizearr.length;i++) {
+				sboption= sboption+"size :"+sizearr[i]+","+countarr[i]+"개";	
+			}
+			String addr=dto.getZipNo()+dto.getRoadAddrPart1()+dto.getAddrDetail();
+			dto.setSboption(sboption);
+			dto.setAddr(addr);
+			
+			//상품을 주문하는 dao
+			orderDao.order(dto);
+			//가지고있는 계좌에서 금액을 감소시킨다.
+			orderDao.minus_money(dto);
+			//상품의 재고를 감소시킨다
+			for(int i=0;i<sizearr.length;i++) {
+				dto.setSbsize(sizearr[i]);
+				dto.setSbcount(countarr[i]);
+				orderDao.minus_count(dto);	
+			}
+			//포인트를 적립시킨다.
+			orderDao.addpoint(dto);
+			//결제가 성공적으로 완료되었다는처리보내기
+			mView.addObject("isSuccess",true);
+			
+		}
+		else {
+			//결제가 실패했다는 처리보내기
+			mView.addObject("isSuccess",false);
+		}
+		
+
+	}
+	@Override
+	public void buy(ModelAndView mView, ProductDto dto) {
+		int[] sbsize= dto.getSizearr();
+		int[] sbcount= dto.getCountarr();
+		int[] sbprice= dto.getPricearr();
+		int totalPrice = dto.getTotalPrice();
+		
+		mView.addObject("sbsize",sbsize);
+		mView.addObject("sbcount",sbcount);
+		mView.addObject("sbprice",sbprice);
+		mView.addObject("sbdto",dto);
+	
+}
 }

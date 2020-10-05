@@ -1,7 +1,10 @@
 package com.sinbal.spring.shop.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sinbal.spring.login.service.LoginService;
 import com.sinbal.spring.product.dto.ProductDto;
 import com.sinbal.spring.product.service.ProductService;
+import com.sinbal.spring.shop.dto.OrderDto;
+import com.sinbal.spring.shop.service.ShopService;
 
 @Controller
 public class ShopController {
 
 	@Autowired
 	private ProductService productservice;
+	@Autowired
+	private LoginService loginservice;
+
 	
 	@RequestMapping("/shop/shop.do")
 	public ModelAndView shoplist(ModelAndView mView){
@@ -59,37 +68,26 @@ public class ShopController {
 		return result;
 	}
 	
+	
+	
 	//구매하기 버튼을 클릭했을 때 구매창 보기 요청 처리
-	@RequestMapping("/shop/private/buy_form(테스트용).do")
-	public String buyForm(ProductDto dto) {
-		int[] sbsize= dto.getSizearr();
-		int[] sbcount= dto.getCountarr();
-		int[] sbprice= dto.getPricearr();
-		int totalPrice = dto.getTotalPrice();
+	@RequestMapping("/shop/private/buy_form.do")
+	public ModelAndView buyForm(ProductDto dto,ModelAndView mView,HttpServletRequest request) {
 		
-		System.out.println("sbsize[0] : "+sbsize[0]);
-		System.out.println("sbsize[1] : "+sbsize[1]);
-		System.out.println("sbsize[2] : "+sbsize[2]);
-		System.out.println("sbsize[3] : "+sbsize[3]);
-		System.out.println("sbsize[4] : "+sbsize[4]);
-		System.out.println("sbsize[5] : "+sbsize[5]);
+			productservice.getData(mView, dto.getNum());		
+			loginservice.getLoginInfo(request, mView);
+			productservice.buy(mView, dto);
 		
-		System.out.println("sbcount[0]_230 : "+sbcount[0]);
-		System.out.println("sbcount[1]_240 : "+sbcount[1]);
-		System.out.println("sbcount[2]_250 : "+sbcount[2]);
-		System.out.println("sbcount[3]_260 : "+sbcount[3]);
-		System.out.println("sbcount[4]_270 : "+sbcount[4]);
-		System.out.println("sbcount[5]_280 : "+sbcount[5]);
+
+		mView.setViewName("shop/private/buy_form");
+		return mView;
+	}
+	
+	@RequestMapping("/shop/private/buy.do")
+	public ModelAndView order(ModelAndView mView ,OrderDto dto,HttpServletRequest request) {
 		
-		System.out.println("sbprice[0]_230 : "+sbprice[0]);
-		System.out.println("sbprice[1]_240 : "+sbprice[1]);
-		System.out.println("sbprice[2]_250 : "+sbprice[2]);
-		System.out.println("sbprice[3]_260 : "+sbprice[3]);
-		System.out.println("sbprice[4]_270 : "+sbprice[4]);
-		System.out.println("sbprice[5]_280 : "+sbprice[5]);
-		
-		System.out.println("totalPrice : "+totalPrice);
-		
-		return "shop/private/buy_form(테스트용)";
+		productservice.order(mView, dto, request);
+		mView.setViewName("shop/private/buy");
+		return mView;
 	}
 }

@@ -365,7 +365,9 @@
 								return; //요소 생성을 막는다.
 							}
 							if(scope.productInfo_duplicate_check[i] == scope.size){
+								scope.product_all_price = scope.product_all_price -${productDto.price }
 								alert("동일한 상품의 옵션을 선택하셨습니다.");
+								
 								return; //요소 생성을 막는다.
 							}else{//배열안에 값과 선택된 사이즈의 값이 같지 않을 때
 								if(typeof scope.productInfo_duplicate_check[i] == 'undefined'){ //배열안에 값이 존재하지 않으면
@@ -400,6 +402,7 @@
 					}else{
 						//사이즈 선택 항목을 눌렀을 때는 뜨지 않도록 처리.
 						if(scope.size != "nosize"){
+							scope.product_all_price = scope.product_all_price -${productDto.price }
 							alert("동일한 상품의 옵션을 선택하셨습니다.");
 						}
 					}
@@ -434,7 +437,7 @@
 				<div style="text-align:center;">
 					<h2 style="margin-bottom:1rem;"><img style="width:1.5em;height:1.5em;margin-right:15px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="logo" />상품 정보</h2>
 				</div>
-				<form action="private/buy_form(테스트용).do" name="product" method="post" novalidate>
+				<form action="private/buy_form.do" name="product" method="post" novalidate>
 				    <table class="table" style="margin-right:20px;">
 						<tr>
 							<th>상품명</th>
@@ -478,6 +481,7 @@
 							onclick="window.location.href='${pageContext.request.contextPath}/home.do'">장바구니</button>
 						<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
 							data-ng-disabled="product.selectBox.$valid" class="btn btn-primary btn-block" onclick="buy_submit()">구매하기</button>
+							<a href="private/buy_form.do">구매하기</a>
 				    </div>
 				    <c:if test="${id eq 'admin'}">
 				    	<button type="button" onclick="location.href='private/productupdate.do?num=${param.num }'">수정</button>
@@ -497,7 +501,7 @@ function deleteConfirm(){
 function buy_submit(){
 	let isBuy=confirm("상품을 구매하시겠습니까?");
 	if(isBuy){
-	    location.href="private/buy_form.do?num=${param.num }";
+	    location.href="private/buy_form.do";
 	}
 }
 </script>
