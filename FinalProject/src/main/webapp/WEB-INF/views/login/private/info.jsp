@@ -33,23 +33,32 @@
 		    <table class="table" style="margin-bottom:0;">
 				<tr>
 					<th><label for="id">아이디</label></th>
-					<td><input type="text" id="id" value="${dto.id }" disabled /></td>
+					<td colspan="2"><input type="text" id="id" value="${dto.id }" disabled /></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><a href="pwd_updateform.do">수정하기</a></td>
+					<td colspan="2"><a href="pwd_updateform.do">수정하기</a></td>
 				</tr>
 				<tr>
 					<th>휴대폰 번호</th>
-					<td>${dto.phone_num }</td>
+					<td colspan="2">${dto.phone_num }</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td>${dto.email }</td>
+					<td colspan="2">${dto.email }</td>
 				</tr>
 				<tr>
-					<th>가입일</th>
-					<td>${dto.regdate }</td>
+					<th>보유 Money</th>
+					<td id="mone">${dto.money} 원  </td>
+					<td><a id="addacount" href="addMoney.do">십만원충전</a></td>
+				</tr>	
+				<tr>
+					<th>보유 Point</th>
+					<td colspan="2">${dto.point } point</td>
+				</tr>							
+				<tr>
+					<th>가입일자</th>
+					<td colspan="2">${dto.regdate }</td>
 				</tr>
 			</table>
 			<hr style="margin-top:0;">
@@ -69,6 +78,25 @@
 			location.href="delete.do";
 		}
 	}
+	
+	$("#addacount").on("click",function(){
+		
+		$.ajax({
+			method:"get",
+			url:"addMoney.do",
+			 // data:{msg:msg} 도 가능
+			success:function(data){
+				$("#mone").text(data.money+"원");
+				alert("십만원 충전완료");
+				
+				
+			}
+			
+			
+		});
+		
+		return false;
+	})
 </script>
 </body>
 </html>

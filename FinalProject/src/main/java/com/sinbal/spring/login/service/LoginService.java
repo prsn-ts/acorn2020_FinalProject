@@ -30,4 +30,9 @@ public interface LoginService {
 	public void updateUser(LoginDto dto, HttpServletRequest request, ModelAndView mView);
 	//회원 탈퇴 요청 관련 추상 메소드
 	public void deleteUser(HttpSession session);
+	
+	// 돈충전 하는 서비스
+	public void addMoney(HttpServletRequest request);
+	// ajax를 통한 회원 돈과 포인트를 보여주는서비스
+	public Map<String,Object> getaccount(HttpServletRequest request);
 }
