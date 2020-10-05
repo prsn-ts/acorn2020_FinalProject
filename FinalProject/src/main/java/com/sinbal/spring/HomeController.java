@@ -31,4 +31,6 @@ public class HomeController {
 		//   info.jsp페이지를 보여주겠다.
 		return "info";
 	}
+	
+
 }

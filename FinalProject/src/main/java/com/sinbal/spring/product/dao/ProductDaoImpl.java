@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dto.OrderDto;
 import com.sinbal.spring.shop.dto.ShopDto;
 
 @Repository
@@ -104,4 +105,6 @@ public class ProductDaoImpl implements ProductDao{
 	public int getSizeData(int num) {
 		return session.selectOne("product.getSizeData", num);
 	}
+
+
 }

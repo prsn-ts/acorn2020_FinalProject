@@ -87,4 +87,30 @@
 		sbcount=#{sbcount}
 		WHERE num=#{num} and sbsize=#{sbsize}
 	</update>
+	
+	<insert id="order" parameterType="orderDto">
+		INSERT INTO sborder(num,productnum,id,name,addr,phone_num,sendrequest,totalprice,orderdate,sboption)
+		values(sborder_seq.nextval,#{productnum},#{id},#{name},#{addr},#{phone_num},#{sendrequest},#{totalPrice},sysdate,#{sboption})
+	</insert>
+	
+	<update id="addpoint" parameterType="orderDto">
+		update sblogin_account
+		set point = point + (#{totalPrice}*0.01)
+		where id = #{id}
+	</update>
+	
+	
+	
+	
+	<update id="minus_money" parameterType="orderDto">
+		update sblogin_account
+		set money = money - #{totalPrice}
+		where id = #{id}
+	</update>
+	
+	<update id="minus_count" parameterType="orderDto">
+		update sbproduct_sub
+		set sbcount =  sbcount - #{sbcount}
+		where num = #{productnum} and sbsize = #{sbsize}
+	</update>
 </mapper>
