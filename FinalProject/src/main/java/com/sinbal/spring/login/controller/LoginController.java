@@ -172,4 +172,12 @@ public class LoginController {
 		mView.setViewName("login/private/delete");
 		return mView;
 	}
+	
+	//Ajax 를통한 포인트 중전 
+	@RequestMapping("/login/private/addMoney.do")
+	@ResponseBody
+	public Map<String, Object> addMey(HttpServletRequest request){
+		loginService.addMoney(request);
+		return loginService.getaccount(request);
+	}
 }

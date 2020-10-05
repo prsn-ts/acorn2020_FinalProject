@@ -34,9 +34,9 @@ public class NoticeDaoImpl implements NoticeDao {
 
 
 	@Override
-	public NoticeDto getData(NoticeDto dto) {
+	public NoticeDto getData(int num) {
 
-		return session.selectOne("notice.getData", dto);
+		return session.selectOne("notice.getData", num);
 	}
 
 	@Override
@@ -58,6 +58,12 @@ public class NoticeDaoImpl implements NoticeDao {
 		
 		session.update("notice.update", dto);
 		
+	}
+
+	@Override
+	public NoticeDto getData(NoticeDto dto) {
+
+		return session.selectOne("notice.getData2", dto);
 	}
 
 }

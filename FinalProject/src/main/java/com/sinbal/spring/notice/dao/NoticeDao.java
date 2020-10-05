@@ -14,6 +14,8 @@ public interface NoticeDao {
 	//글 추가
 	public void insert(NoticeDto dto);
 	//키워드를 활용한 글정보 얻어오기
+	public NoticeDto getData(int num);
+	//키워드를 활용한 글정보 얻어오기
 	public NoticeDto getData(NoticeDto dto);
 	//조회수 증가 시키기
 	public void addViewCount(int num);

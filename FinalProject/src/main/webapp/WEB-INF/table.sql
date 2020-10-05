@@ -1,5 +1,29 @@
 -- 자신이 생성한 테이블과 시퀀스  추가하기
 
+--계좌테이블
+CREATE TABLE sblogin_account
+(
+    id       VARCHAR2(100)    NOT NULL, 
+    money    NUMBER           NOT NULL, 
+    point    NUMBER           NOT NULL
+);
+
+ALTER TABLE sblogin_account
+    ADD CONSTRAINT FK_sblogin_account_id_sblogin_ FOREIGN KEY (id)
+        REFERENCES sblogin (id) on delete cascade;
+
+-- 공지 사항 테이블
+CREATE TABLE sbnotice(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100) NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	content CLOB,
+	viewCount NUMBER, --조회수
+	regdate DATE
+);
+
+CREATE SEQUENCE sbnotice_seq;
+
 -- 사용자(회원) 정보를 저장할 테이블
 CREATE TABLE sblogin(
 	id VARCHAR2(100) PRIMARY KEY,
@@ -11,7 +35,6 @@ CREATE TABLE sblogin(
 	trust_consent VARCHAR2(50) NOT NULL, -- 개인정보 처리위탁동의
 	profile VARCHAR2(100), -- 프로필 이미지 경로를 저장할 칼럼
 	regdate DATE -- 가입일 관련
-);
 
 CREATE TABLE sbproduct
 (
@@ -39,9 +62,6 @@ CREATE TABLE sbproduct_sub
 --상품 추가정보 FOREIGN KEY 설정
 ALTER TABLE sbproduct_sub
     ADD CONSTRAINT FK_sbproduct_sub_num_sbproduct FOREIGN KEY (num)
-        REFERENCES sbproduct (num);
+        REFERENCES sbproduct (num) on delete cascade;
         
 
-INSERT INTO sbproduct
-(num, kind, productname, content, quantity, price, regdate)
-VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname }, #{content }, #{quantity }, #{price }, SYSDATE);

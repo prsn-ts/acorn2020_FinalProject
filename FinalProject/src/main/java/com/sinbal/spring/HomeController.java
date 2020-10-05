@@ -24,7 +24,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	
 	// info.do라는 요청이오면
 	@RequestMapping("/info.do")
 	public String info() {
@@ -32,9 +31,4 @@ public class HomeController {
 		//   info.jsp페이지를 보여주겠다.
 		return "info";
 	}
-	
-	
-	
-
-	
 }

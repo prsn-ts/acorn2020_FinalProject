@@ -26,20 +26,23 @@ public class ProductController {
 		return "product/insertform";
 	}
 	
+	//원래는 request , mview 두개같이쓸필요가없지만 로직을 변경하기귀찮아서 그냥이렇게씀
 	@RequestMapping("/product/insert") 
 	public ModelAndView insert(ProductDto dto, ModelAndView mView ,HttpServletRequest request) {
-		productService.insert(dto);
-		String[] sbsize= request.getParameterValues("sizearr");
-		String[] sbcount= request.getParameterValues("sbcount");
-		for(int i=0; i<sbsize.length;i++) {
-			dto.setSbsize(sbsize[i]);
-			dto.setSbcount(sbcount[i]);
-			productService.insert_sub(dto);
-		}
+		productService.insert(dto,request);
+
 		
-		mView.setViewName("redirect:/shop/shop.do");
+		mView.setViewName("product/insert");
 		return mView;
 	}
+	//상품명이 존재하는 지 여부에 대한 요청 처리
+	@RequestMapping("/product/checkproductname.do")
+	@ResponseBody
+	public Map<String, Object> checkproductname(@RequestParam String inputproductname){
+		//service 가 리턴해주는 Map 객체를 리턴한다.
+		return productService.isExistproductname(inputproductname);
+	}
+
 	
 	// ajax 프로필 사진 업로드 요청 처리
 	@RequestMapping("/product/profile_upload")
@@ -52,4 +55,31 @@ public class ProductController {
 		//Map 을 @ResponseBody 로 리턴해준다. 
 		return map;
 	}	
+	
+	//상품 삭제 부분
+	@RequestMapping("/shop/productdelete.do")
+	public ModelAndView productdelete(ModelAndView mView, int num) {
+		
+		productService.productdelete(num);
+		mView.setViewName("redirect:/shop/shop.do");
+		return mView;
+	}
+	//회원정보 폼 페이지
+	@RequestMapping("/shop/private/productupdate.do")
+	public ModelAndView productupdate(ModelAndView mView, int num) {
+		
+		productService.getData(mView, num);
+		mView.setViewName("shop/private/productupdate");
+		return mView;
+		
+	}
+	//회원정보 수정 응답페이지
+	@RequestMapping("/shop/private/productupdate2.do")
+	public ModelAndView productupdate2(ModelAndView mView, ProductDto dto, HttpServletRequest request) {
+		
+		productService.productupdate(mView, dto, request);
+		mView.setViewName("shop/private/productupdate2");
+		return mView;
+		
+	}
 }
