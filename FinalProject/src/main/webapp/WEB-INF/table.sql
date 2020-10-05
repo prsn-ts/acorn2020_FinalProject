@@ -16,7 +16,7 @@ CREATE TABLE sborder
     CONSTRAINT SBORDER_PK PRIMARY KEY (num)
 );
 
-주문테이블 시퀀스
+--주문테이블 시퀀스
 
 CREATE SEQUENCE sborder_seq;
 
@@ -55,6 +55,20 @@ CREATE TABLE sblogin(
 	trust_consent VARCHAR2(50) NOT NULL, -- 개인정보 처리위탁동의
 	profile VARCHAR2(100), -- 프로필 이미지 경로를 저장할 칼럼
 	regdate DATE -- 가입일 관련
+	
+-- 댓글(상품평) 저장하는 테이블
+CREATE TABLE sbproduct_review(
+	num NUMBER PRIMARY KEY, -- 댓글의 글 번호
+	writer VARCHAR2(100), -- 댓글 작성자의 아이디
+	content VARCHAR2(500), -- 댓글 내용
+	target_id VARCHAR2(100), -- 댓글의 대상자 아이디(누구에게 댓글을 달았는지 확인여부)
+	ref_group NUMBER, -- 하나의 글(ex. 글 번호가 80번이라 가정하면)에서 파생된(작성된) 모든 댓글은 80번 글 번호에 관련된 댓글이다 라는 것을 그룹으로 묶어서 명시.(80번이 아닌 글들의 댓글을 가져오면 안되기 때문에 해당 글(여기선 80번)의 댓글을 가져오기위해서 그룹으로 관리하기 위함) 
+	comment_group NUMBER, -- 하나의 댓글(ex. 글 번호가 12번이라 가정하면)에 대한 대댓글 들의 글 번호를 12번으로 지정해서 글에 달았던 최초 댓글과 그 아래 대댓글을 하나의 그룹으로 묶어서 같이 표현해야할 때 사용하기위해 사용하는 칼럼(그룹으로 관리하기 위함)
+	deleted CHAR(3) DEFAULT 'no', -- 댓글이 삭제된지 여부(삭제된 경우 deleted 칼럼에 'yes' 문자열을 넣는다)
+	regdate DATE
+);
+-- 댓글(상품평) 관련 시퀀스 
+CREATE SEQUENCE sbproduct_review_seq;
 
 CREATE TABLE sbproduct
 (
