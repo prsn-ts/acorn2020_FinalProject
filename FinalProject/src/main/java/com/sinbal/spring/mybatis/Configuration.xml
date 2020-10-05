@@ -19,6 +19,11 @@
 			alias="noticeDto"/>	
 		<typeAlias type="com.sinbal.spring.product.dto.ProductDto"
 			alias="productDto"/>
+		<typeAlias type="com.sinbal.spring.shop.dto.OrderDto"
+			alias="orderDto"/>
+		<!-- ProductReviewDto 별칭 설정. -->
+		<typeAlias type="com.sinbal.spring.product.dto.ProductReviewDto" 
+			alias="productReviewDto"/>	
 	</typeAliases>
 
 	<!-- Mapper 문서가 동작하기위한 설정. -->
@@ -26,5 +31,6 @@
 		<mapper resource="com/sinbal/spring/mybatis/LoginMapper.xml"/>
 		<mapper resource="com/sinbal/spring/mybatis/NoticeMapper.xml"/>
 		<mapper resource="com/sinbal/spring/mybatis/ProductMapper.xml"/>
+		<mapper resource="com/sinbal/spring/mybatis/ProductReviewMapper.xml"/>
 	</mappers>
 </configuration>

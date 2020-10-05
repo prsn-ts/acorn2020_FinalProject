@@ -3,21 +3,30 @@ package com.sinbal.spring.shop.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sinbal.spring.login.service.LoginService;
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.product.dto.ProductReviewDto;
 import com.sinbal.spring.product.service.ProductService;
+import com.sinbal.spring.shop.dto.OrderDto;
 
 @Controller
 public class ShopController {
 
 	@Autowired
 	private ProductService productservice;
+	@Autowired
+	private LoginService loginservice;
+
 	
 	@RequestMapping("/shop/shop.do")
 	public ModelAndView shoplist(ModelAndView mView){
@@ -30,9 +39,9 @@ public class ShopController {
 	
 	//상세보기 페이지 보기 요청 처리
 	@RequestMapping("/shop/detail.do")
-	public ModelAndView detail(ModelAndView mView, @RequestParam int num) {
+	public ModelAndView detail(ModelAndView mView, HttpServletRequest request) {
 		
-		productservice.getProductData(mView, num);
+		productservice.getProductData(mView, request);
 		//  views/shop/shop/.jsp
 		mView.setViewName("shop/detail");
 		return mView;
@@ -60,36 +69,62 @@ public class ShopController {
 	}
 	
 	//구매하기 버튼을 클릭했을 때 구매창 보기 요청 처리
-	@RequestMapping("/shop/private/buy_form(테스트용).do")
-	public String buyForm(ProductDto dto) {
-		int[] sbsize= dto.getSizearr();
-		int[] sbcount= dto.getCountarr();
-		int[] sbprice= dto.getPricearr();
-		int totalPrice = dto.getTotalPrice();
+	@RequestMapping("/shop/private/buy_form.do")
+	public ModelAndView buyForm(ProductDto dto,ModelAndView mView,HttpServletRequest request) {
 		
-		System.out.println("sbsize[0] : "+sbsize[0]);
-		System.out.println("sbsize[1] : "+sbsize[1]);
-		System.out.println("sbsize[2] : "+sbsize[2]);
-		System.out.println("sbsize[3] : "+sbsize[3]);
-		System.out.println("sbsize[4] : "+sbsize[4]);
-		System.out.println("sbsize[5] : "+sbsize[5]);
+		productservice.getData(mView, dto.getNum());		
+		loginservice.getLoginInfo(request, mView);
+		productservice.buy(mView, dto);
+		mView.setViewName("shop/private/buy_form");
+		return mView;
+	}
+	
+	@RequestMapping("/shop/private/buy.do")
+	public ModelAndView order(ModelAndView mView ,OrderDto dto,HttpServletRequest request) {
 		
-		System.out.println("sbcount[0]_230 : "+sbcount[0]);
-		System.out.println("sbcount[1]_240 : "+sbcount[1]);
-		System.out.println("sbcount[2]_250 : "+sbcount[2]);
-		System.out.println("sbcount[3]_260 : "+sbcount[3]);
-		System.out.println("sbcount[4]_270 : "+sbcount[4]);
-		System.out.println("sbcount[5]_280 : "+sbcount[5]);
+		productservice.order(mView, dto, request);
+		mView.setViewName("shop/private/buy");
+		return mView;
+	}
+	//Detail.jsp 페이지 들어갔을 때 출력할 댓글 목록 페이징 ajax 요청 처리
+	@RequestMapping("/shop/ajax_paging_list.do")
+	@ResponseBody
+	public Map<String, Object> ajaxPagingList(HttpServletRequest request, @RequestParam int num){
 		
-		System.out.println("sbprice[0]_230 : "+sbprice[0]);
-		System.out.println("sbprice[1]_240 : "+sbprice[1]);
-		System.out.println("sbprice[2]_250 : "+sbprice[2]);
-		System.out.println("sbprice[3]_260 : "+sbprice[3]);
-		System.out.println("sbprice[4]_270 : "+sbprice[4]);
-		System.out.println("sbprice[5]_280 : "+sbprice[5]);
-		
-		System.out.println("totalPrice : "+totalPrice);
-		
-		return "shop/private/buy_form(테스트용)";
+		return productservice.getPagingList(request, num);
+	}
+	
+	//원글의 댓글 and 댓글의 댓글 추가하기 요청 처리
+	@RequestMapping(value = "/shop/private/comment_insert.do",
+			method=RequestMethod.POST)
+	public ModelAndView commentInsert(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		//새 댓글을 저장하고
+		productservice.saveComment(request);
+		//보고있던 글 자세히 보기로 다시 리다일렉트 이동 시킨다.
+		mView.setViewName("redirect:/shop/detail.do?num="+ref_group);
+		return mView;
+	}
+	
+	//댓글 수정 요청 처리
+	@RequestMapping(value = "/shop/private/comment_update.do",
+			method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> commentUpdate(ProductReviewDto dto){
+		//댓글을 수정 반영하고
+		productservice.updateComment(dto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("num", dto.getNum());
+		map.put("content", dto.getContent());
+		return map;
+	}
+	
+	//댓글 삭제 요청 처리
+	@RequestMapping("/shop/private/comment_delete")
+	public ModelAndView commentDelete(HttpServletRequest request,
+			ModelAndView mView, @RequestParam int ref_group) {
+		productservice.deleteComment(request);
+		mView.setViewName("redirect:/shop/detail.do?num="+ref_group);
+		return mView;
 	}
 }
