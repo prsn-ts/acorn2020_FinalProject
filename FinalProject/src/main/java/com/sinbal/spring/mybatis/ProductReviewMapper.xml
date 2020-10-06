@@ -14,7 +14,7 @@
 				INNER JOIN sblogin
 				ON sbproduct_review.writer = sblogin.id
 				WHERE ref_group=#{ref_group}
-				ORDER BY comment_group DESC, num DESC) result1)
+				ORDER BY comment_group DESC, num ASC) result1)
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	<!-- 한 글의 전체 댓글의 개수를 구하기위한 select 문 -->

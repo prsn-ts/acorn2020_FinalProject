@@ -95,12 +95,15 @@ public class ShopController {
 	}
 	
 	//원글의 댓글 and 댓글의 댓글 추가하기 요청 처리
-	@RequestMapping(value = "/shop/private/comment_insert.do",
-			method=RequestMethod.POST)
+	@RequestMapping("/shop/private/comment_insert.do")
 	public ModelAndView commentInsert(HttpServletRequest request,
 			ModelAndView mView, @RequestParam int ref_group) {
-		//새 댓글을 저장하고
-		productservice.saveComment(request);
+		String id = (String)request.getSession().getAttribute("id");
+		String content = request.getParameter("content");
+		if(id != null && content != null && content != "") { //아이디가 존재하고 컨텐츠가 null or ""일때
+			//새 댓글을 저장하고
+			productservice.saveComment(request);
+		}
 		//보고있던 글 자세히 보기로 다시 리다일렉트 이동 시킨다.
 		mView.setViewName("redirect:/shop/detail.do?num="+ref_group);
 		return mView;

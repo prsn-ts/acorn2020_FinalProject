@@ -662,6 +662,9 @@
 							<c:if test="${tmp.sbcount ne 0}">
 								<option value="${tmp.sbsize }">${tmp.sbsize } - 남은 수량(${tmp.sbcount })</option>
 							</c:if>
+							<c:if test="${tmp.sbcount eq 0}">
+								<option value="${tmp.sbsize }" disabled>${tmp.sbsize } - 남은 수량(${tmp.sbcount }) --품절</option>
+							</c:if>
 						</c:forEach>
 				    </select>
 					<div id="product_info"></div>
@@ -723,7 +726,7 @@
 	    	<hr />
 	    	<div class="first_comment">
 				<!-- 원글에 댓글을 작성하는 form -->
-				<form class="comment-form insert-form" action="private/comment_insert.do" method="post">
+				<form class="comment-form insert-form" action="private/comment_insert.do?ref_group=${productDto.num }" method="post">
 					<!-- 원글의 글번호가 ref_group 번호가 된다. -->
 					<input type="hidden" name="ref_group" value="${productDto.num }"/>
 					<!-- 원글의 작성자가 댓글의 수신자가 된다.(상품 글에 대한 댓글의 수신자는 없기 때문에 파라미터값으로 넘기지 않는다) 
