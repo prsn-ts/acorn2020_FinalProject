@@ -130,4 +130,13 @@ public class ShopController {
 		mView.setViewName("redirect:/shop/detail.do?num="+ref_group);
 		return mView;
 	}
+	
+	//메인홈페이지에서 주문내역보기 처리
+	@RequestMapping("/order_list.do")
+	public ModelAndView order_list(ModelAndView mView, HttpServletRequest request) {
+		
+		productservice.getorder_list(request, mView);
+		mView.setViewName("order_list");
+		return mView;
+	}
 }

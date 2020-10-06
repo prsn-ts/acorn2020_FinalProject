@@ -1,5 +1,7 @@
 package com.sinbal.spring.shop.dao;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,6 +34,11 @@ public class OrderDaoImpl implements OrderDao {
 	public void minus_count(OrderDto dto) {
 		session.update("product.minus_count",dto);
 		
+	}
+	@Override
+	public List<OrderDto> order_list(String id) {
+		 
+		return session.selectList("product.order_list",id);
 	}
 
 }

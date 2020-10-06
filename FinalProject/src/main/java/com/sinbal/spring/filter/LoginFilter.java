@@ -27,7 +27,7 @@ import com.sinbal.spring.product.service.ProductService;
 
 //web.xml 에 필터 정의와 필터 맵핑을 어노테이션을 이용해서 할수 있다.
 
-@WebFilter({"/login/private/*","/shop/private/*"})
+@WebFilter({"/login/private/*","/shop/private/*","/order_list.do"})
 public class LoginFilter implements Filter{
 	@Override
 	public void destroy() {

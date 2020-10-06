@@ -50,4 +50,7 @@ public interface ProductService {
 	//댓글 목록 페이징 ajax 요청 처리 추상 메소드
 	public Map<String, Object>getPagingList(HttpServletRequest request, int num);
 	
+	//주문내역 리스트로불러오는 메소드
+	public void getorder_list(HttpServletRequest request, ModelAndView mView);
+	
 }

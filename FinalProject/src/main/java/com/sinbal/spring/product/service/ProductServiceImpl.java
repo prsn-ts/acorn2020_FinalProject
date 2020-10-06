@@ -403,4 +403,11 @@ public class ProductServiceImpl implements ProductService{
 		map.put("paging", paging);
 		return map;
 	}
+	@Override
+	public void getorder_list(HttpServletRequest request ,ModelAndView mView) {
+		String id =(String)request.getSession().getAttribute("id");
+		
+		mView.addObject("list",orderDao.order_list(id));
+		
+	}
 }

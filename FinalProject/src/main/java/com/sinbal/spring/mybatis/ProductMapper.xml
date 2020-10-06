@@ -113,4 +113,10 @@
 		set sbcount =  sbcount - #{sbcount}
 		where num = #{productnum} and sbsize = #{sbsize}
 	</update>
+	
+	<select id="order_list" parameterType="string" resultType="orderDto">
+		select num,productnum,id,name,addr,phone_num,sendrequest,totalprice,orderdate,sboption
+		from sborder where id=#{id}
+		order by num desc
+	</select>
 </mapper>
