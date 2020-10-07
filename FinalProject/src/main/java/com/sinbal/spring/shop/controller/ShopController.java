@@ -28,13 +28,16 @@ public class ShopController {
 	private LoginService loginservice;
 
 	
+
 	@RequestMapping("/shop/shop.do")
-	public ModelAndView shoplist(ModelAndView mView){
+	public ModelAndView productList(HttpServletRequest request, 
+			ModelAndView mView){
 		
-		productservice.getList(mView);
+		productservice.productList(request);
 		//  views/shop/shop/.jsp
 		mView.setViewName("shop/shop");
 		return mView;
+		
 	}
 	
 	//상세보기 페이지 보기 요청 처리

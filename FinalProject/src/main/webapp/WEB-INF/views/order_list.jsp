@@ -63,6 +63,11 @@
  	 	border-color: #343a40;
 	}	
 	
+	.send-status{
+		font-size : 20px;
+		color : rgb(164, 233, 157);
+	}
+	
 </style>
 </head>
 <body>
@@ -80,22 +85,26 @@
 		<thead>
 			<tr>
 				<th>주문번호</th>				
-				<th class="jb-th-1">상품정보</th>
+				<th colspan="2" class="jb-th-1">상품정보</th>
 				<th>금액</th>
 				<th>주문일자</th>
 				<th>상태<th>
+				
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="tmp" items="${list }">
 			<tr>
 				<td>${tmp.num }</td>
-				<td>${tmp.sboption }</td>
+				<td>
+				<img  style="width :150px; height:150px"src="${pageContext.request.contextPath }${tmp.profile}" alt="profile" />
+				</td>
+				<td>상품명 :${tmp.productname} <br /> 상품 정보 : ${tmp.sboption}
 				<td>${tmp.totalPrice } 원</td>
 				<td>${tmp.orderdate }</td>
-				<td>배송준비중</td>
-				
+				<td class="send-status"><strong>배송준비중</strong></td>
 			</tr>
+
 		</c:forEach>
 		</tbody>
 	</table>

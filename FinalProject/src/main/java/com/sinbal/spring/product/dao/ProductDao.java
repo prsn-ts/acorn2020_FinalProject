@@ -18,7 +18,7 @@ public interface ProductDao {
 	public void productdelete(int num);
 	
 	//상품리스트
-	public List<ProductDto> getList();
+	public List<ProductDto> getList(ProductDto dto);
 	//상품한개의  데이터 가져오기
 	public List<ProductDto> getData(int num);
 	
@@ -33,6 +33,8 @@ public interface ProductDao {
 	public ProductDto getStockData(int size, int num);
 	//선택할 수 있는 신발 사이즈 항목의 개수를 리턴하는 추상 메소드
 	public int getSizeData(int num);
+	public List<ProductDto> productList(ProductDto dto);
+	public int getCount(ProductDto dto);
 	
 	
 }

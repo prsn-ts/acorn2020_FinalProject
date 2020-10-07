@@ -29,53 +29,25 @@
       <div class="col-lg-3">
 
         <h1 class="my-4">신발목록</h1>
-        
-<div class="carousel border border-warning">
-<div class="dropdown">
-  <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    신발
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <button class="dropdown-item" type="button">스니커즈</button>
-    <button class="dropdown-item" type="button">런닝화</button>
-    <button class="dropdown-item" type="button">워커</button>
-  </div>
-  </div>
-  
-  <br><br><br><br><br><br>
-  
-   <div class="dropdown">
-    <button class="btn dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    가격
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
-    <button class="dropdown-item" type="button">50000원 이하</button>
-    <button class="dropdown-item" type="button">50000원 ~ 100000원</button>
-    <button class="dropdown-item" type="button">100000원 ~ 150000원</button>
-  </div>
-  
-</div>
-  
-   <br><br><br><br><br><br>
-  
-  <div class="dropdown">
-    <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    사이즈
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">230</button>
-    <button class="dropdown-item" type="button">240</button>
-    <button class="dropdown-item" type="button">250</button>
-    <button class="dropdown-item" type="button">260</button>
-    <button class="dropdown-item" type="button">270</button>
-    <button class="dropdown-item" type="button">280</button>
-    
-  </div>
-   </div>
-   
-   <br><br><br><br><br><br><br><br><br>
+			<p>스니커즈</p>
+			<div class="list-group" id="buttonList">
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">인기순</button>
+			</div>
+			<p>런닝화</p>
+			<div class="list-group" id="buttonList">
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">스니커즈</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">런닝화</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">워커</button>
+			</div>
+			<p>워커</p>
+			<div class="list-group" id="buttonList">
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">스니커즈</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">런닝화</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">워커</button>
+			</div>						
 
-   </div>
       </div>
       <!-- /.col-lg-3  상품목록-->
 
@@ -101,13 +73,32 @@
           </div>
 		
 		</c:forEach>
-          
+ 	        
 
 
 
         </div>
         <!-- /.row -->
-
+ 		<div class="page-display">
+			<ul class="pagination pagination-sm">
+			<c:if test="${startPageNum ne 1 }">
+				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${startPageNum-1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }">Prev</a></li>
+			</c:if>
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						<li class="page-item active"><a class="page-link" href="shop.do?pageNum=${i }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }">${i }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="shop.do?pageNum=${i }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }">${i }</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${endPageNum lt totalPageCount }">
+				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${endPageNum+1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }">Next</a></li>
+			</c:if>
+			</ul>	
+		</div>
       </div>
       <!-- /.col-lg-9 -->
 

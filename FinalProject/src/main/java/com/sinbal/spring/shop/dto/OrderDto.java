@@ -19,12 +19,15 @@ public class OrderDto {
 	private int totalPrice; //총 가격
 	private String orderdate; //등록일자
 	private String sboption;// 신발 사이즈 개수 전부더해주는필드
+	private String productname; //상품명을 받을필드
+	private String profile; //상품 프로필을 받을 필드
 	
 	public OrderDto() {}
 
 	public OrderDto(int num, int productnum, String id, String name, String zipNo, String roadAddrPart1,
 			String addrDetail, String addr, String phone_num, String sendrequest, int sbsize, int sbcount,
-			int[] sizearr, int[] countarr, int[] pricearr, int totalPrice, String orderdate, String sboption) {
+			int[] sizearr, int[] countarr, int[] pricearr, int totalPrice, String orderdate, String sboption,
+			String productname, String profile) {
 		super();
 		this.num = num;
 		this.productnum = productnum;
@@ -44,6 +47,8 @@ public class OrderDto {
 		this.totalPrice = totalPrice;
 		this.orderdate = orderdate;
 		this.sboption = sboption;
+		this.productname = productname;
+		this.profile = profile;
 	}
 
 	public int getNum() {
@@ -189,6 +194,24 @@ public class OrderDto {
 	public void setSboption(String sboption) {
 		this.sboption = sboption;
 	}
+
+	public String getProductname() {
+		return productname;
+	}
+
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+
 
 
 	

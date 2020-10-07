@@ -16,11 +16,11 @@ public interface ProductService {
 	public void insert(ProductDto dto, HttpServletRequest request);
 	public Map<String, Object> saveProfileImage(HttpServletRequest request,
 			MultipartFile mFile);
-	public void getList(ModelAndView mView);
+	public void getList(ModelAndView mView ,ProductDto dto);
 	public void insert_sub(ProductDto dto);
 	//상품명이 중복되는지 검사하는 추상 메소드
 	public Map<String, Object> isExistproductname(String inputproductname);
-	
+	public void productList(HttpServletRequest request);
 	public void productdelete(int num);
 	public void getData(ModelAndView mView ,int num);
 	
