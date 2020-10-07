@@ -31,21 +31,21 @@
         <h1 class="my-4">신발목록</h1>
 			<p>스니커즈</p>
 			<div class="list-group" id="buttonList">
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">인기순</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button>
 			</div>
 			<p>런닝화</p>
 			<div class="list-group" id="buttonList">
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">스니커즈</button></a>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">런닝화</button>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">워커</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button>
 			</div>
 			<p>워커</p>
 			<div class="list-group" id="buttonList">
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceHighArr&search=${search }"><button class="list-group-item list-group-item-action">스니커즈</button></a>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceLowArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">런닝화</button>
-				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=buyHighArr&search=${search }"><button type="button" class="list-group-item list-group-item-action">워커</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button>
+				<a href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button>
 			</div>						
 
       </div>
