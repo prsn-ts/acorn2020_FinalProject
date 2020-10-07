@@ -494,4 +494,11 @@ public class ProductServiceImpl implements ProductService{
 			request.setAttribute("kindSelect", kindSelect);
 			request.setAttribute("arr", arr);
 	}
+	@Override
+	public void homeList(HttpServletRequest request) {
+		ProductDto dto = new ProductDto();
+		List<ProductDto> list=productDao.homeList(dto);
+		request.setAttribute("list", list);
+		
+	}
 }

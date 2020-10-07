@@ -61,6 +61,12 @@
 		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
+	<select id="homeList" parameterType="productDto" resultType="productDto">
+		SELECT num, productname, kind, content, price, regdate, profile
+		FROM sbproduct
+		ORDER BY num DESC
+	</select>
+	
 	<insert id="insert_sub" parameterType="productDto">
 		insert into sbproduct_sub(num, sbsize, sbcount) values(#{num},#{sbsize},#{sbcount})
 	</insert>

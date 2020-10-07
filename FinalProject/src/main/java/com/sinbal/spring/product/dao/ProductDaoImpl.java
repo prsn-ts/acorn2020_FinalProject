@@ -111,6 +111,11 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Override
+	public List<ProductDto> homeList(ProductDto dto) {
+		return session.selectList("product.homeList",dto);
+	}
+	
+	@Override
 	public int getCount(ProductDto dto) {
 
 		return session.selectOne("product.getCount", dto);
