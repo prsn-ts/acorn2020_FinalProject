@@ -389,10 +389,15 @@ public class ProductServiceImpl implements ProductService{
 		//원글의 글번호를 이용해서 댓글 목록을 얻어온다.
 		List<ProductReviewDto> commentList = productReviewDao.getList(productReviewDto);
 		
+		//상품 정보를 가져온다.
+		ProductDto dto = productDao.getData2(num);
+		
 		//글목록과 페이징 처리에 관련된 값을 담을 Map 객체 생성
 		Map<String, Object> map=new HashMap<>();
 		//글목록을 전체 Map 에 담아준다. 
 		map.put("commentList", commentList);
+		//상품 정보를 전체 Map 에 담아준다.
+		map.put("productDto", dto);
 		
 		//페이징 처리에 필요한 값을 Map 에 담아서 
 		Map<String, Integer> paging=new HashMap<>();

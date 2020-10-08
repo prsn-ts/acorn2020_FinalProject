@@ -499,22 +499,8 @@
 				}
 			}
 		};
-		/*
-		//댓글 or 대댓글을 등록했을 때 ajax 요청 처리
-		$scope.comment_reg=function(){
-			//선택할 수 있는 신발 사이즈 항목의 개수를 ajax 요청 처리
-			$http({
-				method: 'POST',
-				url:"${pageContext.request.contextPath}/shop/private/comment_insert",
-			    headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
-			}).success(function(data){
-				
-			});
-		}
-		*/
 		 
 		//댓글 페이징 처리를 위한 ajax 요청 처리.
-		
 		
 		//페이징 처리 UI를 만들지 여부
 		$scope.isMakePaging=false;
@@ -525,8 +511,20 @@
 			method:"get",
 			params:{"num":${param.num}},
 		}).success(function(data){
-			//data => {"commentList":[{},{},{}...], "paging":{}}
+			//data => {"commentList":[{},{},{}...], "paging":{}, "productDto":{}}
 			$scope.commentList=data.commentList;
+			$scope.productDto=data.productDto; //상품 정보 가져오기
+			$scope.id="${id}"; //아이디 정보 가져오기
+			$(function() {//동적으로 생성된 태그에 접근할 때는 단순히 선택자를 사용해서 접근을 해도 DOM 객체를 인지를 할 수 없다. DOM 다 로드가 된 후 실행을 하도록 해야 선택자를 이용해서 DOM에 접근을 할 수 있다.(참고용)
+				for(var tmp in $scope.commentList){
+					if($scope.commentList[tmp].deleted == 'no ' && $scope.commentList[tmp].num != $scope.commentList[tmp].comment_group){//댓글 중 삭제되지 않고 대댓글인 경우
+						//들여쓰기 css 효과를 준다.
+						var selector="#comment"+$scope.commentList[tmp].num;
+						console.log(selector);
+						$(selector).css('padding-left','50px');
+					}
+				}
+			});
 			//페이징 처리에 필요한 값을 모델로 관리하기
 			$scope.paging=data.paging;
 			var pageNums = [];
@@ -545,10 +543,22 @@
 			$http({
 				url:"${pageContext.request.contextPath}/shop/ajax_paging_list.do",
 				method:"get",
-				params:{num:${param.num}, pageNum:num}
+				params:{"num":${param.num}, pageNum:num},
 			}).success(function(data){
-				//data => {"commentList":[{},{},{}...], "paging":{}}
+				//data => {"commentList":[{},{},{}...], "paging":{}, "productDto":{}}
 				$scope.commentList=data.commentList;
+				$scope.productDto=data.productDto; //상품 정보 가져오기
+				$scope.id="${id}"; //아이디 정보 가져오기
+				$(function() {//동적으로 생성된 태그에 접근할 때는 단순히 선택자를 사용해서 접근을 해도 DOM 객체를 인지를 할 수 없다. DOM 다 로드가 된 후 실행을 하도록 해야 선택자를 이용해서 DOM에 접근을 할 수 있다.(참고용)
+					for(var tmp in $scope.commentList){
+						if($scope.commentList[tmp].deleted == 'no ' && $scope.commentList[tmp].num != $scope.commentList[tmp].comment_group){//댓글 중 삭제되지 않고 대댓글인 경우
+							//들여쓰기 css 효과를 준다.
+							var selector="#comment"+$scope.commentList[tmp].num;
+							console.log(selector);
+							$(selector).css('padding-left','50px');
+						}
+					}
+				});
 				//페이징 처리에 필요한 값을 모델로 관리하기
 				$scope.paging=data.paging;
 				var pageNums = [];
@@ -558,8 +568,6 @@
 				$scope.pageNums = pageNums;
 				//서버로 부터 데이터를 받아왔을 때 페이징 처리 UI가 만들어 질 수 있도록 true로 변경.
 				$scope.isMakePaging=true;
-				
-				console.log($scope);
 			});
 		};
 	});
@@ -638,7 +646,7 @@
 	
 	<div class="container first_container">
 		<div class="left_side">
-			<img class="card-img-top" src="${pageContext.request.contextPath }${productDto.profile}" alt="">
+			<img style="height:400px;" class="card-img-top" src="${pageContext.request.contextPath }${productDto.profile}" alt="">
 		</div>
 		<div class="right_side">
 			<div class="right_side_children">
@@ -742,84 +750,58 @@
 			<div class="productReviewLetter">상품평</div>
 			<hr style="border: 1px solid #888; margin-top:0;" />
 			
-			<!-- ajax 댓글 목록
-			<div class="comments">
-				<ul>
-					<div data-ng-repeat="tmp in commentList">
-						<li data-ng-if="tmp.deleted == 'no '">
-							<li>삭제된 댓글 입니다.</li>
-						</li>
-						<li id="comment{{tmp.num}}" data-ng-style="myStyle" >
-							asdfasdf
-						</li>
-					</div>
-			 -->
-					
 			<!-- 댓글 목록 -->
 			<div class="comments">
 				<ul>
-					<c:forEach var="tmp" items="${commentList }">
-						<c:choose>
-							<c:when test="${tmp.deleted eq 'yes' }">
-								<li>삭제된 댓글 입니다.</li>
-							</c:when>
-							<c:otherwise>
-								<!-- 대댓글의 경우는 들여쓰기가 된 것처럼 보이도록 설정 -->
-								<!-- 특정 li요소를 찾아 수정(javascript로 조작)하기 위해 id 지정 -->
-								<li id="comment${tmp.num }" <c:if test="${tmp.num ne tmp.comment_group }">style="padding-left:50px;"</c:if>>
-									<c:if test="${tmp.num ne tmp.comment_group }"><svg class="reply-icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				  						<path fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
-				  						<path fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/></svg>
-									</c:if>
-									<dl>
-										<dt>
-											<span>${tmp.writer }</span>
-											<c:if test="${tmp.num ne tmp.comment_group }">
-												@<i>${tmp.target_id }</i>
-											</c:if>
-											<span style="margin-left:10px;">${tmp.regdate }</span>
-											<a data-num="${tmp.num }" href="javascript:" class="reply-link" style="text-decoration:none;">답글</a>
-											<c:if test="${tmp.writer eq id }">
-												| <a data-num="${tmp.num }" href="javascript:" class="comment-update-link" style="text-decoration:none;">수정</a>
-												| <a data-num="${tmp.num }" href="javascript:deleteWriting()" class="comment-delete-link" style="text-decoration:none;">삭제</a>
-											</c:if>
-										</dt>
-										<dd>
-											<pre>${tmp.content }</pre> <!-- tab, 띄어쓰기, 개행 등등을 해석해주는 pre 요소 -->
-										</dd>
-									</dl>
-									<!-- 댓글의 댓글(대댓글) 작성 폼 -->
-									<form class="comment-form re-insert-form" 
-										action="private/comment_insert.do" method="post">
-										<input type="hidden" name="ref_group"
-											value="${productDto.num }"/>
-										<input type="hidden" name="target_id"
-											value="${tmp.writer }"/>
-										<input type="hidden" name="comment_group"
-											value="${tmp.comment_group }"/>
-										<textarea name="content"></textarea>
-										<button class="btn btn-info" type="submit">등록</button>
-									</form>
-									<!-- 로그인된 아이디와 댓글의 작성자가 같으면 수정 폼 출력 -->
-									<c:if test="${tmp.writer eq id }">
-										<form class="comment-form update-form" 
-											action="private/comment_update.do" method="post">
-											<input type="hidden" name="num" value="${tmp.num }"/>
-											<textarea name="content">${tmp.content }</textarea>
-											<button class="btn btn-info" type="submit">수정</button>
-										</form>
-									</c:if>
-								</li>
-								<!-- 위에 float:left 에 영향을 받지 않게 하기 위해 -->
-								<div style="clear:both;"></div>						
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+					<div data-ng-repeat="tmp in commentList">
+						<li data-ng-if="tmp.deleted == 'yes'">
+							삭제된 댓글 입니다.
+						</li>
+						<li id="comment{{tmp.num}}" data-ng-if="tmp.deleted == 'no '">
+							<svg data-ng-if="tmp.num != tmp.comment_group" class="reply-icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  						<path data-ng-if="tmp.num != tmp.comment_group" fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+	  						<path data-ng-if="tmp.num != tmp.comment_group" fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/></svg>
+	  						<dl>
+	  							<dt>
+	  								<span>{{tmp.writer}}</span>
+									<span data-ng-if="tmp.num != tmp.comment_group">
+										@<i>{{tmp.target_id}}</i>
+									</span>
+									<span style="margin-left:10px;">{{tmp.regdate}}</span>
+									<a data-num="{{tmp.num}}" href="javascript:" class="reply-link" style="text-decoration:none;">답글</a>
+									<span data-ng-if="tmp.writer == id">
+										| <a data-num="{{tmp.num}}" href="javascript:" class="comment-update-link" style="text-decoration:none;">수정</a>
+										| <a data-num="{{tmp.num}}" href="javascript:deleteWriting()" class="comment-delete-link" style="text-decoration:none;">삭제</a>
+									</span>
+	  							</dt>
+	  							<dd>
+	  								<pre>{{tmp.content}}</pre> <!-- tab, 띄어쓰기, 개행 등등을 해석해주는 pre 요소 -->
+	  							</dd>
+	  						</dl>
+	  						<!-- 댓글의 댓글(대댓글) 작성 폼 -->
+							<form class="comment-form re-insert-form" 
+								action="private/comment_insert.do" method="post">
+								<input type="hidden" name="ref_group"
+									value="{{productDto.num}}"/>
+								<input type="hidden" name="target_id"
+									value="{{tmp.writer}}"/>
+								<input type="hidden" name="comment_group"
+									value="{{tmp.comment_group}}"/>
+								<textarea name="content"></textarea>
+								<button class="btn btn-info" type="submit">등록</button>
+							</form>
+							<form data-ng-if="tmp.writer == id" class="comment-form update-form" 
+								action="private/comment_update.do" method="post">
+								<input type="hidden" name="num" value="{{tmp.num}}"/>
+								<textarea name="content">{{tmp.content}}</textarea>
+								<button class="btn btn-info" type="submit">수정</button>
+							</form>
+						</li>
+						<!-- 위에 float:left 에 영향을 받지 않게 하기 위해 -->
+						<div style="clear:both;"></div>	
+					</div>
 				</ul>
-			</div><!-- /.comments -->
-	    </div>
-	    
-	    <!-- 
+			</div>
 	    <div class="page-display" data-ng-if="isMakePaging">
 			<ul class="pagination pagination-sm">
 				<li data-ng-if="paging.startPageNum != 1" 
@@ -839,27 +821,6 @@
 						class="page-link" href="#/{{paging.endPageNum+1}}">Next</a>
 				</li>
 			</ul>
-		</div>
-		 -->
-	    <div class="page-display paging1" style="margin-top:">
-			<ul class="pagination pagination-sm">
-			<c:if test="${startPageNum ne 1 }">
-				<li class="page-item"><a class="page-link" href="detail.do?num=${productDto.num }&pageNum=${startPageNum-1 }">Prev</a></li>
-			</c:if>
-			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-				<c:choose>
-					<c:when test="${i eq pageNum }">
-						<li class="page-item active"><a class="page-link" href="detail.do?num=${productDto.num }&pageNum=${i }">${i }</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="detail.do?num=${productDto.num }&pageNum=${i }">${i }</a></li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${endPageNum lt totalPageCount }">
-				<li class="page-item"><a class="page-link" href="detail.do?num=${productDto.num }&pageNum=${endPageNum+1 }">Next</a></li>
-			</c:if>
-			</ul>	
 		</div>
 	</div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.form.min.js"></script>
