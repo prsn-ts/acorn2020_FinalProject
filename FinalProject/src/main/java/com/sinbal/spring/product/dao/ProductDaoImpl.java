@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.shop.dto.OrderDto;
 import com.sinbal.spring.shop.dto.ShopDto;
 
 @Repository
@@ -23,9 +24,8 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public List<ProductDto> getList() {
-		
-		return session.selectList("product.getList");
+	public List<ProductDto> getList(ProductDto dto) {
+		return session.selectList("product.getList",dto);
 	}
 	
 	@Override
@@ -104,5 +104,23 @@ public class ProductDaoImpl implements ProductDao{
 	public int getSizeData(int num) {
 		return session.selectOne("product.getSizeData", num);
 	}
+	
+	@Override
+	public List<ProductDto> productList(ProductDto dto) {
+		return session.selectList("product.productList", dto);
+	}
+	
+	@Override
+	public List<ProductDto> homeList(ProductDto dto) {
+		return session.selectList("product.homeList",dto);
+	}
+	
+	@Override
+	public int getCount(ProductDto dto) {
+
+		return session.selectOne("product.getCount", dto);
+	}
+
+
 }
 

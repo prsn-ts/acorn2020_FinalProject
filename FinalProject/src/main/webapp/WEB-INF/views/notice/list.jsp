@@ -127,6 +127,14 @@
 		<button type="submit" class="btn btn-outline-dark btn-sm">Serch</button>
 	</form>	
 </div>
+<br />
+<br />
+<br />
+
+
+<jsp:include page="../include/footer.jsp">
+	<jsp:param value="index" name="thisPage"/>
+</jsp:include>
 
 </body>
 </html>

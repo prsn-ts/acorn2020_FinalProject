@@ -2,6 +2,7 @@ package com.sinbal.spring.filter;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,10 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//web.xml 에 필터 정의와 필터 맵핑을 어노테이션을 이용해서 할수 있다.
-@WebFilter({"/login/private/*","/shop/private/*"})
-public class LoginFilter implements Filter{
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.sinbal.spring.login.service.LoginService;
+import com.sinbal.spring.product.dto.ProductDto;
+import com.sinbal.spring.product.service.ProductService;
+
+
+//web.xml 에 필터 정의와 필터 맵핑을 어노테이션을 이용해서 할수 있다.
+
+@WebFilter({"/login/private/*","/shop/private/*","/order_list.do"})
+public class LoginFilter implements Filter{
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -38,6 +49,8 @@ public class LoginFilter implements Filter{
 			//요청의 흐름 계속 진행 시키기
 			chain.doFilter(request, response);
 		}else {//로그인이 안된 상태 
+			
+
 			/*
 			 * 로그인 페이지로 강제로 리다일렉트 했다면 로그인 성공 후에 원래 가려던 
 			 * 목적지로 다시 보내야 하고 
@@ -53,12 +66,15 @@ public class LoginFilter implements Filter{
 			if(query==null) { //전송 파라미터가 없다면
 				encodedUrl=URLEncoder.encode(url);
 			}else {
-				encodedUrl=URLEncoder.encode(url+"?"+query);
+					encodedUrl=URLEncoder.encode(url+"?"+query);
+				
 			}
 			//로그인 폼으로 리다일렉트 이동하라고 응답
 			HttpServletResponse res=(HttpServletResponse)response;
 			String cPath=req.getContextPath();
-			res.sendRedirect(cPath+"/login/login_form.do?url="+encodedUrl);
+			
+				res.sendRedirect(cPath+"/login/login_form.do?url="+encodedUrl);
+					
 			
 		}
 	}

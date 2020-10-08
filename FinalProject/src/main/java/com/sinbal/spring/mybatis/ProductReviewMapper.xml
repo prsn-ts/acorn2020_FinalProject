@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productreview">
+	<!-- 댓글 목록을 얻어오기 위한 select 문 -->
+	<select id="getList" parameterType="productReviewDto" resultType="productReviewDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num, writer, content, target_id, ref_group,
+					comment_group, deleted, 
+					TO_CHAR(sbproduct_review.regdate, 'YYYY-MM-DD HH24"시 "MI"분"') AS regdate, profile
+				FROM sbproduct_review
+				INNER JOIN sblogin
+				ON sbproduct_review.writer = sblogin.id
+				WHERE ref_group=#{ref_group}
+				ORDER BY comment_group DESC, num ASC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	<!-- 한 글의 전체 댓글의 개수를 구하기위한 select 문 -->
+	<select id="getCount" parameterType="int" resultType="int">
+		SELECT NVL(MAX(ROWNUM),0) AS count
+		FROM sbproduct_review
+		WHERE ref_group=#{ref_group}
+	</select>
+	<!-- 새로운 댓글을 저장하는 insert 문 -->
+	<insert id="insert" parameterType="productReviewDto">
+		INSERT INTO sbproduct_review
+		(num, writer, content, target_id, ref_group, comment_group, regdate)
+		VALUES(#{num}, #{writer}, #{content}, #{target_id}, #{ref_group},
+			#{comment_group}, SYSDATE)
+	</insert>
+	<!-- 원글에 대한 댓글에 num, comment_group 칼럼의 값을 같게하도록 하기위함. -->
+	<select id="getSequence" resultType="int">
+		SELECT sbproduct_review_seq.NEXTVAL
+		FROM DUAL
+	</select>
+	<!-- 자신의 댓글을 수정하는 update 문 -->
+	<update id="update" parameterType="productReviewDto">
+		UPDATE sbproduct_review
+		SET content=#{content}
+		WHERE num=#{num}
+	</update>
+	<!-- 댓글 하나의 정보를 가져오는 select 문 -->
+	<select id="getData" parameterType="int" resultType="productReviewDto">
+		SELECT num,writer,content,ref_group,comment_group,deleted,regdate
+		FROM sbproduct_review
+		WHERE num=#{num}
+	</select>
+	<!-- 자신의 댓글을 삭제하는 update 문(삭제했다고만 표시하기위해 update 문 사용) -->
+	<update id="delete" parameterType="int">
+		UPDATE sbproduct_review
+		SET deleted = 'yes'
+		WHERE num = #{num}
+	</update>
+</mapper>
