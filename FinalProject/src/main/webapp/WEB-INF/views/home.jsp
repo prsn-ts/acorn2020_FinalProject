@@ -57,7 +57,8 @@
   </a>
 </div>
 <div class="container marketing">
-
+   <p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>상품 인기 리스트</strong></p>
+    <hr class="featurette-divider">	
     <!-- Three columns of text below the carousel -->
     <div class="row">
     	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">

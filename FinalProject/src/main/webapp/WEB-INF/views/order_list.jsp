@@ -20,7 +20,7 @@
   	text-align: right;
   }
   .jb-th-1 {
-    width: 600px;
+    width: 500px;
   }
   table.type09 {
     border-collapse: collapse;
@@ -64,9 +64,17 @@
 	}	
 	
 	.send-status{
-		font-size : 20px;
+		font-size : 25px;
 		color : rgb(164, 233, 157);
+		
+		
 	}
+	.send-money{
+		font-size : 20px;
+		color :black;
+		
+	}
+
 	
 </style>
 </head>
@@ -78,17 +86,17 @@
 
 
 <div class="container">
-		<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="" />공지사항</p>
+		<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="" />주문내역</p>
 	
-	<h1>주문 목록입니다.</h1>
+	
 		<table class="type09" style="margin-left: auto; margin-right: auto;">
 		<thead>
 			<tr>
-				<th>주문번호</th>				
-				<th colspan="2" class="jb-th-1">상품정보</th>
-				<th>금액</th>
-				<th>주문일자</th>
-				<th>상태<th>
+				<th width="10%">주문번호</th>				
+				<th width="45%"colspan="2" >주문 상세정보</th>
+				<th width="15%">금액</th>
+				<th width="15%">주문일자</th>
+				<th width="15%">상태<th>
 				
 			</tr>
 		</thead>
@@ -99,10 +107,13 @@
 				<td>
 				<img  style="width :150px; height:150px"src="${pageContext.request.contextPath }${tmp.profile}" alt="profile" />
 				</td>
-				<td>상품명 :${tmp.productname} <br /> 상품 정보 : ${tmp.sboption}
-				<td>${tmp.totalPrice } 원</td>
-				<td>${tmp.orderdate }</td>
-				<td class="send-status"><strong>배송준비중</strong></td>
+				<td class="send-info"><br /><strong style="font-size: 18px;">${tmp.productname}</strong>
+				 <br /> 상품 정보 : ${tmp.sboption}
+				 <br /><span style="font-size: 12px ;color:gray">(배송지 : ${tmp.addr })</span> 
+				
+				<td class="send-money"><strong><br /><br />${tmp.totalPrice } 원</strong></td>
+				<td class="send-money"><br /><br />${tmp.orderdate }</td>
+				<td class="send-money"><br /><br /><strong style="color : rgb(164, 233, 157);">배송준비중</strong></td>
 			</tr>
 
 		</c:forEach>
