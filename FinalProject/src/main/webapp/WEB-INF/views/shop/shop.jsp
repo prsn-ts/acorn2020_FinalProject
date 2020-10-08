@@ -91,9 +91,9 @@
             		<a href="#"><img class="card-img-top embed-responsive-item" src="${pageContext.request.contextPath }${tmp.profile}" alt="" ></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname }</a>
+                  <a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname }</a>
                 </h4>
-                <h6>${tmp.price }</h6>
+                <h6>${tmp.price }원</h6>
               </div>
               <div class="card-footer">
                 <p class="card-text">${tmp.regdate }</p>

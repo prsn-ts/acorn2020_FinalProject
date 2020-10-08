@@ -43,9 +43,10 @@
 	          	상품목록
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">캐주얼</a>
-	          <a class="dropdown-item" href="#">스포츠화</a>
-	          <a class="dropdown-item" href="#">워커</a>
+	        	<a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">전체목록</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers">스니커즈</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running">런닝화</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker">워커</a>
 	        </div>
 	      </li>		
 		</c:when>
@@ -55,9 +56,10 @@
 	          	상품목록
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">캐주얼</a>
-	          <a class="dropdown-item" href="#">스포츠화</a>
-	          <a class="dropdown-item" href="#">워커</a>
+	        	<a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do">전체목록</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers">스니커즈</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running">런닝화</a>
+	          <a class="dropdown-item" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker">워커</a>
 	        </div>
 	      </li>		
 		</c:otherwise>
