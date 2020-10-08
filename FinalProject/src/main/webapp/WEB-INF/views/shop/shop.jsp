@@ -112,7 +112,7 @@
  		<div class="page-display">
 			<ul class="pagination pagination">
 			<c:if test="${startPageNum ne 1 }">
-				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${startPageNum-1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }&keyword="${keyword }">Prev</a></li>
+				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${startPageNum-1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }&keyword="${keyword }"><span aria-hidden="true">&laquo;</span></a></li>
 			</c:if>
 			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 				<c:choose>
@@ -125,7 +125,7 @@
 				</c:choose>
 			</c:forEach>
 			<c:if test="${endPageNum lt totalPageCount }">
-				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${endPageNum+1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }&keyword="${keyword }">Next</a></li>
+				<li class="page-item"><a class="page-link" href="shop.do?pageNum=${endPageNum+1 }&search=${encodedK }&arr=${arr }&kindSelect=${kindSelect }&keyword="${keyword }"><span aria-hidden="true">&raquo;</span></a></li>
 			</c:if>
 			</ul>	
 		</div>
