@@ -25,41 +25,44 @@
 	</select>	
 	
 	<select id="productList" parameterType="productDto" resultType="productDto">
-		SELECT *
-		FROM
-			(SELECT result1.*, ROWNUM AS rnum
-			FROM
-				(SELECT num, productname, kind, content, price, regdate, profile 
-				FROM sbproduct
-				<choose>
-					<when test="kindSelect!=null and search!=null">
-						WHERE productname LIKE '%'||#{search }||'%'
-						AND kind = #{kindSelect }
-					</when>
-					<when test="kindSelect!=null">
-						WHERE kind = #{kindSelect }
-					</when>
-					<when test="search!=null">
-						WHERE productname LIKE '%'||#{search }||'%'
-					</when>
-				</choose>
-				<choose>
-					<when test="arr==null">
-						ORDER BY num DESC
-					</when>
-					<when test="arr=='priceHighArr'">
-						ORDER BY price DESC , num DESC
-					</when>
-					<when test="arr=='priceLowArr'">
-						ORDER BY price ASC , num DESC
-					</when>
-					<when test="arr=='buyHighArr'">
-						ORDER BY buycount DESC , num DESC
-					</when>
-				</choose>
-				)result1)
-		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
-	</select>
+      SELECT *
+      FROM
+         (SELECT result1.*, ROWNUM AS rnum
+         FROM
+            (SELECT num, productname, kind, content, price, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate, profile 
+            FROM sbproduct
+            <choose>
+               <when test="kindSelect!=null and keyword!=null">
+                  WHERE productname LIKE '%'||#{keyword }||'%'
+                  AND kind = #{kindSelect }
+               </when>
+               <when test="keyword!=null">
+                  WHERE productname LIKE '%'||#{keyword }||'%'
+               </when>
+               <when test="kindSelect!=null">
+                  WHERE kind = #{kindSelect }
+               </when>
+               <when test="search!=null">
+                  WHERE productname LIKE '%'||#{search }||'%'
+               </when>
+            </choose>
+            <choose>
+               <when test="arr==null">
+                  ORDER BY num DESC
+               </when>
+               <when test="arr=='priceHighArr'">
+                  ORDER BY price DESC , num DESC
+               </when>
+               <when test="arr=='priceLowArr'">
+                  ORDER BY price ASC , num DESC
+               </when>
+               <when test="arr=='buyHighArr'">
+                  ORDER BY buycount DESC , num DESC
+               </when>
+            </choose>
+            )result1)
+      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+   </select>
 	
 	<select id="homeList" parameterType="productDto" resultType="productDto">
 		SELECT num, productname, kind, content, price, regdate, profile

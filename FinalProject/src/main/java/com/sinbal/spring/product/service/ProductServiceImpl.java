@@ -418,87 +418,95 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public void productList(HttpServletRequest request) {
-			String search = request.getParameter("search");
-			String kindSelect = request.getParameter("kindSelect");
-			String arr = request.getParameter("arr");
-			String keyword = request.getParameter("keyword");
-			
-			if(search==null) {
-				search="";
-			}
-			if(kindSelect==null) {
-				kindSelect="";
-			}
-			if(arr==null) {
-				arr="";
-			}
-			
-			System.out.println(search);
-			System.out.println(kindSelect);
-			System.out.println(arr);
-			
-			String encodedK=URLEncoder.encode(search);
-			
-			
-			//보여줄 페이지의 번호
-			int pageNum=1;
-			//보여줄 페이지의 번호가 파라미터로 전달되는지 읽어와 본다.	
-			String strPageNum=request.getParameter("pageNum");
-			if(strPageNum != null){//페이지 번호가 파라미터로 넘어온다면
-				//페이지 번호를 설정한다.
-				pageNum=Integer.parseInt(strPageNum);
-			}
-			//보여줄 페이지 데이터의 시작 ResultSet row 번호
-			int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-			//보여줄 페이지 데이터의 끝 ResultSet row 번호
-			int endRowNum=pageNum*PAGE_ROW_COUNT;
-			
-			//startRowNum, endRowNum 을 담을 Dto 객체 생성
-			ProductDto dto=new ProductDto();
-			dto.setStartRowNum(startRowNum);
-			dto.setEndRowNum(endRowNum);
-			dto.setSearch(search);
-			
-			if(!search.equals("")) {
-				dto.setSearch(search);
-			}
-			if(!kindSelect.equals("")) {
-				dto.setKindSelect(kindSelect);
-			}
-			if(!arr.equals("")) {
-				dto.setArr(arr);
-			}
-			
-			//파일 목록 얻어오기
-			List<ProductDto> list=productDao.productList(dto);
-			//전체 row 의 갯수 
-			int totalRow=productDao.getCount(dto);
-			
-			//전체 페이지의 갯수 구하기
-			int totalPageCount=
-					(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-			//시작 페이지 번호
-			int startPageNum=
-				1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
-			//끝 페이지 번호
-			int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
-			//끝 페이지 번호가 잘못된 값이라면 
-			if(totalPageCount < endPageNum){
-				endPageNum=totalPageCount; //보정해준다. 
-			}
-			
-			//EL 에서 사용할 값을 미리 request 에 담아두기
-			request.setAttribute("list", list);
-			request.setAttribute("startPageNum", startPageNum);
-			request.setAttribute("endPageNum", endPageNum);
-			request.setAttribute("pageNum", pageNum);
-			request.setAttribute("totalPageCount", totalPageCount);
-			request.setAttribute("search", search);
-			request.setAttribute("encodedK", encodedK);
-			request.setAttribute("kindSelect", kindSelect);
-			request.setAttribute("arr", arr);
-	}
+	   public void productList(HttpServletRequest request) {
+	         String search = request.getParameter("search");
+	         String kindSelect = request.getParameter("kindSelect");
+	         String arr = request.getParameter("arr");
+	         String keyword = request.getParameter("keyword");
+	         
+	         if(search==null) {
+	            search="";
+	         }
+	         if(kindSelect==null) {
+	            kindSelect="";
+	         }
+	         if(arr==null) {
+	            arr="";
+	         }
+	         if(keyword==null) {
+	            keyword="";
+	         }
+	         
+	         System.out.println(search);
+	         System.out.println(kindSelect);
+	         System.out.println(arr);
+	         
+	         String encodedK=URLEncoder.encode(search);
+	         
+	         
+	         //보여줄 페이지의 번호
+	         int pageNum=1;
+	         //보여줄 페이지의 번호가 파라미터로 전달되는지 읽어와 본다.   
+	         String strPageNum=request.getParameter("pageNum");
+	         if(strPageNum != null){//페이지 번호가 파라미터로 넘어온다면
+	            //페이지 번호를 설정한다.
+	            pageNum=Integer.parseInt(strPageNum);
+	         }
+	         //보여줄 페이지 데이터의 시작 ResultSet row 번호
+	         int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+	         //보여줄 페이지 데이터의 끝 ResultSet row 번호
+	         int endRowNum=pageNum*PAGE_ROW_COUNT;
+	         
+	         //startRowNum, endRowNum 을 담을 Dto 객체 생성
+	         ProductDto dto=new ProductDto();
+	         dto.setStartRowNum(startRowNum);
+	         dto.setEndRowNum(endRowNum);
+	         dto.setSearch(search);
+	         
+	         if(!search.equals("")) {
+	            dto.setSearch(search);
+	         }
+	         if(!kindSelect.equals("")) {
+	            dto.setKindSelect(kindSelect);
+	         }
+	         if(!arr.equals("")) {
+	            dto.setArr(arr);
+	         }
+	         if(!keyword.equals("")) {
+	            dto.setKeyword(keyword);
+	         }
+	         
+	         //파일 목록 얻어오기
+	         List<ProductDto> list=productDao.productList(dto);
+	         //전체 row 의 갯수 
+	         int totalRow=productDao.getCount(dto);
+	         
+	         //전체 페이지의 갯수 구하기
+	         int totalPageCount=
+	               (int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	         //시작 페이지 번호
+	         int startPageNum=
+	            1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+	         //끝 페이지 번호
+	         int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
+	         //끝 페이지 번호가 잘못된 값이라면 
+	         if(totalPageCount < endPageNum){
+	            endPageNum=totalPageCount; //보정해준다. 
+	         }
+	         
+	         //EL 에서 사용할 값을 미리 request 에 담아두기
+	         request.setAttribute("list", list);
+	         request.setAttribute("startPageNum", startPageNum);
+	         request.setAttribute("endPageNum", endPageNum);
+	         request.setAttribute("pageNum", pageNum);
+	         request.setAttribute("totalPageCount", totalPageCount);
+	         request.setAttribute("search", search);
+	         request.setAttribute("encodedK", encodedK);
+	         request.setAttribute("kindSelect", kindSelect);
+	         request.setAttribute("arr", arr);
+	         request.setAttribute("keyword", keyword);
+	   }
+	
 	@Override
 	public void homeList(HttpServletRequest request) {
 		ProductDto dto = new ProductDto();

@@ -13,6 +13,13 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 
 <style>
+ .center{
+	display:block; 
+    margin:auto;
+ }
+ .color:link { color: black; text-decoration: none;}
+ .color:visited { color: black; text-decoration: none;}
+ .color:hover { color: black; text-decoration: none;}
 </style>
 </head>
 <body>
@@ -57,31 +64,53 @@
   </a>
 </div>
 <div class="container marketing">
-   <p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>상품 인기 리스트</strong></p>
+   <p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px; text-align: center;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>Best Shoes</strong></p>
     <hr class="featurette-divider">	
     <!-- Three columns of text below the carousel -->
     <div class="row">
     	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
       		<div class="col-lg-4">
-        		<img style=" width:150px; height: 150px; border-radius: 70%;" src="${pageContext.request.contextPath }${tmp.profile }" />
-        		<h2>${tmp.productname}</h2>
-        		<p>설명</p>
-        		<p><a class="btn btn-secondary" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">View details »</a></p>
+				<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%; border-color: black;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+        		<br />
+        		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
+        		<h5>${tmp.price }원</h5>
+        		<h6>${tmp.kind }</h6>
+        		<!--  
+        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
+      			-->
       		</div><!-- /.col-lg-4 -->
       	</c:forEach>
 	</div><!-- /.row -->
-
+	<br />
+	<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px; text-align: center;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>New Shoes</strong></p>
+    <hr class="featurette-divider">	
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+    	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
+      		<div class="col-lg-4">
+        		<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+        		<br />
+        		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
+        		<h5>${tmp.price }원</h5>
+        		<h6>${tmp.kind }</h6>
+        		<!--  
+        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
+      			-->
+      		</div><!-- /.col-lg-4 -->
+      	</c:forEach>
+	</div><!-- /.row -->
+	<br />
 
     <!-- START THE FEATURETTES -->
     
     
 
     <hr class="featurette-divider">
-
+	<br />
     <div class="row featurette">
       <div class="col-md-5 text-center" style="margin-top: 200px">
         <h1 class="featurette-heading">STYLE PICK</h1>
-        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-dark btn-lg" >구매하기 -></button></a>
+        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-secondary btn-lg" >구매하기 -></button></a>
       </div>
       <div class="col-md-5">
         <img src="${pageContext.request.contextPath }/resources/images/a4.png" width="700" height="500" >
@@ -94,7 +123,7 @@
     <div class="row featurette">
       <div class="col-md-3 order-md-9 text-center" style="margin-top: 200px">
         <h1 class="featurette-heading">Sneakers</h1>
-        <a href="info.do" class="lead"><button type="button" class="btn btn-dark btn-lg"><-자세히 보기</button></a>
+        <a href="info.do" class="lead"><button type="button" class="btn btn-secondary btn-lg"><-자세히 보기</button></a>
       </div>
       <div class="col-md-9 order-md-1">
         <img src="${pageContext.request.contextPath }/resources/images/a3.png" width="700" height="500" >
