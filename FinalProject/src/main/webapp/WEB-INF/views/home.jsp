@@ -13,11 +13,16 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 
 <style>
+ .center{
+	display:block; 
+    margin:auto;
+ }
+ .color:link { color: black; text-decoration: none;}
+ .color:visited { color: black; text-decoration: none;}
+ .color:hover { color: black; text-decoration: none;}
 </style>
 </head>
 <body>
-	
-	
 	
 <jsp:include page="include/header.jsp">
 	<jsp:param value="index" name="thisPage"/>
@@ -59,40 +64,53 @@
   </a>
 </div>
 <div class="container marketing">
-
+   <p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px; text-align: center;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>Best Shoes</strong></p>
+    <hr class="featurette-divider">	
     <!-- Three columns of text below the carousel -->
     <div class="row">
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
+    	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
+      		<div class="col-lg-4">
+				<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%; border-color: black;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+        		<br />
+        		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
+        		<h5>${tmp.price }원</h5>
+        		<h6>${tmp.kind }</h6>
+        		<!--  
+        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
+      			-->
+      		</div><!-- /.col-lg-4 -->
+      	</c:forEach>
+	</div><!-- /.row -->
+	<br />
+	<p class="fontst"><img style="width:2.5em ;height=2.5em; margin-right:10px; text-align: center;"src="${pageContext.request.contextPath }/resources/images/dlah.png" /><strong>New Shoes</strong></p>
+    <hr class="featurette-divider">	
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+    	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
+      		<div class="col-lg-4">
+        		<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+        		<br />
+        		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
+        		<h5>${tmp.price }원</h5>
+        		<h6>${tmp.kind }</h6>
+        		<!--  
+        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
+      			-->
+      		</div><!-- /.col-lg-4 -->
+      	</c:forEach>
+	</div><!-- /.row -->
+	<br />
 
     <!-- START THE FEATURETTES -->
     
     
 
     <hr class="featurette-divider">
-
+	<br />
     <div class="row featurette">
       <div class="col-md-5 text-center" style="margin-top: 200px">
         <h1 class="featurette-heading">STYLE PICK</h1>
-        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-dark btn-lg" >구매하기 -></button></a>
+        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-secondary btn-lg" >구매하기 -></button></a>
       </div>
       <div class="col-md-5">
         <img src="${pageContext.request.contextPath }/resources/images/a4.png" width="700" height="500" >
@@ -105,7 +123,7 @@
     <div class="row featurette">
       <div class="col-md-3 order-md-9 text-center" style="margin-top: 200px">
         <h1 class="featurette-heading">Sneakers</h1>
-        <a href="info.do" class="lead"><button type="button" class="btn btn-dark btn-lg"><-자세히 보기</button></a>
+        <a href="info.do" class="lead"><button type="button" class="btn btn-secondary btn-lg"><-자세히 보기</button></a>
       </div>
       <div class="col-md-9 order-md-1">
         <img src="${pageContext.request.contextPath }/resources/images/a3.png" width="700" height="500" >

@@ -7,10 +7,67 @@
 		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{price }, SYSDATE,#{profile})
 	</insert>
 	
-	<select id="getList" resultType="productDto">
-		select num,productname,kind,content,price,regdate,profile,profile2
-		from sbproduct 
-		order by num desc
+	<select id="getCount" parameterType="productDto" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM sbproduct
+		<choose>
+			<when test="kindSelect!=null and search!=null">
+				WHERE productname LIKE '%'||#{search }||'%'
+				AND kind = #{kindSelect }
+			</when>
+			<when test="kindSelect!=null">
+				WHERE kind = #{kindSelect }
+			</when>
+			<when test="search!=null">
+				WHERE productname LIKE '%'||#{search }||'%'
+			</when>
+		</choose>
+	</select>	
+	
+	<select id="productList" parameterType="productDto" resultType="productDto">
+      SELECT *
+      FROM
+         (SELECT result1.*, ROWNUM AS rnum
+         FROM
+            (SELECT num, productname, kind, content, price, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate, profile 
+            FROM sbproduct
+            <choose>
+               <when test="kindSelect!=null and keyword!=null">
+                  WHERE productname LIKE '%'||#{keyword }||'%'
+                  AND kind = #{kindSelect }
+               </when>
+               <when test="keyword!=null">
+                  WHERE productname LIKE '%'||#{keyword }||'%'
+               </when>
+               <when test="kindSelect!=null">
+                  WHERE kind = #{kindSelect }
+               </when>
+               <when test="search!=null">
+                  WHERE productname LIKE '%'||#{search }||'%'
+               </when>
+            </choose>
+            <choose>
+               <when test="arr==null">
+                  ORDER BY num DESC
+               </when>
+               <when test="arr=='priceHighArr'">
+                  ORDER BY price DESC , num DESC
+               </when>
+               <when test="arr=='priceLowArr'">
+                  ORDER BY price ASC , num DESC
+               </when>
+               <when test="arr=='buyHighArr'">
+                  ORDER BY buycount DESC , num DESC
+               </when>
+            </choose>
+            )result1)
+      WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+   </select>
+	
+	<select id="homeList" parameterType="productDto" resultType="productDto">
+		SELECT num, productname, kind, content, price, regdate, profile
+		FROM sbproduct
+		ORDER BY num DESC
 	</select>
 	
 	<insert id="insert_sub" parameterType="productDto">
@@ -87,4 +144,38 @@
 		sbcount=#{sbcount}
 		WHERE num=#{num} and sbsize=#{sbsize}
 	</update>
+	
+	<insert id="order" parameterType="orderDto">
+		INSERT INTO sborder(num,productnum,id,name,addr,phone_num,sendrequest,totalprice,orderdate,sboption)
+		values(sborder_seq.nextval,#{productnum},#{id},#{name},#{addr},#{phone_num},#{sendrequest},#{totalPrice},sysdate,#{sboption})
+	</insert>
+	
+	<update id="addpoint" parameterType="orderDto">
+		update sblogin_account
+		set point = point + (#{totalPrice}*0.01)
+		where id = #{id}
+	</update>
+	
+	
+	
+	
+	<update id="minus_money" parameterType="orderDto">
+		update sblogin_account
+		set money = money - #{totalPrice}
+		where id = #{id}
+	</update>
+	
+	<update id="minus_count" parameterType="orderDto">
+		update sbproduct_sub
+		set sbcount =  sbcount - #{sbcount}
+		where num = #{productnum} and sbsize = #{sbsize}
+	</update>
+	
+	<select id="order_list" parameterType="string" resultType="orderDto">
+		select sborder.num as num ,productnum,id,name,addr,phone_num,sendrequest,totalprice,to_char(orderdate,'yyyy-mm-dd') as orderdate,sboption,
+		productname,profile 
+		from sborder, sbproduct
+		where sbproduct.num = productnum and id=#{id}
+		order by sborder.num desc
+	</select>
 </mapper>
