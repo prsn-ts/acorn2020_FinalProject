@@ -70,14 +70,10 @@
     <div class="row">
     	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
       		<div class="col-lg-4">
-				<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%; border-color: black;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+				<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style="padding:2px; width:220px; height: 220px; border-radius: 70%; border:solid 1px; border-color: #343a40;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
         		<br />
         		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
-        		<h5>${tmp.price }원</h5>
         		<h6>${tmp.kind }</h6>
-        		<!--  
-        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
-      			-->
       		</div><!-- /.col-lg-4 -->
       	</c:forEach>
 	</div><!-- /.row -->
@@ -88,14 +84,10 @@
     <div class="row">
     	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
       		<div class="col-lg-4">
-        		<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" width:150px; height: 150px; border-radius: 70%;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
+        		<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style=" padding:2px; width:220px; height: 220px; border-radius: 70%; border:solid 1px; border-color: #343a40;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
         		<br />
         		<h4><a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname}</a></h4>
-        		<h5>${tmp.price }원</h5>
         		<h6>${tmp.kind }</h6>
-        		<!--  
-        		<p><a class="btn btn-secondary center" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}" role="button">상품보기 »</a></p>
-      			-->
       		</div><!-- /.col-lg-4 -->
       	</c:forEach>
 	</div><!-- /.row -->
@@ -110,7 +102,7 @@
     <div class="row featurette">
       <div class="col-md-5 text-center" style="margin-top: 200px">
         <h1 class="featurette-heading">STYLE PICK</h1>
-        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-secondary btn-lg" >구매하기 -></button></a>
+        <a href="shop/shop.do" class="lead"><button type="button" class="btn btn-secondary btn-lg" >상품목록 -></button></a>
       </div>
       <div class="col-md-5">
         <img src="${pageContext.request.contextPath }/resources/images/a4.png" width="700" height="500" >
