@@ -238,6 +238,10 @@ public class ProductServiceImpl implements ProductService{
 		int[]sizearr =dto.getSizearr();
 		int[]countarr=dto.getCountarr();
 		
+		int buycount = 0;
+		
+		
+		
 		//총금액을 가져오ㄴ다
 		int totalPrice =dto.getTotalPrice();
 		//사용자의 id를 검색한다
@@ -250,6 +254,7 @@ public class ProductServiceImpl implements ProductService{
 			String sboption="";
 			for(int i=0;i<sizearr.length;i++) {
 				sboption= sboption+"size :"+sizearr[i]+","+countarr[i]+"개";	
+				buycount = buycount + countarr[i];
 			}
 			String addr=dto.getZipNo()+dto.getRoadAddrPart1()+dto.getAddrDetail();
 			dto.setSboption(sboption);
@@ -259,6 +264,11 @@ public class ProductServiceImpl implements ProductService{
 			orderDao.order(dto);
 			//가지고있는 계좌에서 금액을 감소시킨다.
 			orderDao.minus_money(dto);
+			
+			System.out.println(buycount);
+			dto.setBuycount(buycount);
+			//상품의 buycount를 증가시킨다
+			orderDao.buycount(dto);
 			//상품의 재고를 감소시킨다
 			for(int i=0;i<sizearr.length;i++) {
 				dto.setSbsize(sizearr[i]);
@@ -284,6 +294,8 @@ public class ProductServiceImpl implements ProductService{
 		int totalPrice = dto.getTotalPrice();
 		
 		mView.addObject("sbsize",sbsize);
+		
+		mView.addObject("sLength", sbsize.length);
 		mView.addObject("sbcount",sbcount);
 		mView.addObject("sbprice",sbprice);
 		mView.addObject("sbdto",dto);

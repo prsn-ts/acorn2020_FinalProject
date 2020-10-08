@@ -3,8 +3,8 @@
 <mapper namespace="product">
 	<insert id="addProduct" parameterType="productDto">
 		INSERT INTO sbproduct
-		(num, kind, productname, content, price, regdate,profile)
-		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{price }, SYSDATE,#{profile})
+		(num, kind, productname, content, price, regdate,profile,buycount)
+		VALUES(sbproduct_seq.NEXTVAL, #{kind }, #{productname },  #{content }, #{price }, SYSDATE,#{profile},0)
 	</insert>
 	
 	<select id="getCount" parameterType="productDto" resultType="int">
@@ -175,4 +175,10 @@
 		where sbproduct.num = productnum and id=#{id}
 		order by sborder.num desc
 	</select>
+	
+	<update id="buycount" parameterType="orderDto">
+		update sbproduct
+		set buycount = buycount + #{buycount}
+		where num = #{num}
+	</update>
 </mapper>
