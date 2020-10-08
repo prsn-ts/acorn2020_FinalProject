@@ -1,5 +1,7 @@
 -- 자신이 생성한 테이블과 시퀀스  추가하기
 
+alter table sbproduct add(buycount number);
+
 --주문테이블
 CREATE TABLE sborder
 (

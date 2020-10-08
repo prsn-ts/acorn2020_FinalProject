@@ -699,7 +699,7 @@
 							<button type="reset" class="btn btn-success btn-block" 
 								onclick="window.location.href='${pageContext.request.contextPath}/home.do'">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
-								data-ng-disabled="product.selectBox.$valid" class="btn btn-primary btn-block" onclick="buy_submit()">구매하기</button>
+								data-ng-disabled="product.selectBox.$valid" class="btn btn-primary btn-block" >구매하기</button>
 					    </div>
 				    </c:if>
 				    <c:if test="${empty id}">
@@ -707,7 +707,7 @@
 							<button type="reset" class="btn btn-success btn-block" 
 								onclick="window.location.href='${pageContext.request.contextPath}/home.do'">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
-								class="btn btn-primary btn-block" onclick="buy_submit()" disabled>구매하기</button>
+								class="btn btn-primary btn-block"  disabled>구매하기</button>
 					    </div>
 					    <p style="color:red; font-size: 20px; text-align:center;">로그인 후 구매가 가능합니다!!</p>
 				    </c:if>

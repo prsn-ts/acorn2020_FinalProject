@@ -40,5 +40,10 @@ public class OrderDaoImpl implements OrderDao {
 		 
 		return session.selectList("product.order_list",id);
 	}
+	@Override
+	public void buycount(OrderDto dto) {
+		session.update("product.buycount",dto);
+		
+	}
 
 }
