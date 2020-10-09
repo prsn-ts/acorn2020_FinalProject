@@ -68,7 +68,7 @@
     <hr class="featurette-divider">	
     <!-- Three columns of text below the carousel -->
     <div class="row">
-    	<c:forEach var="tmp" items="${list}" begin="0" end="2" step="1">
+    	<c:forEach var="tmp" items="${likelist}" begin="0" end="2" step="1">
       		<div class="col-lg-4">
 				<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="center" style="padding:2px; width:220px; height: 220px; border-radius: 70%; border:solid 1px; border-color: #343a40;" src="${pageContext.request.contextPath }${tmp.profile }" /></a>
         		<br />

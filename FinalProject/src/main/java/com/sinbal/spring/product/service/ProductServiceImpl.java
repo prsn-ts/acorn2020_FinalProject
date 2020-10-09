@@ -425,7 +425,7 @@ public class ProductServiceImpl implements ProductService{
 		String id =(String)request.getSession().getAttribute("id");
 		
 		//한 페이지에 나타낼 댓글 의 갯수
-		final int PAGE_ROW_COUNT=1;
+		final int PAGE_ROW_COUNT=5;
 		//하단 디스플레이 페이지 갯수
 		final int PAGE_DISPLAY_COUNT=5;
 		
@@ -572,6 +572,12 @@ public class ProductServiceImpl implements ProductService{
 		ProductDto dto = new ProductDto();
 		List<ProductDto> list=productDao.homeList(dto);
 		request.setAttribute("list", list);
+		
+	}
+	@Override
+	public void likelist(ModelAndView mView) {
+	  List<ProductDto> likelist=productDao.favoritelist();
+	  mView.addObject("likelist" ,likelist);
 		
 	}
 }

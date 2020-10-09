@@ -120,7 +120,10 @@ public class ProductDaoImpl implements ProductDao{
 
 		return session.selectOne("product.getCount", dto);
 	}
-
+	@Override
+	public List<ProductDto> favoritelist() {
+		return session.selectList("product.favoritelist");
+	}
 
 }
 

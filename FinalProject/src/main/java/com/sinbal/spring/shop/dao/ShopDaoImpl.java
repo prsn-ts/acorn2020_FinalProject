@@ -1,8 +1,11 @@
 package com.sinbal.spring.shop.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sinbal.spring.product.dto.ProductDto;
 import com.sinbal.spring.shop.dto.ShopDto;
 
 public class ShopDaoImpl implements ShopDao{
@@ -16,5 +19,7 @@ public class ShopDaoImpl implements ShopDao{
 		
 		return session.selectOne("shop.getData", num);
 	}
+
+
 
 }

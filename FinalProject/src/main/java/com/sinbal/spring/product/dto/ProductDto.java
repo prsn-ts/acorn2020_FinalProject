@@ -21,6 +21,7 @@ public class ProductDto {
 	private String arr;
 	private String kindSelect;
 	private String keyword;
+	private int buycount;
 	
 	//디폴트 생성자 
 	public ProductDto() {}
@@ -28,7 +29,7 @@ public class ProductDto {
 	public ProductDto(int num, String productname, String kind, String content, int price, String regdate,
 			String profile, String profile2, int sbsize, int sbcount, int[] sizearr, int[] countarr, int[] pricearr,
 			int totalPrice, int startRowNum, int endRowNum, String search, String arr, String kindSelect,
-			String keyword) {
+			String keyword, int buycount) {
 		super();
 		this.num = num;
 		this.productname = productname;
@@ -50,6 +51,7 @@ public class ProductDto {
 		this.arr = arr;
 		this.kindSelect = kindSelect;
 		this.keyword = keyword;
+		this.buycount = buycount;
 	}
 
 	public int getNum() {
@@ -211,6 +213,15 @@ public class ProductDto {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
+	public int getBuycount() {
+		return buycount;
+	}
+
+	public void setBuycount(int buycount) {
+		this.buycount = buycount;
+	}
+
 
 
 }

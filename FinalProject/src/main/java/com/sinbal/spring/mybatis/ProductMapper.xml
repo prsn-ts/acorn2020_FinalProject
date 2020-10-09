@@ -29,7 +29,7 @@
       FROM
          (SELECT result1.*, ROWNUM AS rnum
          FROM
-            (SELECT num, productname, kind, content, price, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate, profile 
+            (SELECT num, productname, kind, content, price, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate, profile ,buycount
             FROM sbproduct
             <choose>
                <when test="kindSelect!=null and keyword!=null">
@@ -197,4 +197,9 @@
 		set buycount = buycount + #{buycount}
 		where num = #{num}
 	</update>
+	
+	<select  id="favoritelist" resultType="productDto">
+		select * from sbproduct
+		order by buycount desc
+	 </select>
 </mapper>

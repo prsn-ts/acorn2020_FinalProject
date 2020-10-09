@@ -54,4 +54,8 @@ public interface ProductService {
 	//주문내역 리스트로불러오는 메소드
 	public void getorder_list(HttpServletRequest request, ModelAndView mView);
 	
+	//인기상품리스트
+	
+	public void likelist(ModelAndView mView);
+	
 }

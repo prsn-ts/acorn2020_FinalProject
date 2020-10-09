@@ -36,6 +36,8 @@ public interface ProductDao {
 	public List<ProductDto> productList(ProductDto dto);
 	public List<ProductDto> homeList(ProductDto dto);
 	public int getCount(ProductDto dto);
+	//상품  인기 정보를 리스트를 가져오는 메소드
 	
+	public List<ProductDto> favoritelist(); 
 	
 }

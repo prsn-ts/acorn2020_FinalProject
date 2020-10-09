@@ -35,33 +35,33 @@
 
       <div class="col-md-2" style="margin-top:25px; margin-right:50px">
 
-        <h1 class="my-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품목록</h1>
+        <h3 class="my-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품목록</h3>
         <hr />
         <div class="p-3 mb-2 bg-info text-white" style="font-size:20px; font-weight:bold;">
 				&nbsp;&nbsp;&nbsp;스니커즈
 			</div>
 			<div class="list-group" id="buttonList">
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceHighArr&keyword=${keyword }"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceLowArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=buyHighArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=sneakers&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
 			</div>
 			<br />
 			<div class="p-3 mb-2 bg-info text-white" style="font-size:20px; font-weight:bold;">
 				&nbsp;&nbsp;&nbsp;런닝화
 			</div>
 			<div class="list-group" id="buttonList">
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceHighArr&keyword=${keyword }"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceLowArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=buyHighArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=running&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
 			</div>
 			<br />
 			<div class="p-3 mb-2 bg-info text-white" style="font-size:20px; font-weight:bold;">
 				&nbsp;&nbsp;&nbsp;워커
 			</div>
 			<div class="list-group" id="buttonList">
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceHighArr&keyword=${keyword }"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceLowArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
-				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=buyHighArr&keyword=${keyword }"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceHighArr"><button class="list-group-item list-group-item-action">가격 높은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=priceLowArr"><button type="button" class="list-group-item list-group-item-action">가격 낮은 순</button></a>
+				<a class="color" href="${pageContext.request.contextPath }/shop/shop.do?kindSelect=walker&arr=buyHighArr"><button type="button" class="list-group-item list-group-item-action">인기순</button></a>
 			</div>						
 
       </div>
@@ -72,7 +72,15 @@
          <form action="${pageContext.request.contextPath }/shop/shop.do" method="get">
             <div class="form-group row">
                <div class="col-sm-7">
-                     <input value="${keyword }" class="form-control"  type="text" name="keyword" placeholder="상품명...">
+                    <c:choose>
+                    	<c:when test="${kindSelect eq '' }"><h4>전체 검색</h4></c:when>
+                     	<c:when test="${kindSelect eq 'sneakers'}"><h4>스니커즈 검색</h4></c:when>
+                    	<c:when test="${kindSelect eq 'running'}"><h4>런닝화 검색</h4></c:when>
+                    	<c:when test="${kindSelect eq 'walker'}"><h4>워커 검색</h4></c:when>
+                    </c:choose>
+                     
+                     <input  class="form-control"  type="text" name="keyword" placeholder="상품명...">
+                     <input type="hidden" name="kindSelect" value ="${ kindSelect}" />
                   </div>
                   <button class="btn btn-praimary" type="submit">
                      <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +104,7 @@
                 <h6>${tmp.price }원</h6>
               </div>
               <div class="card-footer">
-                <p class="card-text">${tmp.regdate }</p>
+                <p class="card-text">${tmp.regdate } <span style="color:gray; font-size: 12px; margin-left: 10px;">(누적판매량  ${tmp.buycount })</span> </p>
               </div>
 		</div>
           </div>
