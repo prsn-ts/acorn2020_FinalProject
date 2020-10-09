@@ -240,8 +240,6 @@ public class ProductServiceImpl implements ProductService{
 		
 		int buycount = 0;
 		
-		
-		
 		//총금액을 가져오ㄴ다
 		int totalPrice =dto.getTotalPrice();
 		//사용자의 id를 검색한다
@@ -265,10 +263,12 @@ public class ProductServiceImpl implements ProductService{
 			//가지고있는 계좌에서 금액을 감소시킨다.
 			orderDao.minus_money(dto);
 			
-			System.out.println(buycount);
-			dto.setBuycount(buycount);
+			OrderDto dto2= new OrderDto();
+			dto2.setNum(dto.getProductnum());
+			dto2.setBuycount(buycount);
+			System.out.println("바이카운트"+buycount);
 			//상품의 buycount를 증가시킨다
-			orderDao.buycount(dto);
+			orderDao.buycount(dto2);
 			//상품의 재고를 감소시킨다
 			for(int i=0;i<sizearr.length;i++) {
 				dto.setSbsize(sizearr[i]);
@@ -295,7 +295,6 @@ public class ProductServiceImpl implements ProductService{
 		
 		mView.addObject("sbsize",sbsize);
 		
-		mView.addObject("sLength", sbsize.length);
 		mView.addObject("sbcount",sbcount);
 		mView.addObject("sbprice",sbprice);
 		mView.addObject("sbdto",dto);

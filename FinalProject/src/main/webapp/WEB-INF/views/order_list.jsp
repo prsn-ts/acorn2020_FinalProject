@@ -107,7 +107,7 @@
 				<td>
 				<img  style="width :150px; height:150px"src="${pageContext.request.contextPath }${tmp.profile}" alt="profile" />
 				</td>
-				<td class="send-info"><br /><strong style="font-size: 18px;">${tmp.productname}</strong>
+				<td class="send-info"><br /><strong style="font-size: 18px; hover color:red">${tmp.productname}</strong>
 				 <br /> 상품 정보 : ${tmp.sboption}
 				 <br /><span style="font-size: 12px ;color:gray">(배송지 : ${tmp.addr })</span> 
 				

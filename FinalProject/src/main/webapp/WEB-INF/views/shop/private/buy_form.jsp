@@ -141,8 +141,8 @@ myApp.controller("insert_Ctrl", function($scope, $http){
 	
 
 	<div class="col-lg-5">
-		<h1>${sLength }</h1>
-		<c:forEach var="i" begin="0" end="${sLength }" step="1">
+		
+		<c:forEach var="i" begin="0" end="${fn:length(sbsize)-1 }" step="1">
 		<div class="card"style="margin-bottom: 10px;" >
 		  <div class="card-body">
 		  <div class="row">
