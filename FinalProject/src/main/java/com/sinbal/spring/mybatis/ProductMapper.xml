@@ -170,13 +170,26 @@
 		set sbcount =  sbcount - #{sbcount}
 		where num = #{productnum} and sbsize = #{sbsize}
 	</update>
-	
-	<select id="order_list" parameterType="string" resultType="orderDto">
+	<!--
 		select sborder.num as num ,productnum,id,name,addr,phone_num,sendrequest,totalprice,to_char(orderdate,'yyyy-mm-dd') as orderdate,sboption,
 		productname,profile 
 		from sborder, sbproduct
 		where sbproduct.num = productnum and id=#{id}
-		order by sborder.num desc
+		order by sborder.num desc 
+	 -->
+	<select id="order_list" parameterType="orderDto" resultType="orderDto">
+		SELECT *
+		FROM
+		(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT sborder.num,productnum,id,name,addr,phone_num,sendrequest,totalprice,to_char(orderdate,'yyyy-mm-dd') as orderdate,sboption,
+				productname,profile
+				FROM sborder
+				INNER JOIN sbproduct
+				ON sbproduct.num = productnum
+				WHERE id=#{id}
+				ORDER BY sborder.num desc) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
 	</select>
 	
 	<update id="buycount" parameterType="orderDto">

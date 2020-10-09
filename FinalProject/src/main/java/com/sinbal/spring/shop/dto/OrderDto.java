@@ -22,13 +22,15 @@ public class OrderDto {
 	private String productname; //상품명을 받을필드
 	private String profile; //상품 프로필을 받을 필드
 	private int buycount;
+	private int startRowNum; //페이징 처리에 사용되는 필드1
+	private int endRowNum; //페이징 처리에 사용되는 필드2
 	
 	public OrderDto() {}
 
 	public OrderDto(int num, int productnum, String id, String name, String zipNo, String roadAddrPart1,
 			String addrDetail, String addr, String phone_num, String sendrequest, int sbsize, int sbcount,
 			int[] sizearr, int[] countarr, int[] pricearr, int totalPrice, String orderdate, String sboption,
-			String productname, String profile, int buycount) {
+			String productname, String profile, int buycount, int startRowNum, int endRowNum) {
 		super();
 		this.num = num;
 		this.productnum = productnum;
@@ -51,6 +53,8 @@ public class OrderDto {
 		this.productname = productname;
 		this.profile = profile;
 		this.buycount = buycount;
+		this.startRowNum = startRowNum;
+		this.endRowNum = endRowNum;
 	}
 
 	public int getNum() {
@@ -221,8 +225,19 @@ public class OrderDto {
 		this.buycount = buycount;
 	}
 
+	public int getStartRowNum() {
+		return startRowNum;
+	}
 
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
 
+	public int getEndRowNum() {
+		return endRowNum;
+	}
 
-	
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
+	}
 }

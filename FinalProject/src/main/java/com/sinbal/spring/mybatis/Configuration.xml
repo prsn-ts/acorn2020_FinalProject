@@ -32,5 +32,6 @@
 		<mapper resource="com/sinbal/spring/mybatis/NoticeMapper.xml"/>
 		<mapper resource="com/sinbal/spring/mybatis/ProductMapper.xml"/>
 		<mapper resource="com/sinbal/spring/mybatis/ProductReviewMapper.xml"/>
+		<mapper resource="com/sinbal/spring/mybatis/OrderMapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<!-- 한 글의 전체 댓글의 개수를 구하기위한 select 문 -->
+	<select id="getCount" parameterType="String" resultType="int">
+		SELECT NVL(MAX(ROWNUM),0) AS count
+		FROM sborder
+		WHERE id=#{id}
+	</select>
+</mapper>

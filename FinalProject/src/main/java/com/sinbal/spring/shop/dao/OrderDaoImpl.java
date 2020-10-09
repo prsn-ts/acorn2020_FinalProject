@@ -36,14 +36,22 @@ public class OrderDaoImpl implements OrderDao {
 		
 	}
 	@Override
-	public List<OrderDto> order_list(String id) {
-		 
-		return session.selectList("product.order_list",id);
-	}
-	@Override
 	public void buycount(OrderDto dto) {
 		session.update("product.buycount",dto);
 		
 	}
-
+	
+	
+	//주문 내역 페이징 관련 부분
+	
+	@Override
+	public List<OrderDto> order_list(OrderDto orderDto) {
+		 
+		return session.selectList("product.order_list",orderDto);
+	}
+	//전체 주문 내역 개수를 가져오는 메소드
+	@Override
+	public int getCount(String id) {
+		return session.selectOne("order.getCount", id);
+	}
 }

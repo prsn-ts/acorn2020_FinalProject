@@ -17,7 +17,7 @@
  .color:visited { color: black; text-decoration: none;}
  .color:hover { color: black; text-decoration: none;}
  .color{
-  	text-align: right;
+      text-align: right;
   }
   .jb-th-1 {
     width: 500px;
@@ -26,56 +26,57 @@
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
+    }
+    table.type09 thead th {
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        color: #369;
+        border-bottom: 3px solid #036;
+    }
+    table.type09 tbody th {
+        width: 150px;
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+        background: #f3f6f7;
 	}
-	table.type09 thead th {
-    	padding: 10px;
-    	font-weight: bold;
-    	vertical-align: top;
-    	color: #369;
-    	border-bottom: 3px solid #036;
-	}
-	table.type09 tbody th {
-    	width: 150px;
-    	padding: 10px;
-    	font-weight: bold;
-    	vertical-align: top;
-    	border-bottom: 1px solid #ccc;
-    	background: #f3f6f7;
-}
-	table.type09 td {
-    	padding: 10px;
-    	vertical-align: top;
-    	border-bottom: 1px solid #ccc;
-	}
-	.fontst{
-		font-size: 30px;
-	}
-	.pagination {
-   		justify-content: center;
-	}
-	.my.pagination > .active > a, 
-	.my.pagination > .active > span, 
-	.my.pagination > .active > a:hover, 
-	.my.pagination > .active > span:hover, 
-	.my.pagination > .active > a:focus, 
-	.my.pagination > .active > span:focus {
-  		background: #343a40;
- 	 	border-color: #343a40;
-	}	
-	
-	.send-status{
-		font-size : 25px;
-		color : rgb(164, 233, 157);
-		
-		
-	}
-	.send-money{
-		font-size : 20px;
-		color :black;
-		
-	}
-
-	
+    table.type09 td {
+        padding: 10px;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+    }
+    .fontst{
+        font-size: 30px;
+    }
+    .pagination {
+           justify-content: center;
+    }
+    .my.pagination > .active > a, 
+    .my.pagination > .active > span, 
+    .my.pagination > .active > a:hover, 
+    .my.pagination > .active > span:hover, 
+    .my.pagination > .active > a:focus, 
+    .my.pagination > .active > span:focus {
+          background: #343a40;
+          border-color: #343a40;
+    }
+    .send-status{
+        font-size : 25px;
+        color : rgb(164, 233, 157);
+    }
+    .send-money{
+        font-size : 20px;
+        color :black;
+    }
+    .send-info strong .send_info_name {
+     	text-decoration:none; color:black;
+    }
+    .send-info strong:hover .send_info_name {
+    	color: blue;
+    }
+>>>>>>> stash
 </style>
 </head>
 <body>
@@ -102,27 +103,42 @@
 		</thead>
 		<tbody>
 		<c:forEach var="tmp" items="${list }">
-			<tr>
-				<td>${tmp.num }</td>
-				<td>
-				<img  style="width :150px; height:150px"src="${pageContext.request.contextPath }${tmp.profile}" alt="profile" />
-				</td>
-				<td class="send-info"><br /><strong style="font-size: 18px;">${tmp.productname}</strong>
-				 <br /> 상품 정보 : ${tmp.sboption}
-				 <br /><span style="font-size: 12px ;color:gray">(배송지 : ${tmp.addr })</span> 
-				
-				<td class="send-money"><strong><br /><br />${tmp.totalPrice } 원</strong></td>
-				<td class="send-money"><br /><br />${tmp.orderdate }</td>
-				<td class="send-money"><br /><br /><strong style="color : rgb(164, 233, 157);">배송준비중</strong></td>
-			</tr>
-
-		</c:forEach>
+            <tr>
+                <td>${tmp.num }</td>
+                <td>
+                <a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.productnum}"><img style="width :150px; height:150px"src="${pageContext.request.contextPath }${tmp.profile}" alt="profile" /></a>
+                </td>
+                <td class="send-info"><br /><strong style="font-size: 18px;"><a class="send_info_name" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.productnum}">${tmp.productname}</a></strong>
+                 <br /> 상품 정보 : ${tmp.sboption}
+                 <br /><span style="font-size: 12px ;color:gray">(배송지 : ${tmp.addr })</span></td>
+                 
+                <td class="send-money"><strong><br /><br />${tmp.totalPrice } 원</strong></td>
+                <td class="send-money"><br /><br />${tmp.orderdate }</td>
+                <td class="send-money"><br /><br /><strong style="color : rgb(164, 233, 157);">배송준비중</strong></td>
+            </tr>
+        </c:forEach>
 		</tbody>
 	</table>
-	
-	
-	
-
+	<div class="page-display">
+		<ul class="pagination pagination-sm">
+		<c:if test="${startPageNum ne 1 }">
+			<li class="page-item"><a class="page-link" href="order_list.do?pageNum=${startPageNum-1 }">Prev</a></li>
+		</c:if>
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+			<c:choose>
+				<c:when test="${i eq pageNum }">
+					<li class="page-item active"><a class="page-link" href="order_list.do?pageNum=${i }">${i }</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item"><a class="page-link" href="order_list.do?pageNum=${i }">${i }</a></li>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${endPageNum lt totalPageCount }">
+			<li class="page-item"><a class="page-link" href="order_list.do?pageNum=${endPageNum+1 }">Next</a></li>
+		</c:if>
+		</ul>	
+	</div>
 </div>
 
 

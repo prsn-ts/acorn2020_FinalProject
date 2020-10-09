@@ -424,7 +424,56 @@ public class ProductServiceImpl implements ProductService{
 	public void getorder_list(HttpServletRequest request ,ModelAndView mView) {
 		String id =(String)request.getSession().getAttribute("id");
 		
-		mView.addObject("list",orderDao.order_list(id));
+		//한 페이지에 나타낼 댓글 의 갯수
+		final int PAGE_ROW_COUNT=1;
+		//하단 디스플레이 페이지 갯수
+		final int PAGE_DISPLAY_COUNT=5;
+		
+		//전체 댓글 의 갯수를 읽어온다.
+		int totalRow=orderDao.getCount(id);
+		//전체 페이지의 갯수 구하기
+		int totalPageCount=
+				(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+		
+		//보여줄 페이지의 번호
+		int pageNum=1;
+		//보여줄 페이지의 번호(만일 pageNum이 넘어오지 않으면 가장 마지막 페이지)
+		String strPageNum = request.getParameter("pageNum");
+		//만일 페이지 번호가 넘어온다면
+		if(strPageNum!=null) {
+			//넘어온 페이지에 해당하는 댓글 목록을 보여주도록 한다.
+			pageNum=Integer.parseInt(strPageNum);
+		}
+		
+		//보여줄 페이지 데이터의 시작 ResultSet row 번호
+		int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+		//보여줄 페이지 데이터의 끝 ResultSet row 번호
+		int endRowNum=pageNum*PAGE_ROW_COUNT;
+		
+		//시작 페이지 번호
+		int startPageNum=
+			1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+		//끝 페이지 번호
+		int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
+		//끝 페이지 번호가 잘못된 값이라면 
+		if(totalPageCount < endPageNum){
+			endPageNum=totalPageCount; //보정해준다. 
+		}
+		
+		// CafeDto 객체에 위에서 계산된 startRowNum 과 endRowNum 을 담는다.
+		OrderDto orderDto=new OrderDto();
+		orderDto.setStartRowNum(startRowNum);
+		orderDto.setEndRowNum(endRowNum);
+		//주문자의 아이디를 담는다.
+		orderDto.setId(id);
+		
+		//request 에 담아준다.
+		request.setAttribute("list",orderDao.order_list(orderDto));
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("startPageNum", startPageNum);
+		request.setAttribute("endPageNum", endPageNum);
+		request.setAttribute("totalRow", totalRow);
+		request.setAttribute("totalPageCount", totalPageCount);
 		
 	}
 	
