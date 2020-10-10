@@ -71,7 +71,7 @@
 	</select>
 	
 	<insert id="insert_sub" parameterType="productDto">
-		insert into sbproduct_sub(num, sbsize, sbcount) values(#{num},#{sbsize},#{sbcount})
+		insert into sbproduct_sub(subnum, num, sbsize, sbcount) values(sbproduct_sub_seq.NEXTVAL, #{num},#{sbsize},#{sbcount})
 	</insert>
 	<select id="getnum" resultType="int">
 		 SELECT sbproduct_seq.currval as num FROM DUAL
@@ -79,7 +79,7 @@
 	
 	<!-- 상품 정보를 가져오는 sql문 -->
 	<select id="getData2" parameterType="int" resultType="ProductDto">
-		select num,productname,kind,content,price,regdate,profile,profile2
+		select num,productname,kind,content,price,regdate,profile
 		from sbproduct
 		where num=#{num}
 	</select>
@@ -87,7 +87,7 @@
 	<select id="getSubData" parameterType="int" resultType="ProductDto">
 		SELECT detailSelect.*, ROWNUM rnum
 			FROM
-			(select num,productname,kind,content,price,regdate,profile,profile2,sbsize,sbcount
+			(select num,productname,kind,content,price,regdate,profile,sbsize,sbcount
 			from sbproduct
 			inner join sbproduct_sub using(num)
 			where num=#{num}
@@ -99,7 +99,7 @@
 			from
 			(SELECT detailSelect.*, ROWNUM rnum
 				FROM
-				(select num,productname,kind,content,price,regdate,profile,profile2,sbsize,sbcount
+				(select num,productname,kind,content,price,regdate,profile,sbsize,sbcount
 				from sbproduct
 				inner join sbproduct_sub using(num)
 				where num=#{num}) detailSelect)
@@ -108,7 +108,7 @@
 	<select id="getStockData" parameterType="Map" resultType="productDto">
 		select detailSelect.*, ROWNUM rnum
 			from
-			(select num,productname,kind,content,price,regdate,profile,profile2,sbsize,sbcount
+			(select num,productname,kind,content,price,regdate,profile,sbsize,sbcount
 				from sbproduct
 				inner join sbproduct_sub using(num)
 				where num=#{num}

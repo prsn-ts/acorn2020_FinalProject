@@ -8,7 +8,7 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="VARCHAR"/>
 	</settings>
-	
+	 
 	<!-- type  별칭 등록 -->
 	<typeAliases>
 		<!-- LoginDto 별칭 설정. -->

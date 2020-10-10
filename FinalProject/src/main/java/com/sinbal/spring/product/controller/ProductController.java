@@ -58,9 +58,9 @@ public class ProductController {
 	
 	//상품 삭제 부분
 	@RequestMapping("/shop/productdelete.do")
-	public ModelAndView productdelete(ModelAndView mView, int num) {
+	public ModelAndView productdelete(ModelAndView mView, HttpServletRequest request, int num) {
 		
-		productService.productdelete(num);
+		productService.productdelete(request, num);
 		mView.setViewName("redirect:/shop/shop.do");
 		return mView;
 	}
