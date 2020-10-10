@@ -22,7 +22,7 @@ public interface ProductService {
 	public Map<String, Object> isExistproductname(String inputproductname);
 	public void productList(HttpServletRequest request);
 	public void homeList(HttpServletRequest request);
-	public void productdelete(int num);
+	public void productdelete(HttpServletRequest request, int num);
 	public void getData(ModelAndView mView ,int num);
 	
 	//신발 수정 서비스

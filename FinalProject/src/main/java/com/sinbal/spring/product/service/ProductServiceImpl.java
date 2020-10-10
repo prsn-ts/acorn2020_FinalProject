@@ -105,9 +105,16 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 	@Override
-	public void productdelete(int num) {
+	public void productdelete(HttpServletRequest request, int num) {
+		//세션에 저장된 로그인된 아이디
+		String id=(String)request.getSession().getAttribute("id");
+		//관리자 계정의 정보를 담는다.
+		String admin = "admin";
+		//관리자 계정으로 삭제하지 않은 경우 예외 발생
+		if(!admin.equals(id)) {
+			throw new NotDeleteException("남의 상품은 삭제할 수 없습니다!");
+		}
 		productDao.productdelete(num);
-		
 	}
 	@Override
 	public void getData(ModelAndView mView ,int num) {
