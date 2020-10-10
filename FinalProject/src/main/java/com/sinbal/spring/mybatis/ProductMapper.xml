@@ -71,7 +71,7 @@
 	</select>
 	
 	<insert id="insert_sub" parameterType="productDto">
-		insert into sbproduct_sub(num, sbsize, sbcount) values(#{num},#{sbsize},#{sbcount})
+		insert into sbproduct_sub(subnum, num, sbsize, sbcount) values(sbproduct_sub_seq.NEXTVAL, #{num},#{sbsize},#{sbcount})
 	</insert>
 	<select id="getnum" resultType="int">
 		 SELECT sbproduct_seq.currval as num FROM DUAL

@@ -140,6 +140,8 @@ CREATE TABLE sbproduct_sub
     sbcount    NUMBER    NOT NULL, 
     num        NUMBER    NOT NULL
 );
+--sbproduct_sub 시퀀스 추가
+CREATE SEQUENCE sbproduct_sub_seq;
 --상품 추가정보 FOREIGN KEY 설정
 ALTER TABLE sbproduct_sub
     ADD CONSTRAINT FK_sbproduct_sub_num_sbproduct FOREIGN KEY (num)
@@ -195,7 +197,7 @@ DROP SEQUENCE sborder_seq;
 DROP SEQUENCE sbnotice_seq;
 DROP SEQUENCE sbproduct_review_seq;
 DROP SEQUENCE sbproduct_seq;
-
+DROP SEQUENCE sbproduct_sub_seq;
 
 
 
