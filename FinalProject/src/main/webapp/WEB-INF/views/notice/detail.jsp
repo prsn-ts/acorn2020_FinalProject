@@ -102,6 +102,11 @@
 	</c:if>
 
 </div><!-- /.container -->
+<br />
+<br />
+<jsp:include page="../include/footer.jsp">
+	<jsp:param value="index" name="thisPage"/>
+</jsp:include>
 
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.form.min.js"></script>

@@ -712,8 +712,8 @@
 					    <p style="color:red; font-size: 20px; text-align:center;">로그인 후 구매가 가능합니다!!</p>
 				    </c:if>
 				    <c:if test="${id eq 'admin'}">
-				    	<button type="button" onclick="location.href='private/productupdate.do?num=${param.num }'">수정</button>
-						<button type="button" onclick="deleteConfirm()">삭제</button>
+				    	<button class="btn btn-outline-info" type="button" onclick="location.href='private/productupdate.do?num=${param.num }'">수정</button>
+						<button class="btn btn-outline-danger" type="button" onclick="deleteConfirm()">삭제</button>
 				    </c:if>
 				</form>
 			</div>

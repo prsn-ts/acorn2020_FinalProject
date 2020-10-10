@@ -33,11 +33,11 @@
 		    <table class="table" style="margin-bottom:0;">
 				<tr>
 					<th><label for="id">아이디</label></th>
-					<td colspan="2"><input type="text" id="id" value="${dto.id }" disabled /></td>
+					<td colspan="2"><input class="form-control" type="text" id="id" value="${dto.id }" disabled /></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td colspan="2"><a href="pwd_updateform.do">수정하기</a></td>
+					<td colspan="2"><a href="pwd_updateform.do"><button class="btn btn-outline-warning btn-sm">수정하기</button></a></td>
 				</tr>
 				<tr>
 					<th>휴대폰 번호</th>
@@ -50,7 +50,7 @@
 				<tr>
 					<th>보유 Money</th>
 					<td id="mone">${dto.money} 원  </td>
-					<td><a id="addacount" href="addMoney.do">십만원충전</a></td>
+					<td><a id="addacount" href="addMoney.do"><button class="btn btn-outline-success btn-sm">십만원충전</button></a></td>
 				</tr>	
 				<tr>
 					<th>보유 Point</th>
@@ -64,9 +64,9 @@
 			<hr style="margin-top:0;">
 			<div class="updateAndDelete">
 				<div>
-					<a href="update_form.do">개인정보 수정</a>
+					<a href="update_form.do"><button class="btn btn-outline-warning btn-sm">개인정보 수정</button></a>
 				</div>
-				<a href="javascript:deleteConfirm()">탈퇴</a>
+				<a href="javascript:deleteConfirm()"><button class="btn btn-outline-danger btn-sm">탈퇴</button></a>
 			</div>
 	    </div>
 	</div>

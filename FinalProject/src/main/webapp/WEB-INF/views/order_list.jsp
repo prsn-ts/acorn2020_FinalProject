@@ -119,6 +119,7 @@
         </c:forEach>
 		</tbody>
 	</table>
+	<br />
 	<div class="page-display">
 		<ul class="pagination pagination-sm">
 		<c:if test="${startPageNum ne 1 }">
