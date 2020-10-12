@@ -39,9 +39,7 @@
 		    <div class="etc_line"></div>
 		    <div class="join_btn">
 		        <a href="${pageContext.request.contextPath }/login/signup_form.do">회원가입</a>
-		        <a href="/user/find_passwd.html">비밀번호 찾기</a>
-		        <a href="javascript:doGuest()">비회원주문</a>
-		        <a href="javascript:doGuesOrder()">비회원주문조회 </a>
+
 		    </div>
 		    <div id="guestOrder" style="display:none;margin-top:5px" class="join_b_order">
 		        <form name="form_guest_order" id="form_guest_order" method="post"  action="?" onSubmit="return doGuestOrderSubmit()">

@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService{
 	private ProductReviewDao productReviewDao;
 	
 	//한 페이지에 나타낼 댓글 의 갯수
-	final int PAGE_ROW_COUNT=9;
+	final int PAGE_ROW_COUNT=12;
 	//하단 디스플레이 페이지 갯수
 	final int PAGE_DISPLAY_COUNT=5;
 	

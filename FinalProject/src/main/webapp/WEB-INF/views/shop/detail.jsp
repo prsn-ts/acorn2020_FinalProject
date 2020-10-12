@@ -697,7 +697,7 @@
 				    <c:if test="${not empty id}">
 						<div class="updateAndCancel">
 							<button type="reset" class="btn btn-success btn-block" 
-								onclick="window.location.href='${pageContext.request.contextPath}/home.do'">장바구니</button>
+								onclick="alert('이용에 불편을드려 죄송합니다 (장바구니 미구현)')">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
 								data-ng-disabled="product.selectBox.$valid" class="btn btn-primary btn-block" >구매하기</button>
 					    </div>
@@ -705,7 +705,7 @@
 				    <c:if test="${empty id}">
 				    	<div class="updateAndCancel">
 							<button type="reset" class="btn btn-success btn-block" 
-								onclick="window.location.href='${pageContext.request.contextPath}/home.do'">장바구니</button>
+								onclick="alert('이용에 불편을드려 죄송합니다 (장바구니 미구현)')">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
 								class="btn btn-primary btn-block"  disabled>구매하기</button>
 					    </div>

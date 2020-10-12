@@ -68,10 +68,10 @@
       <!-- /.col-lg-3  상품목록-->
 
 	<div class="col-lg-9" ">
-		<div class="container" style="margin-top: 50px;">
+		<div class="" style="margin-top: 50px;">
          <form action="${pageContext.request.contextPath }/shop/shop.do" method="get">
             <div class="form-group row">
-               <div class="col-sm-7">
+               <div class="col">
                     <c:choose>
                     	<c:when test="${kindSelect eq '' }"><h4>전체 검색</h4></c:when>
                      	<c:when test="${kindSelect eq 'sneakers'}"><h4>스니커즈 검색</h4></c:when>
@@ -82,13 +82,13 @@
                      <input  class="form-control"  type="text" name="keyword" placeholder="상품명...">
                      <input type="hidden" name="kindSelect" value ="${ kindSelect}" />
                   </div>
-                  <button class="btn btn-praimary" type="submit">
+                  <button style="margin-top: 20px;" class="btn btn-praimary" type="submit">
                      <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                   </svg>
                   </button>
-               </div>
+              
           </form>
 	</div>
 
@@ -96,7 +96,7 @@
 		<c:forEach var="tmp" items="${list }">
 		<div class="col-sm-3" >
             <div class="card h-100">
-            		<a href="#"><img class="card-img-top embed-responsive-item" src="${pageContext.request.contextPath }${tmp.profile}" alt="" ></a>
+            		<a href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}"><img class="card-img-top embed-responsive-item" src="${pageContext.request.contextPath }${tmp.profile}" alt="" ></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a class="color" href="${pageContext.request.contextPath }/shop/detail.do?num=${tmp.num}">${tmp.productname }</a>

@@ -41,7 +41,7 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp">
-	<jsp:param value="index" name="thisPage"/>
+	<jsp:param value="list" name="thisPage"/>
 </jsp:include>
 <br />
 <div class="container">
