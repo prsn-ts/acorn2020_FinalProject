@@ -22,6 +22,7 @@
 		<div class="panel-body">
 		    <form class="user" action="login.do" method="post">
 				<input type="hidden" name="url" value="${url }">
+				<input type="hidden" name="requestPostData" value="${requestPostData }"/>
 				<div class="form-group">
 				  <input value="${savedId }" type="text" name="id" class="form-control" id="id" placeholder="아이디">
 				  <span id="idMsg" style="display:none;color:#FF0000;">아이디를 입력해주세요.</span>

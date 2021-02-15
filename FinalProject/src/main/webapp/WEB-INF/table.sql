@@ -177,7 +177,26 @@ ALTER TABLE sblogin_account
         
         
         
-        
+--장바구니 테이블
+CREATE TABLE sbshopping_basket
+(
+	identitynum NUMBER PRIMARY KEY,
+	id VARCHAR2(100),
+	num NUMBER REFERENCES sbproduct(num),
+	kind VARCHAR2(30) NOT NULL,
+	productname VARCHAR2(50) NOT NULL,
+	selectedsize VARCHAR2(20),
+	selectedquantity NUMBER NOT NULL,
+	selectedprice NUMBER NOT NULL,
+	initprice NUMBER NOT NULL,
+	totalprice NUMBER NOT NULL,
+	totalquantity NUMBER NOT NULL,
+	buycount NUMBER NOT NULL,
+	savetime DATE NOT NULL 
+);
+--sbshopping_basket 시퀀스 추가
+CREATE SEQUENCE sbshopping_basket_seq;
+
         
         
         
@@ -192,12 +211,14 @@ DROP TABLE sbproduct_sub;
 DROP TABLE sbnotice;
 DROP TABLE sblogin;
 DROP TABLE sbproduct;
+DROP TABLE sbshopping_basket;
 
 DROP SEQUENCE sborder_seq;
 DROP SEQUENCE sbnotice_seq;
 DROP SEQUENCE sbproduct_review_seq;
 DROP SEQUENCE sbproduct_seq;
 DROP SEQUENCE sbproduct_sub_seq;
+DROP SEQUENCE sbshopping_basket_seq;
 
 
 

@@ -202,4 +202,140 @@
 		select * from sbproduct
 		order by buycount desc
 	 </select>
+	 
+	 <insert id="saveToBasket_230" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num }, #{kind }, 
+	 	#{productname }, #{oneSize }, #{quantity_230 }, #{product_price_230 }, #{initPrice }, #{totalPrice }, #{totalQuantity }, #{buycount }, SYSDATE)
+	 </insert>
+	 <insert id="saveToBasket_240" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num}, #{kind}, 
+	 	#{productname}, #{oneSize}, #{quantity_240}, #{product_price_240}, #{initPrice}, #{totalPrice}, #{totalQuantity}, #{buycount }, SYSDATE)
+	 </insert>
+	 <insert id="saveToBasket_250" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num}, #{kind}, 
+	 	#{productname}, #{oneSize}, #{quantity_250}, #{product_price_250}, #{initPrice}, #{totalPrice}, #{totalQuantity}, #{buycount }, SYSDATE)
+	 </insert>
+	 <insert id="saveToBasket_260" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num}, #{kind}, 
+	 	#{productname}, #{oneSize}, #{quantity_260}, #{product_price_260}, #{initPrice}, #{totalPrice}, #{totalQuantity}, #{buycount }, SYSDATE)
+	 </insert>
+	 <insert id="saveToBasket_270" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num}, #{kind}, 
+	 	#{productname}, #{oneSize}, #{quantity_270}, #{product_price_270}, #{initPrice}, #{totalPrice}, #{totalQuantity}, #{buycount }, SYSDATE)
+	 </insert>
+	 <insert id="saveToBasket_280" parameterType="productDto">
+	 	insert into sbshopping_basket values(sbshopping_basket_seq.NEXTVAL, #{id }, #{num}, #{kind}, 
+	 	#{productname}, #{oneSize}, #{quantity_280}, #{product_price_280}, #{initPrice}, #{totalPrice}, #{totalQuantity}, #{buycount }, SYSDATE)
+	 </insert>
+	 
+	 <!-- 장바구니 DB에 저장된 내용을 가져오는 select문  -->
+	 <select id="savedBasketInfo" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket 
+		WHERE savetime BETWEEN TO_DATE(#{saveTime},'YYYY-MM-DD') AND SYSDATE
+		and id=#{id}
+	 </select>
+	 <!-- 특정 상품 번호에 맞는 리스트를 가져오기 위한 select문  -->
+	 <select id="select_230" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <select id="select_240" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <select id="select_250" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <select id="select_260" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <select id="select_270" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <select id="select_280" parameterType="productDto" resultType="productDto">
+	 	select * from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </select>
+	 <!-- 특정 상품 번호에 맞는 리스트를 제거하기 위한 delete문  -->
+	 <delete id="delete_230" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <delete id="delete_240" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <delete id="delete_250" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <delete id="delete_260" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <delete id="delete_270" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <delete id="delete_280" parameterType="productDto">
+	 	delete from sbshopping_basket
+	 	where num=#{num} and id=#{id} and selectedsize=#{oneSize}
+	 </delete>
+	 <!-- 장바구니 관련 DB에 저장된 아이디 리스트를 검색하는 select문 -->
+	 <select id="selectedId" resultType="String">
+	 	select id from sbshopping_basket
+	 </select>
+	 <!-- 현재 쿠키(아이디)값에 존재하지 않는 장바구니 관련 DB에 저장된 아이디를 삭제하는 delete문 -->
+	 <delete id="selectedId_remove">
+	 	delete from sbshopping_basket
+		where id=#{id}
+	 </delete>
+	 <select id="selectedAllBasket" resultType="productDto">
+	 	select * from sbshopping_basket
+	 </select>
+	 <!-- 장바구니 테이블에 데이터들을 정렬하여 가져오기 위한 select문 -->
+	 <select id="getAlignedBasket" parameterType="productDto" resultType="productDto">
+	 	select first_result.*, ROWNUM-1 as basketIndex
+		from
+			(select * from sbshopping_basket
+			where id=#{id} and
+			savetime between #{saveTime} and sysdate
+			order by num asc)first_result
+	 </select>
+	 <!-- 물품 삭제하는 X버튼을 누른 특정 상품의 특정 사이즈의 identitynum을 검색해오는 select문 -->
+	 <select id="getIdentityNumBasket" parameterType="productDto" resultType="int">
+	 	select identitynum
+		from
+			(select rownum as rnum, first_result.*
+			from(select * from sbshopping_basket
+				where id=#{id} and 
+				savetime between #{saveTime} and sysdate
+				order by num asc)first_result)second_result
+		where rnum = #{Xid}
+	 </select>
+	 <!-- identitynum에 해당하는 물품을 삭제하는 delete문 -->
+	 <delete id="deleteIdentityNumAtBasket" parameterType="productDto">
+	 	delete from sbshopping_basket where identitynum = #{identityNum}
+	 </delete>
+	 <!-- 선택했던 체크박스의 장바구니 관련 항목을 삭제하는 delete문 -->
+	 <delete id="selectedCheckBoxItemRemove" parameterType="productDto">
+	 	delete from sbshopping_basket
+		where identitynum in(	
+			select identitynum
+			from
+				(select rownum as rnum, first_result.*
+				from(select * from sbshopping_basket
+					where id=#{id} and 
+					savetime between #{saveTime} and sysdate
+					order by num asc)first_result)second_result
+			where rnum between #{startRnum} and #{endRnum})
+	 </delete>
+	 <!-- 선택된 아이템 항목에 맞는 재고수량을 가져오는 select문 -->
+	 <select id="getSelectedSbproductSub" parameterType="productDto" resultType="productDto">
+	 	select * from sbproduct_sub
+	 	where num=#{num} and sbsize=#{sbsize}
+	 </select>
 </mapper>

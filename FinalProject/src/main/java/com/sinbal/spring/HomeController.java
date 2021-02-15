@@ -5,6 +5,7 @@ package com.sinbal.spring;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +33,6 @@ public class HomeController {
 	@RequestMapping("/home.do")
 	public ModelAndView home(HttpServletRequest request,
 			ModelAndView mView) {
-
 		productservice.likelist(mView);
 		
 		productservice.productList(request);

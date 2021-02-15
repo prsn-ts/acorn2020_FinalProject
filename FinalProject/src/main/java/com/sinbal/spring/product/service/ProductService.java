@@ -3,6 +3,7 @@ package com.sinbal.spring.product.service;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,7 +56,16 @@ public interface ProductService {
 	public void getorder_list(HttpServletRequest request, ModelAndView mView);
 	
 	//인기상품리스트
-	
 	public void likelist(ModelAndView mView);
 	
+	//장바구니에 상품을 저장하는 추상 메소드
+	public String saveToBasket(HttpServletRequest request, ProductDto dto, HttpServletResponse response, String cookie);
+	//장바구니 DB에 저장된 내용을 가져오는 추상 메소드
+	public ModelAndView shoppingBasketInfo(ProductDto dto, HttpServletRequest request, ModelAndView mView, @RequestParam String id);
+	//장바구니 DB에 저장된 내용을 가져오는 추상 메소드(ajax 요청)
+	public Map<String, Object> shoppingBasketInfo_Ajax(HttpServletRequest request, ModelAndView mView, ProductDto dto);
+	//선택된 아이템 항목들을 삭제하는 추상 메소드(ajax 요청)
+	public Map<String, Object> selected_delete_Ajax(HttpServletRequest request, ModelAndView mView, ProductDto dto);
+	//선택된 아이템 항목에 맞는 재고수량을 가져오는 추상 메소드
+	public Map<String, ProductDto> getSelectedSbproductSub(ProductDto dto);
 }

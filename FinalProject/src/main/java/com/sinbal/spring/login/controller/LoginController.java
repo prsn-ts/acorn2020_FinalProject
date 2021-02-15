@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sinbal.spring.login.dto.LoginDto;
 import com.sinbal.spring.login.service.LoginService;
+import com.sinbal.spring.product.dto.ProductDto;
 
 @Controller
 public class LoginController {
@@ -52,7 +53,6 @@ public class LoginController {
 		//로그인 처리 후 가야할 url 정보를 ModelAndView 객체에 담는다.
 		mView.addObject("url", url);
 		mView.addObject("encodedUrl", encodedUrl);
-		
 		//로그인 처리하는 메소드
 		loginService.loginProcess(dto, request, response, mView);
 		

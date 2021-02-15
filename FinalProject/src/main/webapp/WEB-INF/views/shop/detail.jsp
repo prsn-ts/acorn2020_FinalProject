@@ -16,6 +16,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.bundle.min.js"></script>
 <!-- angularjs 로딩 -->
 <script src="${pageContext.request.contextPath}/resources/js/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
 <style>
 	.first_container {
 		display:flex;
@@ -173,11 +174,14 @@
     }
 </style>
 <script>
-	var myApp=angular.module("myApp", []);
+	
+	var myApp=angular.module("myApp", ['ngCookies']);
 
-	myApp.controller("detail_Ctrl", function($scope, $http){
+	myApp.controller("detail_Ctrl", function($scope, $http, $cookies){
 		
 		console.log($scope);
+		$scope.cookies = $cookies.guest;
+		
 		
 		//초기값 설정.
 		$scope.size = "nosize";
@@ -211,6 +215,13 @@
 		$scope.product_info_270 = false;
 		$scope.product_info_280 = false;
 		
+		//페이지가 준비돼었을 때 selectBox의 폼 유효성을 true로 초기화 
+		$(document).ready(function () {
+			$scope.product.selectBox.$invalid=true;
+		});
+		
+		//선택한 사이즈를 저장할 배열
+		$scope.selectedSize = [];
 
 		$scope.quantity_plus=function(e){
 			console.log($scope);
@@ -387,7 +398,7 @@
 		
 		//사이즈가 변경되었을 때 호출될 함수
 		$scope.size_change=function(){
-			$scope.product.selectBox.$valid = false;
+			$scope.product.selectBox.$invalid = false;
 			console.log("체인지이벤트!1");
 			//사이즈 변경 했을 때 초기화 설정.
 			switch ($scope.size) {
@@ -397,6 +408,7 @@
 				$scope.product_price_230 = ${productDto.price };
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 				break;
 			  case "240":
 				$scope.quantity_240 = 1;
@@ -404,6 +416,7 @@
 				$scope.product_price_240 = ${productDto.price };
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 			    break;
 			  case "250":
 				$scope.quantity_250 = 1;
@@ -411,6 +424,7 @@
 				$scope.product_price_250 = ${productDto.price };
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 			    break;
 			  case "260":
 				$scope.quantity_260 = 1;
@@ -418,6 +432,7 @@
 				$scope.product_price_260 = ${productDto.price };
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 				break;
 			  case "270":
 				$scope.quantity_270 = 1;
@@ -425,6 +440,7 @@
 				$scope.product_price_270 = ${productDto.price };
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 			    break;
 			  case "280":
 				$scope.quantity_280 = 1;
@@ -432,6 +448,7 @@
 			  	$scope.product_price_280 = ${productDto.price };
 			  	$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
 				$scope.product_all_price = $scope.product_init_price*$scope.quantity_all; //전체 가격을 구한다.
+				$scope.selectedSize.push($scope.size); //선택된 사이즈 항목을 배열에 추가한다
 			  	break;
 			  default :
 				$scope.product_all_price = 0; //총 가격 계산을 하기전에 0으로 초기화해놓는다.
@@ -478,6 +495,7 @@
 					for(var i=0; i<$scope.productInfo_duplicate_check.length; i++){ //선택된 사이즈가 저장된 배열의 길이만큼 반복.(요소를 동적으로 제거하기위한 것.)
 						if($scope.productInfo_duplicate_check[i] == product_info_el){ //제거하고자 하는 엘리먼트의 문자열과 배열안에 문자열이 같으면
 							$scope.productInfo_duplicate_check.splice(i, 1); // 같은 문자열이 들은 배열의 인덱스를 삭제한다.
+							$scope.selectedSize.splice(i, 1); // 같은 문자열이 들은 배열의 인덱스를 삭제한다.
 							$scope.productInfo_index--; //선택한 사이즈의 개수를 알려주는 index 값을 하나 줄인다.(삭제했기 때문)
 							$("#size").find("option:eq(0)").prop("selected", true); //스크립트로 추가된 요소는 prop 으로 제어가능.(x버튼 눌렀을 때 "사이즈 선택" 옵션이 보이도록, change 이벤트 적용을 위해)
 							$scope.size="nosize"; //선택했던 사이즈 박스가 제거됐을 때 size 값을 기본(nosize)로 설정.
@@ -492,7 +510,7 @@
 							console.log($scope.productInfo_duplicate_check);
 							console.log($scope.productInfo_index);
 							if($scope.productInfo_index == 0){ //신발 사이즈 항목이 없을 때
-								$scope.product.selectBox.$valid = true; //구매하기 버튼을 비활성화
+								$scope.product.selectBox.$invalid = true; //구매하기 버튼을 비활성화
 							}
 						}
 					}
@@ -619,12 +637,14 @@
 						quantity_first_chlid.append($compile("<a href='' data-ng-click='quantity_minus($event)' style='color:#000000;'><i class='fa fa-minus-circle fa-2x' id='"+scope.size+"' aria-hidden='true' style='margin-right:5px;'></i></a>")(scope));
 						quantity_first_chlid.append($compile("<input class='quantity_input' type='text' data-ng-model='quantity_"+scope.size+"' value='{{quantity_"+scope.size+"}}' name='countarr' disabled/>")(scope));
 						quantity_first_chlid.append($compile("<input type='hidden' value='{{quantity_"+scope.size+"}}' name='countarr' />")(scope));
+						quantity_first_chlid.append($compile("<input type='hidden' value='{{quantity_"+scope.size+"}}' name='sbCount' />")(scope));
 						quantity_first_chlid.append($compile("<a href='' data-ng-click='quantity_plus($event)' style='color:#000000;'><i class='fa fa-plus-circle fa-2x' id='"+scope.size+"' aria-hidden='true' style='margin-left:5px;'></i></a>")(scope));
 						quantity_first_chlid.append($compile("<input type='hidden' name='sizearr' value='"+scope.size+"'/>")(scope));
 						quantity.append($compile("<div></div>")(scope));
 						var quantity_second_chlid = angular.element(quantity[0].children[1]);
 						quantity_second_chlid.append($compile("<input type='text' name='price' data-ng-model='product_price_"+scope.size+"' value='product_price_"+scope.size+"' class=price disabled />원<a href='' data-ng-click='product_info_delete($event)' style='color:#000000;'><i class='fa fa-times fa-2x ' id="+scope.size+" aria-hidden='true' style='text-align:right; margin-left:10px;'></i></a>")(scope));
 						quantity_second_chlid.append($compile("<input type='hidden' name='pricearr' value='{{product_price_"+scope.size+"}}'/>")(scope));
+						quantity_second_chlid.append($compile("<input type='hidden' name='sbPrice' value='{{product_price_"+scope.size+"}}'/>")(scope));
 						
 						scope.productInfo_index++; //생성 후 1증가 시킴.
 					}else{
@@ -638,10 +658,12 @@
 		};
 	});
 	
+	
 </script>
 <body data-ng-controller="detail_Ctrl">
 	<jsp:include page="../include/header.jsp">
 		<jsp:param value="index" name="thisPage"/>
+		<jsp:param value="{{cookies}}" name="cookie"/>
 	</jsp:include>
 	
 	<div class="container first_container">
@@ -653,7 +675,7 @@
 				<div style="text-align:center;">
 					<h2 style="margin-bottom:1rem;"><img style="width:1.5em;height:1.5em;margin-right:15px;"src="${pageContext.request.contextPath }/resources/images/dlah.png" alt="logo" />상품 정보</h2>
 				</div>
-				<form action="private/buy_form.do" name="product" method="post" novalidate>
+				<form id="product" action="private/buy_form.do" name="product" method="post" novalidate>
 				    <table class="table" style="margin-right:20px;">
 						<tr>
 							<th>상품명</th>
@@ -681,6 +703,31 @@
 						<input type="hidden" name="totalPrice" value="{{product_all_price}}" />
 					</div>
 					<input type="hidden" name="num" value="${param.num }" />
+					<input type="hidden" name="buycount" value="{{productInfo_index}}"/>
+					<input type="hidden" name="totalQuantity" value="{{quantity_all}}"/>
+					<input type="hidden" name="productname" value="${productDto.productname }"/>
+					<input type="hidden" name="kind" value="${productDto.kind }"/>
+					<input type="hidden" name="selectedSize" value="{{selectedSize}}" />
+					<input type="hidden" name="initPrice" value="{{product_init_price}}" />
+					<input type="hidden" name="profile" value="${productDto.profile}" />
+					<!-- 쿠키값을 넘긴다 -->
+					<input type="hidden" name="cookie" value="{{cookies}}" />
+					<!-- 상세페이지에 있는 장바구니 버튼을 눌렀는지 확인하는 파라미터 -->
+					<input type="hidden" name="detail_basket_button" value="ok" />
+					
+					<input type="hidden" name="product_price_230" value="{{product_price_230}}" />
+					<input type="hidden" name="product_price_240" value="{{product_price_240}}" />
+					<input type="hidden" name="product_price_250" value="{{product_price_250}}" />
+					<input type="hidden" name="product_price_260" value="{{product_price_260}}" />
+					<input type="hidden" name="product_price_270" value="{{product_price_270}}" />
+					<input type="hidden" name="product_price_280" value="{{product_price_280}}" />
+					
+					<input type="hidden" name="quantity_230" value="{{quantity_230}}"/>
+					<input type="hidden" name="quantity_240" value="{{quantity_240}}"/>
+					<input type="hidden" name="quantity_250" value="{{quantity_250}}"/>
+					<input type="hidden" name="quantity_260" value="{{quantity_260}}"/>
+					<input type="hidden" name="quantity_270" value="{{quantity_270}}"/>
+					<input type="hidden" name="quantity_280" value="{{quantity_280}}"/>
 				    <!-- 
 				    <div class="product_info" data-ng-model="product_info_230" data-ng-if="product_info_230">
 				    	<div class="kindAndName">
@@ -696,18 +743,18 @@
 				    -->
 				    <c:if test="${not empty id}">
 						<div class="updateAndCancel">
-							<button type="reset" class="btn btn-success btn-block" 
-								onclick="alert('이용에 불편을드려 죄송합니다 (장바구니 미구현)')">장바구니</button>
+							<button type="button" class="btn btn-success btn-block" 
+								onclick="shoppingBasketMove()">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
-								data-ng-disabled="product.selectBox.$valid" class="btn btn-primary btn-block" >구매하기</button>
+								data-ng-disabled="product.selectBox.$invalid" class="btn btn-primary btn-block" >구매하기</button>
 					    </div>
 				    </c:if>
 				    <c:if test="${empty id}">
 				    	<div class="updateAndCancel">
-							<button type="reset" class="btn btn-success btn-block" 
-								onclick="alert('이용에 불편을드려 죄송합니다 (장바구니 미구현)')">장바구니</button>
+							<button type="button" class="btn btn-success btn-block" 
+								onclick="shoppingBasketMove()">장바구니</button>
 							<button id="submitBtn" type="submit" style="margin: 0 0 0 20px;"
-								class="btn btn-primary btn-block"  disabled>구매하기</button>
+								data-ng-disabled="product.selectBox.$invalid" class="btn btn-primary btn-block"  disabled>구매하기</button>
 					    </div>
 					    <p style="color:red; font-size: 20px; text-align:center;">로그인 후 구매가 가능합니다!!</p>
 				    </c:if>
@@ -835,6 +882,16 @@
 		let isBuy=confirm("상품을 구매하시겠습니까?");
 		if(isBuy){
 		    location.href="private/buy_form.do?num=${param.num }";
+		}
+	}
+	function shoppingBasketMove(){
+		let isMove=confirm("장바구니로 이동하시겠습니까?");
+		console.log(isMove);
+		if(isMove){
+			//폼의 액션요소를 바꾼다.
+			$("#product").attr("action", "shopping_basket.do");
+			//폼 제출하기
+			$("#product").submit();
 		}
 	}
 	//새로 동적으로 생기는 폼들은 ajaxForm()이 먹히지 않는다 따라서 폼이 제출될 때 ajax로 처리하기위해서는 ajaxSubmit() 함수를 이용해야한다고 한다.
