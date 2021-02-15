@@ -296,15 +296,26 @@
 	 <select id="selectedAllBasket" resultType="productDto">
 	 	select * from sbshopping_basket
 	 </select>
-	 <!-- 장바구니 테이블에 데이터들을 정렬하여 가져오기 위한 select문 -->
+	 <!-- getAlignedBasket의 ANSI JOIN(안시 조인) 방법 -->
 	 <select id="getAlignedBasket" parameterType="productDto" resultType="productDto">
-	 	select first_result.*, ROWNUM-1 as basketIndex
+		select first_result.* , ROWNUM-1 as basketIndex
 		from
-			(select * from sbshopping_basket
-			where id=#{id} and
-			savetime between #{saveTime} and sysdate
-			order by num asc)first_result
+			(select sb.*, sp.profile from sbshopping_basket sb
+			inner join sbproduct sp on sb.num = sp.num 
+			where sb.id=#{id} and
+			sb.savetime between #{saveTime} and sysdate
+			order by sb.num asc)first_result
 	 </select>
+	 <!-- 장바구니 테이블에 데이터들을 정렬하여 가져오기 위한 select문(getAlignedBasket의 일반 JOIN 방법)
+	 <select id="getAlignedBasket" parameterType="productDto" resultType="productDto">
+		select first_result.* , ROWNUM-1 as basketIndex
+		from
+			(select sb.*, sp.profile from sbshopping_basket sb, sbproduct sp 
+			where sb.num = sp.num and sb.id=#{id} and
+			sb.savetime between #{saveTime} and sysdate
+			order by sb.num asc)first_result
+	 </select>
+	  -->
 	 <!-- 물품 삭제하는 X버튼을 누른 특정 상품의 특정 사이즈의 identitynum을 검색해오는 select문 -->
 	 <select id="getIdentityNumBasket" parameterType="productDto" resultType="int">
 	 	select identitynum

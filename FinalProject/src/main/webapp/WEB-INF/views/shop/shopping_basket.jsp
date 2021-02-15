@@ -745,7 +745,7 @@
 						each_product_checkbox.append($compile("<input type='checkbox' href='#' id='input_checkbox_"+(i+1)+"' data-ng-click='isSelectedCheckbox($event)' data-ng-checked='isCheckedBox_"+i+"' data-ng-model='basket_list_"+i+"_check' value='basket_list_"+i+"_check'>")($scope));
 						//처음 페이지 로딩될 때 checkbox 체크 상태를 true로 설정하기
 						eval("$scope.isCheckedBox_"+i+" = true");
-						each_product_image.append($compile("<img style='width: 80px; height:80px;' class='card-img-top' src='${pageContext.request.contextPath }${productDto.profile}' alt=''>")($scope));
+						each_product_image.append($compile("<img style='width: 80px; height:80px;' class='card-img-top' src='${pageContext.request.contextPath }"+$scope.basket_list[i].profile+"' alt=''>")($scope));
 						each_product.append(each_product_checkbox_image_all);
 						//상품 종류와 상품명을 보여준다.↓
 						each_product_info_productName.append($compile("<span class='cart_item_name'>"+$scope.basket_list[i].kind+" - "+$scope.basket_list[i].productname+"</span>")($scope));
@@ -759,7 +759,7 @@
 							each_product_checkbox.append($compile("<input type='checkbox' id='input_checkbox_"+(i+1)+"' data-ng-click='isSelectedCheckbox($event)' data-ng-checked='isCheckedBox_"+i+"' data-ng-model='basket_list_"+i+"_check' value='basket_list_"+i+"_check'>")($scope));
 							//처음 페이지 로딩될 때 checkbox 체크 상태를 true로 설정하기
 							eval("$scope.isCheckedBox_"+i+" = true");
-							each_product_image.append($compile("<img style='width: 80px; height:80px;' class='card-img-top' src='${pageContext.request.contextPath }${productDto.profile}' alt=''>")($scope));
+							each_product_image.append($compile("<img style='width: 80px; height:80px;' class='card-img-top' src='${pageContext.request.contextPath }"+$scope.basket_list[i].profile+"' alt=''>")($scope));
 							each_product.append(each_product_checkbox_image_all);
 							//상품 종류와 상품명을 보여준다.↓
 							each_product_info_productName.append($compile("<span class='cart_item_name'>"+$scope.basket_list[i].kind+" - "+$scope.basket_list[i].productname+"</span>")($scope));
