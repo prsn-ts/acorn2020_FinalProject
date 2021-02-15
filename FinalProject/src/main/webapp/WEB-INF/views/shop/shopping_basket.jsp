@@ -361,8 +361,8 @@
 				$scope.basket_list = success.data.basket_list;
 				
 				//누른 마이너스 버튼의 리스트의 순서값을 가져온다.
-				let plusButtonStrArr = $scope.plus_button.split('_');
-				$scope.order_list = Number(plusButtonStrArr[plusButtonStrArr.length-1]);
+				let minusButtonStrArr = $scope.minus_button.split('_');
+				$scope.order_list = Number(minusButtonStrArr[minusButtonStrArr.length-1]);
 				console.log($scope.order_list);
 				
 				if(eval("$scope.basket_list_quantity_"+$scope.order_list+" > 1")) { //선택한 상품의 수량이 1보다 클 경우
