@@ -457,9 +457,10 @@
 				console.log($scope);
 				//특정 사이즈를 구분하기위해 설정.
 				$scope.delete_X_id = e.target.parentNode.parentNode.parentNode.id;
-				console.log($scope.delete_X_id);
-				//$scope.delete_X_id에 저장된 문자열 중에 리스트의 순서값을 저장하는 문자열을 빼서 숫자로 변환한다.
-				$scope.delete_X_number = $scope.delete_X_id.substr($scope.delete_X_id.length-1, 1);
+				//누른 마이너스 버튼의 문자열을 _ 단위로 나눠서 배열에 저장한다.
+				let delete_X_id_arr = e.target.parentNode.parentNode.parentNode.id.split('_');
+				//$scope.delete_X_id에 저장된 문자열 중에 리스트의 순서값을 저장하는 문자열을 뺀다.
+				$scope.delete_X_number = delete_X_id_arr[delete_X_id_arr.length-1];
 				
 				$http({
 					method: 'POST',
